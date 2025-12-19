@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import SignatureView from './signature-view'
+import { formatPhone } from '../utils/formatPhone';
 
 function Signature({url}:{url?:string}) {
 
@@ -15,6 +16,8 @@ function Signature({url}:{url?:string}) {
   const [mobilePhone, setMobilePhone] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [logo, setLogo] = React.useState('');
+  const [domain_name, setDomainName] = React.useState('');
+  const [googleUrlLink, setGoogleUrlLink] = React.useState('');
 
  useEffect(() => {
   if (!url) return;
@@ -25,10 +28,12 @@ function Signature({url}:{url?:string}) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const json = await res.json();
-      const addressData=json.data.adres+' '+json.data.ilce_name +' / '+json.data.il_name;
+      const addressData=json.iletisim.adres;
       setAddress(addressData);
-      setPhone(json.data.phone);
+      setPhone(json.iletisim.tel);
       setLogo(json.data.img);
+      setDomainName(json.data.domain_name);
+      setGoogleUrlLink(json.iletisim.google_url);
       console.log(json.data);
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -45,14 +50,16 @@ function Signature({url}:{url?:string}) {
     email,
     phone,
     mobilePhone,
+    googleUrlLink,
     address,
     logo,
+    domain_name,
   }
   return (
     <>
    <Container className='mt-5 mb-3'>
                 <Row className='mb-4'>
-                    <h5 className='text-center mt-2 mb-4 fw-bold fs-3' style={{color:'#0070C0'}}>CW Enerji Plus Mail İmzası Oluşturma</h5>
+                    <h5 className='text-center mt-2 mb-4 fw-bold fs-3' style={{color:'#1796d2'}}>CW Enerji Plus Mail İmzası Oluşturma</h5>
                     <Form>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
                             <Col sm="6">
@@ -66,14 +73,14 @@ function Signature({url}:{url?:string}) {
                                 <Form.Control type="text" className="mb-3" placeholder="E-mail" value={email??''} onChange={(e) => setEmail(e.target.value)} />
                             </Col>
                             <Col sm="6">
-                                <Form.Control type="text" className="mb-3" placeholder="Cep Telefonu" value={mobilePhone??''} onChange={(e) => setMobilePhone(e.target.value)} />
+                                <Form.Control type="text" className="mb-3" placeholder="Cep Telefonu 0(5xx) xxx xx xx" value={mobilePhone??''} onChange={(e) => setMobilePhone(formatPhone(e.target.value))} />
                             </Col>
                         </Form.Group>
                     </Form>
                 <hr/>
                 </Row>
             </Container>
-    <SignatureView datas={datas} />
+    <SignatureView datas={datas}/>
     </>
   )
 }

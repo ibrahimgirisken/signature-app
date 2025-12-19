@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap'
 
-function SignatureView({datas}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string}}) {
+function SignatureView({datas}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string, domain_name:string, googleUrlLink:string}}) {
   const signatureDatas={
     fullName: '',
     department: '',
@@ -12,6 +12,8 @@ function SignatureView({datas}:{datas:{fullName:string, department:string, email
     mobilePhone:'',
     address:'',
     logo:'',
+    domain_name:'',
+    googleUrlLink:'',
   }
   const [signatureData, setSignatureData] = useState(signatureDatas);
   React.useEffect(() => {
@@ -273,7 +275,7 @@ color:#0B58B5'>
      <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
      <o:lock v:ext="edit" aspectratio="t"/>
     </v:shapetype><v:shape id="Resim_x0020_57" o:spid="_x0000_s1027" type="#_x0000_t75"
-     href="https://www.google.com/search?sca_esv=397bf5706f45ee43&rlz=1C1GCEU_trTR980TR980&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EzDRH9c7qGj4uMVBD4EGKExAGvGDFCcjNj4BJJ9f9GeI8nigCyQMzCb1fnZH98BRcrCnSlz4ZPWCy_pL5PnBZbdlOTW3Gkp9XIIypGhMAXIrxJyo5tHRjGna_YvUVdl3OC85j9M%3D&q=CW+ENERJ%C4%B0+M%C3%9CH.+T%C4%B0C.+VE+SAN.+A.%C5%9E.+Yorumlar&sa=X&ved=2ahUKEwihtdS-1NCOAxVCQvEDHQmSF1EQ0bkNegQINhAE&biw=1745&bih=835&dpr=1.1"
+     href="${signatureData.googleUrlLink}" alt=""
      style='position:absolute;margin-left:30pt;margin-top:-.2pt;width:140.25pt;
      height:62.65pt;z-index:251659264;visibility:visible;mso-wrap-style:square;
      mso-width-percent:0;mso-height-percent:0;mso-wrap-distance-left:9pt;
@@ -289,7 +291,7 @@ color:#0B58B5'>
     </v:shape><![endif]-->
                                     <![if !vml]><span style='mso-ignore:vglayout;
     position:absolute;z-index:251659264;margin-left:40px;margin-top:0px;
-    width:187px;height:84px'><a href="https://www.google.com/search?hl=tr-TR&gl=tr&q=TommaTech+GmbH,+Zeppelinstra%C3%9Fe+14,+85748+Garching+bei+M%C3%BCnchen,+Almanya&ludocid=1508749390886505299&lsig=AB86z5WXM8Xyaz4DHAIzdDSV-8vs#lrd=0x479e7398c56f903d:0x14f02793cae08b53,3"><img
+    width:187px;height:84px'><a href="${signatureData.googleUrlLink}" target="_blank"><img
                                                 border=0 width=230 height=120
                                                 src="gorusleriniz-degerli.png" title=""
                                                 v:shapes="Resim_x0020_57"></a></span>
@@ -344,7 +346,7 @@ color:#0B58B5'>
         </table>
         <table class=MsoNormalTable cellspacing=0 cellpadding=0 width=1000 style='margin-top:2pt;width:8.0in;border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:
  0in 0in 0in 0in'>
-            <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+            <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;'>
                      <td width=110 valign=top style='width:95.8pt;border:none;padding:0.5in 0.2in 0.3in .1in'>
                     <p class=MsoNormal style='line-height:105%'>
                         <!--[if gte vml 1]><v:shape
@@ -361,10 +363,10 @@ color:#0B58B5'>
       o:title="metin, cihaz, ölçü aleti içeren bir resim&#10;&#10;Açıklama otomatik olarak oluşturuldu"/>
      <w:wrap type="tight"/>
     </v:shape><![endif]-->
-                        <a href="https://cwplusbursa.cw-enerji.com" target="_blank"><span style='font-family:"Times New Roman",serif;color:black;mso-no-proof:yes;
+                        <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank"><span style='font-family:"Times New Roman",serif;color:black;mso-no-proof:yes;
     text-decoration:none;text-underline:none'>
                                 <![if !vml]><img width=250 height=116
-                                    src="${signatureData.logo?signatureData.logo:'cw-enerji-plus.webp'}" style="border-radius:12px"
+                                    src="${signatureData.logo?signatureData.logo:'cw-enerji-plus.webp'}"
                                     alt="metin içeren bir resim&#10;&#10;Açıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1041">
                                 <![endif]>
@@ -432,7 +434,7 @@ color:#0B58B5'>
                             </span></a></p>
                 </td>
                 <td width=200 valign=top style='width:300pt;padding:0in 5.4pt 0in 5.4pt'>
-                    <p class=MsoNormal style='text-align:left;line-height:105%'><a href="cw-akademi.png" target="_blank"><span style='font-family:"Times New Roman",serif;
+                    <p class=MsoNormal style='text-align:left;line-height:105%'><a href="https://cw-enerji.com/tr/cw-akademi" target="_blank"><span style='font-family:"Times New Roman",serif;
     color:black;mso-no-proof:yes;text-decoration:none;text-underline:none'>
                                 <!--[if gte vml 1]><v:shape
      id="_x0000_i1038" type="#_x0000_t75" alt="çizim içeren bir resimAçıklama otomatik olarak oluşturuldu"
@@ -447,7 +449,7 @@ color:#0B58B5'>
                                 <![endif]>
                             </span></a></p>
                 </td>
-                <td width=200 valign=top style='width:300pt.8pt;padding:0in 5.4pt 0in 5.4pt'>
+                <td width=200 valign=top style='width:300pt;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoNormal style='text-align:left;line-height:105%'><a href="https://indir.cw-enerji.com/tr/index.html" target="_blank">
                     <span style='font-family:"Times New Roman",serif;
     color:black;mso-no-proof:yes;text-decoration:none;text-underline:none'>
