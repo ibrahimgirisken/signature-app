@@ -561,7 +561,7 @@ color:#0B58B5'>
   `;
   return (
     <>
-    <Container>
+    <Container className='signature-shema'>
      <div dangerouslySetInnerHTML={{ __html: signatureHtml }} />
      </Container>
     </>

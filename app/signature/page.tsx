@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import SignatureView from './signature-view'
 import { formatPhone } from '../utils/formatPhone';
+import Download from '../download/page';
 
 function Signature({url}:{url?:string}) {
 
@@ -19,7 +20,9 @@ function Signature({url}:{url?:string}) {
   const [domain_name, setDomainName] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
 
- useEffect(() => {
+  const qrRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
   if (!url) return;
 
   const fetchData = async () => {
@@ -80,7 +83,8 @@ function Signature({url}:{url?:string}) {
                 <hr/>
                 </Row>
             </Container>
-    <SignatureView datas={datas}/>
+    <SignatureView ref={qrRef} datas={datas}/>
+    <Download targetRef={qrRef} />
     </>
   )
 }
