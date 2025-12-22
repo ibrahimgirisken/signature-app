@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap'
 
-function SignatureView({datas}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string, domain_name:string, googleUrlLink:string}}) {
+function SignatureView({datas,targetRef}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string, domain_name:string, googleUrlLink:string},targetRef:any}) {
   const signatureDatas={
     fullName: '',
     department: '',
@@ -366,7 +366,7 @@ color:#0B58B5'>
                         <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank"><span style='font-family:"Times New Roman",serif;color:black;mso-no-proof:yes;
     text-decoration:none;text-underline:none'>
                                 <![if !vml]><img width=250 height=116
-                                    src="${signatureData.logo?signatureData.logo:'cw-enerji-plus.webp'}"
+                                    src="${signatureData.logo?signatureData.logo:'cw-enerji-plus.jpg'}"
                                     alt="metin içeren bir resim&#10;&#10;Açıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1041">
                                 <![endif]>
@@ -381,10 +381,12 @@ color:#0B58B5'>
                                     alt="işaret, yiyecek, tren, mavi içeren bir resimAçıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1040">
                                 <![endif]>
-                            </span></a><span style='mso-ascii-font-family:
-    Calibri;mso-hansi-font-family:Calibri;mso-bidi-font-family:Calibri;'>
-                                Hücre
-                            <span></p>
+                            </span></a>
+                            <p class=MsoNormal style='line-height:105%;align-items:center;justify-content:center;display:flex;flex-direction:column'>
+                            <span style='mso-ascii-font-family:
+    Calibri;mso-hansi-font-family:Calibri;mso-bidi-font-family:Calibri;color:#7F7F7F'>
+                               Solar Hücre Tanıtım
+                            <span></p></p>
                     <p class=MsoNormal><span style='mso-ascii-font-family:Calibri;mso-fareast-font-family:
   Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-font-family:Calibri;
   mso-bidi-font-family:Calibri'>
@@ -394,14 +396,14 @@ color:#0B58B5'>
                     <p class=MsoNormal style='line-height:105%;align-items:center;justify-content:center;display:flex;flex-direction:column'><a href="https://www.youtube.com/watch?v=rDa8JF7KywE" target="_blank"><span style='font-family:"Times New Roman",serif;color:black;mso-no-proof:yes;text-decoration:none;
     text-underline:none'>
                                 <![if !vml]><img width=110 height=86
-                                    src="reklam.webp" style="border-radius:12px"
+                                    src="reklam.jpg" style="border-radius:12px"
                                     alt="işaret, yiyecek, tren, mavi içeren bir resimAçıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1040">
                                 <![endif]>
-                            </span></a><span style='mso-ascii-font-family:
-    Calibri;mso-hansi-font-family:Calibri;mso-bidi-font-family:Calibri'>
-                                Reklam
-                            <span></p>
+                            </span></a><p class=MsoNormal style='line-height:105%;align-items:center;justify-content:center;display:flex;flex-direction:column'><span style='mso-ascii-font-family:
+    Calibri;mso-hansi-font-family:Calibri;mso-bidi-font-family:Calibri;color:#7F7F7F'>
+                                CWPlus Reklam
+                            <span></p></p>
                     <p class=MsoNormal><span style='mso-ascii-font-family:Calibri;mso-fareast-font-family:
   Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-font-family:Calibri;
   mso-bidi-font-family:Calibri'>
@@ -427,7 +429,7 @@ color:#0B58B5'>
                                 style='font-family:"Times New Roman",serif;
     color:black;mso-no-proof:yes;text-decoration:none;text-underline:none'>
                                 <![if !vml]><img width=200 height=74
-                                    src="https://cw-enerji.com/images/galeri/22_cw-enerji-logo_0.png"
+                                    src="cw-enerji-logo.jpg"
                                     alt="çizim içeren bir resimAçıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1039">
                                 <![endif]>
@@ -456,10 +458,10 @@ color:#0B58B5'>
                                 <!--[if gte vml 1]><v:shape
      id="_x0000_i1037" type="#_x0000_t75" alt="çizim içeren bir resimAçıklama otomatik olarak oluşturuldu"
      style='width:135pt;height:55.5pt;visibility:visible'>
-     <v:imagedata src="indirme-merkezi.webp"
+     <v:imagedata src="indirme-merkezi.jpg"
       o:href="cid:image008.png@01D8ABD2.F6271D30"/>
     </v:shape><![endif]-->
-                                <![if !vml]><img width=200 height=74 src="indirme-merkezi.webp"
+                                <![if !vml]><img width=200 height=74 src="indirme-merkezi.jpg"
                                     alt="çizim içeren bir resimAçıklama otomatik olarak oluşturuldu"
                                     v:shapes="_x0000_i1037">
                                 <![endif]>
@@ -545,12 +547,12 @@ color:#0B58B5'>
                         <!--[if gte vml 1]><v:shape
    id="_x0000_i1026" type="#_x0000_t75" style='width:458pt;height:42.75pt;
    visibility:visible'>
-   <v:imagedata src="cevre.webp"
+   <v:imagedata src="cevre.jpg"
     o:href="cid:image019.jpg@01D8ABD2.F6271D30"/>
   </v:shape><![endif]-->
                         <![if !vml]><img width=64 height=57
-                            src="cevre.webp" v:shapes="_x0000_i1026">
-                        <![endif]>
+                            src="cevre.jpg" v:shapes="_x0000_i1026">
+                        <![endif ]>
                     </span></p>
                     <p class=MsoNormal><i><span style='font-size:10.0pt;line-height:80%;
   color:#7F7F7F'>'Please protect the trees and the nature... Please think before printing this email; Do you really need it?'</span></i></p>
@@ -562,7 +564,7 @@ color:#0B58B5'>
   return (
     <>
     <Container className='signature-shema'>
-     <div dangerouslySetInnerHTML={{ __html: signatureHtml }} />
+     <div ref={targetRef} dangerouslySetInnerHTML={{ __html: signatureHtml }} />
      </Container>
     </>
   )

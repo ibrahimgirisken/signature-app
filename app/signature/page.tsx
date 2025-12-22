@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -20,7 +20,7 @@ function Signature({url}:{url?:string}) {
   const [domain_name, setDomainName] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
 
-  const qrRef = React.useRef<HTMLDivElement>(null);
+const sigRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
   if (!url) return;
@@ -83,8 +83,8 @@ function Signature({url}:{url?:string}) {
                 <hr/>
                 </Row>
             </Container>
-    <SignatureView ref={qrRef} datas={datas}/>
-    <Download targetRef={qrRef} />
+    <SignatureView datas={datas} targetRef={sigRef}/>
+    <Download targetRef={sigRef}/>
     </>
   )
 }
