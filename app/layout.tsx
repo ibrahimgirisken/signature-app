@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./globals.css";
+import "alertifyjs/build/css/alertify.css";
+import "alertifyjs/build/css/themes/default.css";
 
 
 const geistSans = Geist({
@@ -17,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mail İmza Oluşturucu",
   description: "CW Enerji Plus Mail İmza Oluşturucu",
+  icons:{
+    icon:"favicon-32x32.png"
+  }
 };
 
 export default function RootLayout({

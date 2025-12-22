@@ -7,9 +7,11 @@ import Row from 'react-bootstrap/Row';
 import SignatureView from './signature-view'
 import { formatPhone } from '../utils/formatPhone';
 import Download from '../download/page';
+import { useSearchParams } from 'next/navigation';
 
-function Signature({url}:{url?:string}) {
-
+function Signature() {
+  const sp=useSearchParams();
+  const url=sp.get("bayi") ??"cwplus"
   const [fullName, setFullName] = React.useState('');
   const [department, setDepartment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -65,17 +67,17 @@ const sigRef = useRef<HTMLDivElement | null>(null);
                     <h5 className='text-center mt-2 mb-4 fw-bold fs-3' style={{color:'#1796d2'}}>CW Enerji Plus Mail İmzası Oluşturma</h5>
                     <Form>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
-                            <Col sm="6">
+                            <Col sm="6" col-lg="12">
                                 <Form.Control type='text' className="mb-3" placeholder="İsim" value={fullName??''} onChange={(e) => setFullName(e.target.value)} />
                             </Col>
 
-                            <Col sm="6">
+                            <Col sm="6" col-lg="12">
                                 <Form.Control type="text" className="mb-3" placeholder="Ünvan" value={department??''} onChange={(e) => setDepartment(e.target.value)} />
                             </Col>
-                            <Col sm="6">
+                            <Col sm="6" col-lg="12">
                                 <Form.Control type="text" className="mb-3" placeholder="E-mail" value={email??''} onChange={(e) => setEmail(e.target.value)} />
                             </Col>
-                            <Col sm="6">
+                            <Col sm="6" col-lg="12">
                                 <Form.Control type="text" className="mb-3" placeholder="Cep Telefonu 0(5xx) xxx xx xx" value={mobilePhone??''} onChange={(e) => setMobilePhone(formatPhone(e.target.value))} />
                             </Col>
                         </Form.Group>

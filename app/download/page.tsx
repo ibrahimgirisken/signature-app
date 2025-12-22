@@ -1,5 +1,5 @@
-import { color } from "html2canvas/dist/types/css/types/color";
-
+"use client"
+import alertify from "alertifyjs";
 function Download({
   targetRef,
 }: {
@@ -17,8 +17,8 @@ function Download({
         "text/plain": new Blob([text], { type: "text/plain" }),
       }),
     ]);
-
-    alert("İmza HTML olarak panoya kopyalandı ✅");
+    alertify.set("notifier","position","top-center")
+    alertify.success("İmza HTML olarak panoya kopyalandı ✅");
   };
 
   const handleHtmlDownload = () => {
@@ -35,11 +35,11 @@ function Download({
   }
 
   return (
-  <>
-  <button style={{display:"flex",position:"absolute",float:"right",right:"25%",top:"45%",backgroundColor:"#1796d2",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleCopy}>Kopyala</button>;
+  <div className="btn-items">
+  <button style={{display:"flex",position:"absolute",float:"right",right:"15%",top:"48%",backgroundColor:"#1796d2",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleCopy}>Kopyala</button>;
 
-  <button style={{display:"flex",position:"absolute",float:"right",right:"25%",top:"50%",backgroundColor:"#ffc107",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleHtmlDownload}>HTML İndir</button>;  
-  </>
+  <button style={{display:"flex",position:"absolute",float:"right",right:"15%",top:"53%",backgroundColor:"#ffc107",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleHtmlDownload}>HTML İndir</button>;  
+  </div>
   )
 }
 
