@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import SignatureView from './signature-view'
 import { formatPhone } from '../utils/formatPhone';
-import Download from '../download/page';
 import { useSearchParams } from 'next/navigation';
+import DownloadSignature from '../components/DownloadSignature';
 
 function Signature() {
   const sp=useSearchParams();
@@ -86,7 +86,7 @@ const sigRef = useRef<HTMLDivElement | null>(null);
                 </Row>
             </Container>
     <SignatureView datas={datas} targetRef={sigRef}/>
-    <Download targetRef={sigRef}/>
+    <DownloadSignature targetRef={sigRef} />
     </>
   )
 }
