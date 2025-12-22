@@ -1,5 +1,6 @@
 "use client"
 import alertify from "alertifyjs";
+import { useEffect } from "react";
 function Download({
   targetRef,
 }: {
@@ -17,7 +18,7 @@ function Download({
         "text/plain": new Blob([text], { type: "text/plain" }),
       }),
     ]);
-    alertify.set("notifier","position","top-center")
+    alertify.set("notifier", "position", "top-center")
     alertify.success("İmza HTML olarak panoya kopyalandı ✅");
   };
 
@@ -27,19 +28,22 @@ function Download({
     const html = targetRef.current.innerHTML;
     const blob = new Blob([html], { type: "text/html" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "signature.html";
-    a.click();
+    useEffect(() => {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "signature.html";
+      a.click();
+    }, [])
+
     URL.revokeObjectURL(url);
   }
 
   return (
-  <div className="btn-items">
-  <button style={{display:"flex",position:"absolute",float:"right",right:"15%",top:"48%",backgroundColor:"#1796d2",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleCopy}>Kopyala</button>;
+    <div className="btn-items">
+      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "48%", backgroundColor: "#1796d2", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleCopy}>Kopyala</button>;
 
-  <button style={{display:"flex",position:"absolute",float:"right",right:"15%",top:"53%",backgroundColor:"#ffc107",color:"white",padding:"10px",borderRadius:"5px"}} onClick={handleHtmlDownload}>HTML İndir</button>;  
-  </div>
+      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "53%", backgroundColor: "#ffc107", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleHtmlDownload}>HTML İndir</button>;
+    </div>
   )
 }
 
