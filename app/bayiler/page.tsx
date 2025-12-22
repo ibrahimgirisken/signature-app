@@ -1,11 +1,8 @@
 'use client'
-import React from 'react'
-import Signature from '../signature/page'
+import dynamic from "next/dynamic";
 
-function Bayiler() {
-  return (
-    <div><Signature/></div>
-  )
+const Signature = dynamic(() => import("../signature/page"), { ssr: false });
+
+export default function Bayiler() {
+  return <Signature />;
 }
-
-export default Bayiler
