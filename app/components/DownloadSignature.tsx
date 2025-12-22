@@ -1,5 +1,4 @@
 'use client';
-import alertify from "alertifyjs";
 import { useEffect } from "react";
 
 export default function DownloadSignature({ targetRef }: { targetRef: React.RefObject<HTMLDivElement | null> }) {
@@ -15,7 +14,8 @@ export default function DownloadSignature({ targetRef }: { targetRef: React.RefO
          "text/plain": new Blob([text], { type: "text/plain" }),
        }),
      ]);
-     alertify.set("notifier", "position", "top-center")
+     const alertify = (await import('alertifyjs')).default;
+     alertify.set("notifier", "position", "top-center");
      alertify.success("İmza HTML olarak panoya kopyalandı ✅");
    };
  
@@ -32,9 +32,9 @@ export default function DownloadSignature({ targetRef }: { targetRef: React.RefO
 
   return (
     <div className="btn-items">
-      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "48%", backgroundColor: "#1796d2", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleCopy}>Kopyala</button>;
+      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "48%", backgroundColor: "#1796d2", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleCopy}>Kopyala</button>
 
-      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "53%", backgroundColor: "#ffc107", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleHtmlDownload}>HTML İndir</button>;
+      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "53%", backgroundColor: "#ffc107", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleHtmlDownload}>HTML İndir</button>
     </div>
   )
 }
