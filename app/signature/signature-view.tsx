@@ -82,6 +82,14 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
             <td style="font-weight:700;color: #0B58B5;">Telefon</td>
             <td style="color: #0B58B5;">: ${signatureData.phone}</td>
           </tr>
+           <tr>
+            <td style="font-weight:700;color: #0B58B5;">Web</td>
+            <td style="color: #0B58B5;">: 
+             <a href="https://${signatureData.domain_name}.cw-enerji.com" style="color: #0B58B5;" target="_blank">
+                ${signatureData.domain_name}.cw-enerji.com
+              </a>
+            </td>
+          </tr>
           <tr>
             <td style="font-weight:700; vertical-align:top;color: #0B58B5;">Adres</td>
             <td style="line-height:1.35;color: #0B58B5;"">
@@ -129,7 +137,7 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
           />
         </a>
         <div style="font-size:12px; color:#7F7F7F;">
-          Solar Hücre Tanıtım
+         CW Solarcell Tanıtım
         </div>
       </td>
 
@@ -144,7 +152,7 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
           />
         </a>
         <div style="font-size:12px; color:#7F7F7F;">
-          CWPlus Reklam
+          CW Enerji Plus Tanıtım
         </div>
       </td>
     </tr>
