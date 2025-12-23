@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap'
 
-function SignatureView({datas,targetRef}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string, domain_name:string, googleUrlLink:string},targetRef:any}) {
+function SignatureView({datas,targetRef}:{datas:{fullName:string, department:string, email:string, phone:string,mobilePhone:string, address:string, logo:string, domain_name:string, googleUrlLink:string, instagram:string, facebook:string},targetRef:any}) {
   const signatureDatas={
     fullName: '',
     department: '',
@@ -14,6 +14,8 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
     logo:'',
     domain_name:'',
     googleUrlLink:'',
+    instagram:'',
+    facebook:''
   }
   const [signatureData, setSignatureData] = useState(signatureDatas);
   React.useEffect(() => {
@@ -115,6 +117,7 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
   <!-- Video / Reklam Alanı -->
   <table width="720" cellpadding="0" cellspacing="0">
     <tr>
+    <br/>
       <td width="300">
         <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank">
           <img
@@ -156,10 +159,39 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
         </div>
       </td>
     </tr>
-    <tr><br/><br/></tr>
   </table>
 
   <!-- Çizgi -->
+  <table width="160" cellpadding="0" cellspacing="0">
+    <tr>
+    <td width="100">
+    <span style="font-weight:600;font-size:13px;color:#7F7F7F;">Bizi Takip Edin:</span>
+        </td>
+      <td width="30">
+       <a href="${signatureData.facebook}" target="_blank">
+          <img
+            src="facebook.jpg"
+            width="25"
+            height="25"
+            alt=""
+            style="border-radius:12px;"
+          />
+        </a>
+        </td>
+      <td width="30">
+         <a href="${signatureData.instagram}" target="_blank">
+          <img
+            src="instagram.jpg"
+            width="25"
+            height="25"
+            alt=""
+            style="border-radius:12px;"
+          />
+        </a>
+      </td>
+      </tr>
+      </table>
+      <br/>
   <div style="border-top:1px solid #D0CECE; margin:12px 0;"></div>
 
   <!-- KDV Metni -->

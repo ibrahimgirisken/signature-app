@@ -21,6 +21,8 @@ function Signature() {
   const [logo, setLogo] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
+  const [instagram, setInstagram] = React.useState('');
+  const [facebook, setFacebook] = React.useState('');
 
 const sigRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,6 +41,8 @@ const sigRef = useRef<HTMLDivElement | null>(null);
       setLogo(json.data.img);
       setDomainName(json.data.domain_name);
       setGoogleUrlLink(json.iletisim.google_url);
+      setInstagram(json.iletisim.instagram);
+      setFacebook(json.iletisim.facebook);
       console.log(json.data);
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -59,6 +63,8 @@ const sigRef = useRef<HTMLDivElement | null>(null);
     address,
     logo,
     domain_name,
+    instagram,
+    facebook
   }
   return (
     <>
