@@ -195,7 +195,7 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
   <div style="border-top:1px solid #D0CECE; margin:12px 0;"></div>
 
   <!-- KDV Metni -->
-  <div style="font-size:10px; font-weight:700;">
+  <div style="font-size:10px; font-weight:700;color:#7F7F7F;">
     "KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE
     BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK
     FATURALARDA KDV <br/> TEVKİFATINA ÖZEN GÖSTERİLMESİ RİCA OLUNUR."
