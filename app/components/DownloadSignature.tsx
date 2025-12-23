@@ -34,10 +34,10 @@ export default function DownloadSignature({ targetRef }: { targetRef: React.RefO
    }
 
   return (
-    <div className="btn-items">
-      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "48%", backgroundColor: "#1796d2", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleCopy}>Kopyala</button>
+    <div className="btn-items text-center mb-3">
+      <button style={{ backgroundColor: "#1796d2", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleCopy}>Kopyala</button>
 
-      <button style={{ display: "flex", position: "absolute", float: "right", right: "15%", top: "53%", backgroundColor: "#ffc107", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleHtmlDownload}>HTML İndir</button>
+      <button className="ms-2" style={{ backgroundColor: "#ffc107", color: "white", padding: "10px", borderRadius: "5px" }} onClick={handleHtmlDownload}>HTML İndir</button>
     </div>
   )
 }

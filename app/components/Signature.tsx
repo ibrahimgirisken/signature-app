@@ -82,11 +82,11 @@ const sigRef = useRef<HTMLDivElement | null>(null);
                             </Col>
                         </Form.Group>
                     </Form>
+               <DownloadSignature targetRef={sigRef}/>
                 <hr/>
                 </Row>
             </Container>
     <SignatureView datas={datas} targetRef={sigRef}/>
-    <DownloadSignature targetRef={sigRef} />
     </>
   )
 }

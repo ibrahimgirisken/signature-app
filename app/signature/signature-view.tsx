@@ -53,7 +53,7 @@ function SignatureView({datas,targetRef}:{datas:{fullName:string, department:str
   </div>
 
   <!-- Ünvan -->
-  <div style="margin-bottom: 20px;color: #0B58B5;">
+  <div style="font-size: 14px; margin-bottom: 20px;color: #0B58B5;">
     ${signatureData.department}<br/>
   </div>
     <div style="margin-bottom: 20px;">
