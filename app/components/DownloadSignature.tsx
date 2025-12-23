@@ -25,7 +25,10 @@ export default function DownloadSignature({ targetRef }: { targetRef: React.RefO
      const html = targetRef.current.innerHTML;
      const blob = new Blob([html], { type: "text/html" });
      const url = URL.createObjectURL(blob);
-    
+     const a = document.createElement("a");
+     a.href = url;
+     a.download = "signature.html";
+     a.click();
  
      URL.revokeObjectURL(url);
    }
