@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.20",
     "alertifyjs": "^1.14.0",
+    "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "html2canvas": "^1.4.1",
     "next": "16.0.10",

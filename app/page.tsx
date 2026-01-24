@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import React from 'react'
 import { formatPhone } from "./utils/formatPhone";
+import { useCrud } from '@/hooks/useCrud';
+import { CompanyRequest, CompanyResponse } from '@/types/company';
+import { companyService } from '@/services/company.service';
 
 function Home() {
   const [fullName, setFullName] = React.useState('');
@@ -16,6 +19,15 @@ function Home() {
     const [logo, setLogo] = React.useState('');
     const [domain_name, setDomainName] = React.useState('');
     const [googleUrlLink, setGoogleUrlLink] = React.useState('');
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+    const {list}=
+    useCrud<CompanyRequest,CompanyResponse>(
+        "Companies",
+        companyService
+    );
+
+    console.log(list.data)
+
   return (
      <>
    <Container className='mt-5 mb-3'>
