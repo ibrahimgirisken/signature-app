@@ -1,5 +1,5 @@
 'use client';
-import { Container } from 'react-bootstrap';
+import { Container, FormSelect } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -19,15 +19,15 @@ function Home() {
     const [logo, setLogo] = React.useState('');
     const [domain_name, setDomainName] = React.useState('');
     const [googleUrlLink, setGoogleUrlLink] = React.useState('');
-    console.log(process.env.NEXT_PUBLIC_API_URL);
+    
+    
     const {list}=
     useCrud<CompanyRequest,CompanyResponse>(
-        "Companies",
+        "companies",
         companyService
     );
-
-    console.log(list.data)
-
+console.log(list.data);
+const companies = list.data ?? [];
   return (
      <>
    <Container className='mt-5 mb-3'>
@@ -35,6 +35,22 @@ function Home() {
                     <h5 className='text-center mt-2 mb-4 fw-bold fs-3' style={{color:'#1796d2'}}>CW Enerji Firmalar Mail İmzası Oluşturma</h5>
                     <Form>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
+                            <Col>
+                            <FormSelect>
+                                <option>
+                                    Seçiniz
+                                </option>
+                                            {
+                                  Array.isArray(companies)
+                                    ? companies?.map(company => (
+                                        <option key={company.id}>
+                                          {company.companyName}
+                                        </option>
+                                      ))
+                                    : null
+                                }
+                            </FormSelect>
+                            </Col>
                             <Col sm="6" col-lg="12">
                                 <Form.Control type='text' className="mb-3" placeholder="İsim" value={fullName??''} onChange={(e) => setFullName(e.target.value)} />
                             </Col>
