@@ -5,6 +5,7 @@ export interface CompanyListResponse {
 export interface CompanyResponse {
   id: string;
   companyName: string;
+  domainName: string;
   phone?: string;
   fax?: string;
   address?: string;

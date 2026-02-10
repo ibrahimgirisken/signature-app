@@ -8,6 +8,7 @@ import SignatureView from '@/app/signature/signature-view'
 import { formatPhone } from '../utils/formatPhone';
 import { useSearchParams } from 'next/navigation';
 import DownloadSignature from '../components/DownloadSignature';
+import { cwplusSignature } from '../_lib/signatures/cwplus';
 
 function Signature() {
   const sp=useSearchParams();
@@ -23,37 +24,12 @@ function Signature() {
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
   const [instagram, setInstagram] = React.useState('');
   const [facebook, setFacebook] = React.useState('');
+  const [kdvInformation, setKdvInformation] = React.useState('KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK FATURALARDA KDV TEVKİFATINA<br>ÖZEN GÖSTERİLMESİ RİCA OLUNUR.');
+  const [informationText, setInformationText] = React.useState('Bu elektronik posta ve ekleri gizlidir ve yalnızca gönderildiği gerçek veya tüzel kişi tarafından kullanılması amacıyla gönderilmiştir. Eğer bu elektronik postayı yanlışlıkla aldıysanız, lütfen göndereni derhal bilgilendiriniz ve mesajı sisteminizden siliniz. Bu mesajın izinsiz kullanımı, kopyalanması, ifşa edilmesi veya dağıtılması kesinlikle yasaktır.<br><br>This e-mail and any attachments are confidential and intended solely for the use of the individual or entity to whom they are addressed. If you have received this e-mail in error,please notify the sender immediately and delete it from your system.');
+  const [news, setNews] = React.useState('');
+  const [environmentText, setEnvironmentText] = React.useState('Lütfen ağaçları ve doğayı koruyun. Lütfen bu e-postayı yazdırmadan önce düşünün.</br>Please protect the trees and the nature. Please think before printing this e-mail.');
 
-const sigRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-  if (!url) return;
-
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`/api/mail-data?subdomain=${encodeURIComponent(url)}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-      const json = await res.json();
-      const addressData=json.iletisim.adres;
-      setAddress(addressData);
-      setPhone(json.iletisim.tel);
-      setLogo(json.data.img);
-      setDomainName(json.data.domain_name);
-      setGoogleUrlLink(json.iletisim.google_url);
-      setInstagram(json.iletisim.instagram);
-      setFacebook(json.iletisim.facebook);
-      console.log(json.data);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  };
-
-  fetchData();
-}, [url]);
-
-
-  const datas={
+    const datas={
     fullName,
     department,
     email,
@@ -64,8 +40,40 @@ const sigRef = useRef<HTMLDivElement | null>(null);
     logo,
     domain_name,
     instagram,
-    facebook
+    facebook,
+    kdvInformation,
+    informationText,
+    environmentText
   }
+
+const sigRef = useRef<HTMLDivElement | null>(null);
+const signatureHtml = cwplusSignature(datas);
+  useEffect(() => {
+  if (!url) return;
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`/api/mail-data?subdomain=${encodeURIComponent(url)}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+
+      setAddress(json.iletisim.adres ?? '');
+      setPhone(json.iletisim.tel ?? '');
+      setLogo(json.data.img ?? '');
+      setDomainName(json.data.domain_name ?? '');
+      setGoogleUrlLink(json.iletisim.google_url ?? '');
+      setInstagram(json.iletisim.instagram ?? '');
+      setFacebook(json.iletisim.facebook ?? '');
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
+  fetchData();
+}, [url]);
+
+
+
   return (
     <>
    <Container className='mt-5 mb-3'>
@@ -90,9 +98,9 @@ const sigRef = useRef<HTMLDivElement | null>(null);
                     </Form>
                <DownloadSignature targetRef={sigRef}/>
                 <hr/>
+            <SignatureView signatureHtml={signatureHtml} targetRef={sigRef}/>
                 </Row>
             </Container>
-    <SignatureView datas={datas} targetRef={sigRef}/>
     </>
   )
 }
