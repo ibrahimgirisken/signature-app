@@ -3,7 +3,7 @@ import { cwsolarcellSignature } from "../signatures/cwsolarcell";
 import { tommatechSignature } from "../signatures/tommatech";
 
 export const SUGNATURE_TEMPLATE_BY_COMPANY_ID:Record<string, (data:any)=>string>={
-    "08de5c9f-2f65-4212-8ec1-51d60e4bd511":tommatechSignature,
-    "08de5cb1-7038-40ce-81d3-6e2242827e91":cwsolarcellSignature,
-    "08de6584-b430-4f25-8c7d-2a2ccce9aee3":cwenerjiSigranuture
+    "08de6a24-3eeb-4a41-807f-58ca9b6699b1":tommatechSignature,
+    "08de6a24-4b6e-4831-8da5-6aee482bb8ab":cwsolarcellSignature,
+    "08de6a16-110e-4aa5-84fc-33d41a4e4f00":cwenerjiSigranuture
 }
