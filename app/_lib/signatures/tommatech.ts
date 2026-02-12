@@ -142,13 +142,13 @@ export const tommatechSignature = (signatureData: SignatureData) => `
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
           <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
-       <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
+       <a href="\${signatureData.twitter}" target="_blank" style="text-decoration:none;">
           <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
-     <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
+     <a href="\${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
           <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
-         <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
+         <a href="\${signatureData.youtube}" target="_blank" style="text-decoration:none;">
           <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
     </td>
@@ -161,7 +161,7 @@ export const tommatechSignature = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href="${signatureData.contact}"
+        href="\${signatureData.contact}"
         target="_blank"
         style="
           display:block;
