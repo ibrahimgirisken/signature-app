@@ -204,7 +204,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href="\${signatureData.fairs}"
+        href=""
         target="_blank"
         style="
           display:block;
@@ -228,7 +228,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href="\${signatureData.education}"
+        href=""
         target="_blank"
         style="
           display:block;
@@ -252,7 +252,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href="\${signatureData.contact}"
+        href=""
         target="_blank"
         style="
           display:block;
