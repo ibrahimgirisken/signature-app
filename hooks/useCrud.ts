@@ -4,7 +4,7 @@ export function useCrud<TRequest,TResponse>(
     key:string,
     service:{
         getAll:()=>Promise<TResponse[]>;
-        getById?:(id:string)=>Promise<TResponse>;
+        getById:(id:string)=>Promise<TResponse>;
         create:(data:TRequest)=>Promise<TResponse>;
         update:(id:string,data:TRequest)=>Promise<TResponse>;
         delete:(id:string) =>Promise<void>; 
@@ -12,9 +12,16 @@ export function useCrud<TRequest,TResponse>(
 ) {
     const queryClient=useQueryClient();
 
-    const list=useQuery({
-        queryKey:[key],
+    const getall=useQuery({
+        queryKey:[key,"list"],
         queryFn: () => service.getAll(),
+    });
+
+    const useGetById = (id: string) =>
+    useQuery({
+      queryKey: [key, "detail", id],
+      queryFn: () => service.getById(id),
+      enabled: Boolean(id),
     });
 
     const create=useMutation({
@@ -33,5 +40,5 @@ export function useCrud<TRequest,TResponse>(
         onSuccess:()=>queryClient.invalidateQueries({queryKey:[key]}),
     });
 
-    return {list,create,update,remove};
+    return {getall,useGetById,create,update,remove};
 }

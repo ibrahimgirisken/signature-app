@@ -9,7 +9,7 @@ export class BaseService<TRequest,TResponse> {
     }
 
     async getById(id:string):Promise<TResponse> {
-        const res=await http.get<TResponse>(this.endpoint)
+        const res=await http.get<TResponse>(`${this.endpoint}/getbyid?Id=${id}`)
         return res.data;
     }
 
@@ -18,8 +18,8 @@ export class BaseService<TRequest,TResponse> {
         return res.data;
     }
 
-    async update(id:string, data:TRequest):Promise<TResponse> {
-        const res=await http.put<TResponse>(`${this.endpoint}/${id}`,data)
+    async update(data:TRequest):Promise<TResponse> {
+        const res=await http.put<TResponse>(`${this.endpoint}/update`,data)
         return res.data;
     }
 

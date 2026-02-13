@@ -6,23 +6,20 @@ export interface CompanyResponse {
   id: string;
   companyName: string;
   domainName: string;
-  phone?: string;
-  fax?: string;
-  address?: string;
-  kdvText?: string;
-  informationText?: string;
-  environmentText?: string;
+  phone: string;
+  fax: string;
+  address: string;
+  kdvText: string;
+  informationText: string;
+  environmentText: string;
   components: CompanyComponentResponse[];
 }
 
 export interface CompanyRequest {
-  companyName: string;
-  email?: string;
-  phone?: string;
-  isActive?: boolean;
+  id?: string;
 }
 
-export interface CompanyComponentResponse{
+export interface CompanyComponentResponse {
   id: string;
   companyId: string;
   label: string;

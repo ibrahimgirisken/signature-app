@@ -65,8 +65,8 @@ function Home() {
     'Lütfen ağaçları ve doğayı koruyun. Lütfen bu e-postayı yazdırmadan önce düşünün.</br>Please protect the trees and the nature. Please think before printing this e-mail.'
   );
 
-  const { list } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
-  const companies = list.data ?? [];
+  const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
+  const companies = getall.data ?? [];
 
   // ✅ tek kaynak: state'lerden datas üret
   const datas: SignatureData = useMemo(
