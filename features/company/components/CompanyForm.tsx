@@ -42,7 +42,7 @@ function CompanyForm({ initialData, onSuccess }: CompanyFormProps) {
                 await companyService.update(formData.id,formData);
             } else {
                 const { id, ...dataToSend } = formData
-                await companyService.create(dataToSend)
+                await companyService.create(formData)
             }
             if (onSuccess) onSuccess()
         } catch (error) {
