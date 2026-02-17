@@ -6,7 +6,7 @@ export const metadata = {
   title: 'Signature Admin Paneli',
   description: 'Signature içerik yönetimi',
   icons:{
-    icon:"app\favicon.ico"
+    icon:"/favicon.ico"
   }
 };
 
