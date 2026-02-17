@@ -39,9 +39,10 @@ function CompanyForm({ initialData, onSuccess }: CompanyFormProps) {
         e.preventDefault()
         try {
             if (formData.id) {
-                await companyService.update(formData);
+                const {components,...dataToSend}=formData
+                await companyService.update(dataToSend);
             } else {
-                const { id, ...dataToSend } = formData
+                const { id,components,...dataToSend } = formData
                 await companyService.create(dataToSend)
             }
             if (onSuccess) onSuccess()
