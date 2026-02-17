@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "Mail İmza Oluşturucu",
   description: "CW Enerji Plus Mail İmza Oluşturucu",
   icons:{
-    icon:"favicon-32x32.png"
+    icon:"app\favicon.ico"
   }
 };
 

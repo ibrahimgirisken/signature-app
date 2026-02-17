@@ -18,7 +18,7 @@ export class BaseService<TRequest,TResponse> {
         return res.data;
     }
 
-    async update(data:TRequest):Promise<TResponse> {
+    async update(id:string,data:TRequest):Promise<TResponse> {
         const res=await http.put<TResponse>(`${this.endpoint}/update`,data)
         return res.data;
     }
