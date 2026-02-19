@@ -1,37 +1,40 @@
 @import "tailwindcss";
 
+/* Global renk değişkenleri */
 :root {
   --background: #ffffff;
   --foreground: #000000;
 }
 
+/* Tailwind theme mapping */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
+/* Dark mode olsa bile yazı siyah kalacak */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #000000;
   }
 }
 
+/* Global body ayarı */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
   background-color: #ffffff;
+  color: #000000; /* yazı rengi siyah */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Mobil düzenlemeler */
 @media (max-width:768px) {
-  .btn-items button{
-    margin-top:55px!Important;
-    right: 5px!Important;
+  .btn-items button {
+    margin-top: 55px !important;
+    right: 5px !important;
   }
-  .signature-shema{
+
+  .signature-shema {
     margin-top: 100px;
     width: 100%;
     overflow: scroll;
