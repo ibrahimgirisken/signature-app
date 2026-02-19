@@ -38,7 +38,7 @@ type SignatureData = {
 function Home() {
   const sigRef = useRef<HTMLDivElement | null>(null);
 
-  const [selectedCompanyId, setSelectedCompanyId] = React.useState<string>('');
+  const [selectedCompanyName, setSelectedCompanyName] = React.useState<string>('');
 
   const [fullName, setFullName] = React.useState('');
   const [department, setDepartment] = React.useState('');
@@ -108,16 +108,16 @@ function Home() {
 
   // ✅ imza html'i seçili firmaya göre derived üret
   const signatureHtml = useMemo(() => {
-    if (!selectedCompanyId) return '';
-    const templateFn = SUGNATURE_TEMPLATE_BY_COMPANY_ID[selectedCompanyId];
+    if (!selectedCompanyName) return '';
+    const templateFn = SUGNATURE_TEMPLATE_BY_COMPANY_ID[selectedCompanyName];
     return templateFn ? templateFn(datas) : '';
-  }, [selectedCompanyId, datas]);
+  }, [selectedCompanyName, datas]);
 
   const handleCompanyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedId = e.target.value;
-    setSelectedCompanyId(selectedId);
+    const selectedCompanyName = e.target.value;
+    setSelectedCompanyName(selectedCompanyName);
 
-    const selectedCompany = companies.find((c) => c.id === selectedId);
+    const selectedCompany = companies.find((c) => c.companyName === selectedCompanyName);
     if (!selectedCompany) return;
 
     // company bilgileri
@@ -146,13 +146,13 @@ function Home() {
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
            <Col sm="6" col-lg="12">
-              <FormSelect value={selectedCompanyId} className='mb-3' onChange={handleCompanyChange}>
+              <FormSelect value={selectedCompanyName} className='mb-3' onChange={handleCompanyChange}>
                 <option value="" disabled>
                   Seçiniz
                 </option>
                 {Array.isArray(companies) &&
                   companies.map((company) => (
-                    <option key={company.id} value={company.id}>
+                    <option key={company.id} value={company.companyName}>
                       {company.companyName}
                     </option>
                   ))}
