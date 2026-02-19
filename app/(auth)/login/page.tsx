@@ -2,7 +2,7 @@
 import Cookies from 'js-cookie';
 import { http } from '@/lib/http';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
 function login() {
@@ -38,6 +38,7 @@ function login() {
     }
   };
   return (
+    <Suspense fallback={<div>Yükleniyor...</div>}>
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <Row className="border rounded p-4 shadow" style={{ width: '100%', maxWidth: '500px' }}>
         <Col>
@@ -76,6 +77,7 @@ function login() {
         </Col>
       </Row>
     </Container>
+    </Suspense>
   )
 }
 
