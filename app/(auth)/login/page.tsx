@@ -5,40 +5,41 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
-function login() {
+// 1. Hook kullanan form bileşenini ayırıyoruz
+function LoginForm() {
   const [formData, setFormData] = useState({ userNameOrEmail: '', password: '' });
-  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const sp = useSearchParams();
+  
+  // useSearchParams sadece bu alt bileşen içinde çağrılmalı
+  const sp = useSearchParams(); 
   const callbackUrl = sp.get('callbackUrl') || '/admin';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await http.post(`${process.env.NEXT_PUBLIC_API_URL}/Auth/login`, {
+      const res = await http.post(`/Auth/login`, {
         userNameOrEmail: formData.userNameOrEmail,
         password: formData.password,
       });
 
-      if (res.data.ok) {
-        router.replace(callbackUrl);
-        return;
-      }
-
       const { token } = res.data;
-      localStorage.setItem("token", token);
-      Cookies.set('token', token, { expires: 1, secure: true });
-      router.push(callbackUrl);
+      
+      if (token) {
+        localStorage.setItem("token", token);
+        Cookies.set('token', token, { expires: 1, secure: true });
+        router.push(callbackUrl);
+        router.refresh(); // Middleware'in güncel cookie'yi fark etmesi için
+      }
     } catch (error: any) {
       alert("Giriş başarısız: " + (error.response?.data?.message || "Hata!"));
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <Suspense fallback={<div>Yükleniyor...</div>}>
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <Row className="border rounded p-4 shadow" style={{ width: '100%', maxWidth: '500px' }}>
         <Col>
@@ -77,8 +78,15 @@ function login() {
         </Col>
       </Row>
     </Container>
+  );
+}
+
+// 2. Ana sayfa bileşeni (Default Export)
+export default function LoginPage() {
+  return (
+    // Suspense Boundary build hatasını engeller
+    <Suspense fallback={<div>Yükleniyor...</div>}>
+      <LoginForm />
     </Suspense>
   )
 }
-
-export default login
