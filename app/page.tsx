@@ -68,7 +68,6 @@ function Home() {
   const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
   const companies = getall.data ?? [];
 
-  // ✅ tek kaynak: state'lerden datas üret
   const datas: SignatureData = useMemo(
     () => ({
       fullName,
@@ -106,7 +105,6 @@ function Home() {
     ]
   );
 
-  // ✅ imza html'i seçili firmaya göre derived üret
   const signatureHtml = useMemo(() => {
     if (!selectedCompanyName) return '';
     const templateFn = SUGNATURE_TEMPLATE_BY_COMPANY_ID[selectedCompanyName];
@@ -120,7 +118,6 @@ function Home() {
     const selectedCompany = companies.find((c) => c.companyName === selectedCompanyName);
     if (!selectedCompany) return;
 
-    // company bilgileri
     setDomainName(selectedCompany.domainName || '');
     setPhone(selectedCompany.phone || '');
     setAddress(selectedCompany.address || '');
@@ -204,7 +201,6 @@ function Home() {
         <DownloadSignature targetRef={sigRef} />
         <hr />
 
-        {/* ✅ sadece HTML bas */}
         <SignatureView signatureHtml={signatureHtml} targetRef={sigRef} />
       </Row>
     </Container>

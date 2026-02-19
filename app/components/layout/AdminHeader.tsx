@@ -1,10 +1,18 @@
 'use client'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 
 function AdminHeader() {
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+    }
+  }, [router]);
   return (
-        <>
+    <>
       <header className="text-white">
         <Navbar variant="dark" bg="dark" expand="lg">
           <Container>
@@ -13,7 +21,7 @@ function AdminHeader() {
             <Navbar.Collapse id="navbar-dark-example">
               <Nav>
                 <Nav.Link href="../">Site</Nav.Link>
-                <Nav.Link href="../">Çıkış</Nav.Link>
+                <Nav.Link href="/logout">Çıkış</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
