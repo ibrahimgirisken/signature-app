@@ -21,12 +21,10 @@
 }
 
 /* Global body ayarı */
-body {
-  background-color: #ffffff;
-  color: #000000; /* yazı rengi siyah */
-  font-family: Arial, Helvetica, sans-serif;
-}
 
+body {
+  @apply bg-white text-black;
+}
 /* Mobil düzenlemeler */
 @media (max-width:768px) {
   .btn-items button {
