@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: 'https://api.cw-dig.com/api',
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
   },
 });
-console.log('http:'+process.env.NEXT_PUBLIC_API_URL)
+
 http.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");

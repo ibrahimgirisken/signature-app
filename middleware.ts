@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
-  const API_URL = process.env.API_URL;
+  const API_URL = 'https://api.cw-dig.com/api';
 
   if (!API_URL) {
     console.error("API_URL TANIMSIZ");
