@@ -7,7 +7,7 @@ export const http = axios.create({
     "Content-Type": "application/json",
   },
 });
-
+console.log('http:'+process.env.NEXT_PUBLIC_API_URL)
 http.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
