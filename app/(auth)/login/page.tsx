@@ -10,9 +10,9 @@ function LoginForm() {
   const [formData, setFormData] = useState({ userNameOrEmail: '', password: '' });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  
+
   // useSearchParams sadece bu alt bileşen içinde çağrılmalı
-  const sp = useSearchParams(); 
+  const sp = useSearchParams();
   const callbackUrl = sp.get('callbackUrl') || '/admin';
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -25,10 +25,15 @@ function LoginForm() {
       });
 
       const { token } = res.data;
-      
+
       if (token) {
         localStorage.setItem("token", token);
-        Cookies.set('token', token, { expires: 1, secure: true });
+        Cookies.set('token', token, {
+          expires: 1,
+          secure: true,
+          sameSite: 'lax',
+          path: '/'
+        });
         router.push(callbackUrl);
         router.refresh(); // Middleware'in güncel cookie'yi fark etmesi için
       }
