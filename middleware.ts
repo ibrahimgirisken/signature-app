@@ -1,36 +1,49 @@
-import { NextRequest, NextResponse } from "next/server";
+// middleware.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  // Sabit olarak doğrudan API URL'ini buraya da ekleyin (Test amaçlı)
-  const BASE_API = process.env.NEXT_PUBLIC_API_URL || "https://api.cw-dig.com/api";
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
+  // ÖNEMLİ: Vercel değişkeni göremezse diye doğrudan API adresinizi yedek olarak buraya yazın
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.cw-dig.com/api";
+
   if (pathname.startsWith("/admin")) {
-    if (!token) return NextResponse.redirect(new URL("/login", request.url));
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
     try {
-      // URL'in çift slash içermediğinden emin olun
-      const cleanUrl = `${BASE_API}/Auth/verify-token`.replace(/([^:]\/)\/+/g, "$1");
-
-      const apiRes = await fetch(cleanUrl, {
+      // fetch isteğinin tam URL'ini oluşturun
+      const verifyRes = await fetch(`${API_URL}/Auth/verify-token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ token: token }),
       });
 
-      // API yanıt vermezse veya JSON değilse hata fırlatır
-      const result = await apiRes.json();
+      // Eğer API 404 veya 405 verirse (yanlış URL), burası hata fırlatır
+      if (!verifyRes.ok) {
+        throw new Error("API hatası");
+      }
 
-      if (!apiRes.ok || result.state === false) {
+      const result = await verifyRes.json();
+
+      if (result.state !== true) {
         const response = NextResponse.redirect(new URL("/login", request.url));
         response.cookies.delete("token");
         return response;
       }
     } catch (error) {
-      // Bir hata oluşursa (CORS, 405, 404 vb.) kullanıcıyı login'e atar
+      // API'ye ulaşılamazsa veya hata gelirse login'e at
+      console.error("Middleware Auth Hatası:", error);
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
+
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: "/admin/:path*",
+};
