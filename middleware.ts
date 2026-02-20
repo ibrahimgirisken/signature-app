@@ -1,28 +1,25 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  // Sabit olarak doğrudan API URL'ini buraya da ekleyin (Test amaçlı)
+  const BASE_API = process.env.NEXT_PUBLIC_API_URL || "https://api.cw-dig.com/api";
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
-  const API_URL = 'https://api.cw-dig.com/api';
 
-  if (!API_URL) {
-    console.error("API_URL TANIMSIZ");
-  }
+  if (pathname.startsWith("/admin")) {
+    if (!token) return NextResponse.redirect(new URL("/login", request.url));
 
-  if (token && pathname.startsWith("/admin")) {
     try {
-      const apiRes = await fetch(
-        `${API_URL}/Auth/verify-token`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: token }),
-        },
-      );
+      // URL'in çift slash içermediğinden emin olun
+      const cleanUrl = `${BASE_API}/Auth/verify-token`.replace(/([^:]\/)\/+/g, "$1");
 
-      console.log(`middleware:+${API_URL}`);
+      const apiRes = await fetch(cleanUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
 
+      // API yanıt vermezse veya JSON değilse hata fırlatır
       const result = await apiRes.json();
 
       if (!apiRes.ok || result.state === false) {
@@ -31,12 +28,9 @@ export async function middleware(request: NextRequest) {
         return response;
       }
     } catch (error) {
+      // Bir hata oluşursa (CORS, 405, 404 vb.) kullanıcıyı login'e atar
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
-
   return NextResponse.next();
 }
-export const config = {
-  matcher: "/admin/:path*",
-};
