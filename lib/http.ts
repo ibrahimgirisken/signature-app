@@ -27,6 +27,8 @@ http.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       console.error("Oturum süresi dolmuş!");
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = "/login"
     }
     return Promise.reject(error);
   },

@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
       if (!apiRes.ok || result.state === false) {
         const response = NextResponse.redirect(new URL('/login', request.url));
-        response.cookies.delete('token'); // Çöp token'ı sil
+        response.cookies.delete('token');
         return response;
       }
     } catch (error) {
