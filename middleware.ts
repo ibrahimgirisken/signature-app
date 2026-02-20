@@ -8,21 +8,22 @@ export async function middleware(request: NextRequest) {
   // If user is trying to access admin routes, enforce auth
   if (pathname.startsWith("/admin")) {
     const accept = request.headers.get("accept") || "";
-    // Allow non-navigation requests (RSC/fetch/prefetch) to pass through
-    if (!accept.includes("text/html")) {
+    const isHtmlNav = accept.includes("text/html");
+
+    // No token: if this is a full page navigation (HTML) redirect to login,
+    // otherwise allow the request through (so RSC/prefetch/fetch won't get a 307).
+    if (!token) {
+      if (isHtmlNav) return NextResponse.redirect(new URL("/login", request.url));
       return NextResponse.next();
     }
-    // No token -> redirect to login immediately
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
 
-    // If token exists, verify it with backend
+    // Token exists: verify it with backend. If invalid, redirect only for HTML navigations,
+    // otherwise allow the non-navigation request through so it can handle auth itself.
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       if (!apiUrl) {
-        // If API URL is not configured, deny access
-        return NextResponse.redirect(new URL("/login", request.url));
+        if (isHtmlNav) return NextResponse.redirect(new URL("/login", request.url));
+        return NextResponse.next();
       }
 
       const apiRes = await fetch(`${apiUrl}/Auth/verify-token`, {
@@ -34,12 +35,16 @@ export async function middleware(request: NextRequest) {
       const result = await apiRes.json();
 
       if (!apiRes.ok || result.state === false) {
-        const response = NextResponse.redirect(new URL("/login", request.url));
-        response.cookies.delete("token");
-        return response;
+        if (isHtmlNav) {
+          const response = NextResponse.redirect(new URL("/login", request.url));
+          response.cookies.delete("token");
+          return response;
+        }
+        return NextResponse.next();
       }
     } catch (error) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      if (isHtmlNav) return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.next();
     }
   }
 
