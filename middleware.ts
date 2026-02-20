@@ -20,6 +20,7 @@ export async function middleware(request: NextRequest) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: token }),
+        cache: "no-store",
       });
 
       // Eğer API 404 veya 405 verirse (yanlış URL), burası hata fırlatır
