@@ -4,12 +4,16 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
+  const API_URL = process.env.API_URL;
 
+  if (!API_URL) {
+    console.error("API_URL TANIMSIZ");
+  }
 
   if (token && pathname.startsWith("/admin")) {
     try {
       const apiRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/Auth/verify-token`,
+        `${API_URL}/Auth/verify-token`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -17,7 +21,7 @@ export async function middleware(request: NextRequest) {
         },
       );
 
-      console.log('middleware:'+process.env.NEXT_PUBLIC_API_URL);
+      console.log(`middleware:+${API_URL}`);
 
       const result = await apiRes.json();
 
