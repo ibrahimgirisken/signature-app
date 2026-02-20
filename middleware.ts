@@ -5,19 +5,26 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
+  // If user is trying to access admin routes, enforce auth
+  if (pathname.startsWith("/admin")) {
+    // No token -> redirect to login immediately
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
-  if (token && pathname.startsWith("/admin")) {
+    // If token exists, verify it with backend
     try {
-      const apiRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/Auth/verify-token`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: token }),
-        },
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        // If API URL is not configured, deny access
+        return NextResponse.redirect(new URL("/login", request.url));
+      }
 
-      console.log('middleware:'+process.env.NEXT_PUBLIC_API_URL);
+      const apiRes = await fetch(`${apiUrl}/Auth/verify-token`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
 
       const result = await apiRes.json();
 
@@ -34,5 +41,5 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 export const config = {
-  matcher: "/admin/:path*",
+  matcher: ["/admin", "/admin/:path*"],
 };
