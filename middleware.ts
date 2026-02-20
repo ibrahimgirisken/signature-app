@@ -1,41 +1,29 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { http } from './lib/http';
 
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get("token")?.value;
-  const { pathname } = request.nextUrl;
-  const API_URL = process.env.API_URL;
-
-  if (!API_URL) {
-    console.error("API_URL tanımlı değil");
-  }
-
-  if (!token && pathname.startsWith("/admin")) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  if (token && pathname.startsWith("/admin")) {
-    try {
-      const apiRes = await fetch(`${API_URL}/Auth/verify-token`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: token }),
-      });
-
-      const result = await apiRes.json();
-
-      if (!apiRes.ok || result.state === false) {
-        const response = NextResponse.redirect(new URL("/login", request.url));
-        response.cookies.delete("token");
-        return response;
-      }
-    } catch (error) {
-      return NextResponse.redirect(new URL("/login", request.url));
+  const token = request.cookies.get('token')?.value;
+  try {
+    const resValid=await http.post(`/Auth//verify-token`,{
+      token:localStorage.getItem("token")
+    });
+    if(resValid.data.State)
+    {
+      return NextResponse.redirect(new URL('/admin', request.url));
     }
+      return NextResponse.redirect(new URL('/login', request.url));
+
+  } catch (error) {
+    
+  }
+  if (!token && request.nextUrl.pathname.startsWith('/admin')) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return NextResponse.next();
 }
+
 export const config = {
-  matcher: "/admin/:path*",
+  matcher: '/admin/:path*', 
 };
