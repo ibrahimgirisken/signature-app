@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: 'https://api.cw-dig.com/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
