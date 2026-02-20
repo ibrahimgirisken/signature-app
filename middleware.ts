@@ -7,6 +7,11 @@ export async function middleware(request: NextRequest) {
 
   // If user is trying to access admin routes, enforce auth
   if (pathname.startsWith("/admin")) {
+    const accept = request.headers.get("accept") || "";
+    // Allow non-navigation requests (RSC/fetch/prefetch) to pass through
+    if (!accept.includes("text/html")) {
+      return NextResponse.next();
+    }
     // No token -> redirect to login immediately
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
