@@ -15,6 +15,7 @@ export async function middleware(request: NextRequest) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: token }),
+        redirect: 'follow'
       });
 
       const result = await apiRes.json();
