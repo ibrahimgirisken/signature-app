@@ -1,7 +1,6 @@
 'use client'
 import Cookies from 'js-cookie';
 import { http } from '@/lib/http';
-import { useRouter} from 'next/navigation';
 import React, { Suspense, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
@@ -9,7 +8,6 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 function LoginForm() {
   const [formData, setFormData] = useState({ userNameOrEmail: '', password: '' });
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
