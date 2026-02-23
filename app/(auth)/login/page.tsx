@@ -27,9 +27,10 @@ function LoginForm() {
         localStorage.setItem("token", token);
         Cookies.set('token', token, {
           expires: 1,
-          secure: true,
+          secure: process.env.NODE_ENV === 'production',
           sameSite: 'lax',
-          path: '/'
+          path: '/',
+          domain: window.location.hostname
         });
         router.push('/admin');
         router.refresh(); // Middleware'in güncel cookie'yi fark etmesi için
