@@ -26,7 +26,8 @@ function LoginForm() {
 
       const { token } = res.data;
       console.log("Gelen token:", token); // Token'ı konsola yazdırarak kontrol edin
-      console.log("env NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL+' ve API_URL'+process.env.API_URL); // Callback URL'yi de kontrol edin
+      console.log("env NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
+      console.log("callbackUrl", callbackUrl);
       if (token) {
         localStorage.setItem("token", token);
         Cookies.set('token', token, {
