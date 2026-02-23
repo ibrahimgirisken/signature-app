@@ -1,7 +1,7 @@
 'use client'
 import Cookies from 'js-cookie';
 import { http } from '@/lib/http';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter} from 'next/navigation';
 import React, { Suspense, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
@@ -10,10 +10,6 @@ function LoginForm() {
   const [formData, setFormData] = useState({ userNameOrEmail: '', password: '' });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  // useSearchParams sadece bu alt bileşen içinde çağrılmalı
-  const sp = useSearchParams();
-  const callbackUrl = sp.get('callbackUrl') || '/admin';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +23,6 @@ function LoginForm() {
       const { token } = res.data;
       console.log("Gelen token:", token); // Token'ı konsola yazdırarak kontrol edin
       console.log("env NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
-      console.log("callbackUrl", callbackUrl);
       if (token) {
         localStorage.setItem("token", token);
         Cookies.set('token', token, {
@@ -36,7 +31,7 @@ function LoginForm() {
           sameSite: 'lax',
           path: '/'
         });
-        router.push(callbackUrl);
+        router.push('/admin');
         router.refresh(); // Middleware'in güncel cookie'yi fark etmesi için
       }
     } catch (error: any) {
