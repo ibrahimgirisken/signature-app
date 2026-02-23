@@ -21,7 +21,7 @@ function LoginForm() {
       });
 
       const { token } = res.data;
-      console.log("Gelen token:", token); // Token'ı konsola yazdırarak kontrol edin
+      console.log("Gelen token:", token);
       console.log("env NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
       if (token) {
         localStorage.setItem("token", token);
@@ -29,11 +29,9 @@ function LoginForm() {
           expires: 1,
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'lax',
-          path: '/',
-          domain: window.location.hostname
+          path: '/'
         });
-        router.push('/admin');
-        router.refresh(); // Middleware'in güncel cookie'yi fark etmesi için
+        window.location.href = '/admin'; // Sayfayı yenileyerek yönlendirme
       }
     } catch (error: any) {
       alert("Giriş başarısız: " + (error.response?.data?.message || "Hata!"));
