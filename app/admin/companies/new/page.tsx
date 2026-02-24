@@ -11,7 +11,7 @@ function CompanyAdd() {
             <CompanyForm onSuccess={() => {
                 console.log("Firma Eklendi")
                 router.push('/admin/companies/new')
-            }} />
+            }} onChange={(val)=>{console.log(val)}} />
         </>
   )
 }

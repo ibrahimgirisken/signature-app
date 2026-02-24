@@ -4,9 +4,10 @@ import { CompanyResponse } from '@/types/company';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
-    onChange: (data: CompanyResponse) => void 
+    onChange: (data: CompanyResponse) => void,
+    onSuccess?: () => void
 }
-function CompanyForm({ initialData, onChange }: CompanyFormProps) {
+function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
