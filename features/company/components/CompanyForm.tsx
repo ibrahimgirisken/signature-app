@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Row } from 'react-bootstrap';
-import { companyService } from '@/services/company.service';
 import { CompanyResponse } from '@/types/company';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
-    onSuccess?: () => void
+    onChange: (data: CompanyResponse) => void 
 }
-function CompanyForm({ initialData, onSuccess }: CompanyFormProps) {
+function CompanyForm({ initialData, onChange }: CompanyFormProps) {
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
@@ -23,36 +22,26 @@ function CompanyForm({ initialData, onSuccess }: CompanyFormProps) {
 
 
     useEffect(() => {
-        if (initialData)
-            setFormData(initialData)
+        if (initialData) {
+            setFormData(initialData);
+        }
     }, [initialData]);
 
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type } = e.target
-        setFormData((prev) => ({
-            ...prev,
-            [name]: type === 'number' ? Number(value) : value,
-        }))
-    }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        const updatedData = {
+            ...formData,
+            [name]: value,
+        };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        try {
-            if (formData.id) {
-                const {components,...dataToSend}=formData
-                await companyService.update(dataToSend);
-            } else {
-                const { id,components,...dataToSend } = formData
-                await companyService.create(dataToSend)
-            }
-            if (onSuccess) onSuccess()
-        } catch (error) {
-            console.log(error)
-        }
-    }
+        setFormData(updatedData);
+        // Her değişimde üst bileşeni bilgilendiriyoruz
+        onChange(updatedData);
+    };
+
     return (
         <>
-            <Form className='m-5' onSubmit={handleSubmit}>
+            <Form className='m-5'>
                 <Row className="mb-3">
                     <Form.Group className="mb-3">
                         <Form.Label>Firma Adı</Form.Label>
@@ -126,17 +115,15 @@ function CompanyForm({ initialData, onSuccess }: CompanyFormProps) {
                     <Form.Group className="mb-3">
                         <Form.Label>Çevre Yazısı</Form.Label>
                         <Form.Control
-                         as="textarea"
-                         rows={2}
-                         type="text"
-                         name="environmentText"
-                         value={formData.environmentText}
-                         onChange={handleChange}
+                            as="textarea"
+                            rows={2}
+                            type="text"
+                            name="environmentText"
+                            value={formData.environmentText}
+                            onChange={handleChange}
                         />
                     </Form.Group>
-                    <Button style={{ width: '5rem', padding: '2px' }} variant="primary" type="submit">
-                        {formData.id ? 'Güncelle' : 'Ekle'}
-                    </Button>
+
                 </Row>
             </Form>
         </>

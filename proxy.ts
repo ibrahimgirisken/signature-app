@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+// Sadece fonksiyon ismini 'middleware' yerine 'proxy' yaptık
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
@@ -18,14 +19,15 @@ export async function middleware(request: NextRequest) {
         body: JSON.stringify({ token: token }),
       });
       const result = await apiRes.json();
+      
       if (!apiRes.ok || result.state === false) {
         const response = NextResponse.redirect(new URL("/login", request.url));
         response.cookies.delete("token");
         return response;
       }
     } catch (error) {
-      console.error("Middleware API Hatası:", error);
-     return NextResponse.next();
+      console.error("Proxy API Hatası:", error);
+      return NextResponse.next();
     }
   }
 

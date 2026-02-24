@@ -19,13 +19,18 @@ export interface CompanyRequest {
   id?: string;
 }
 
+export interface CompanyComponentRequest {
+  id?: string;
+}
+
+
 export interface CompanyComponentResponse {
   id: string;
   companyId: string;
   label: string;
   imageUrl: string;
   targetUrl: string;
-  type: string; // enum da olabilir
+  type: string;
   order: number;
   isActive: boolean;
 }
