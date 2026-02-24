@@ -13,7 +13,6 @@ function CompanyEdit() {
   const router = useRouter()
   const params = useParams();
   const id = params.id as string;
-  const isEditMode = !!id;
 
   const { useGetById } = useCrud<CompanyRequest, CompanyResponse>("company", companyService as any);
   const { data, isLoading } = useGetById(id);
@@ -31,39 +30,27 @@ function CompanyEdit() {
 
   const handleGlobalSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return; // Çift tıklamayı engelle
+    if (isSubmitting) return;
     
     setIsSubmitting(true);
     try {
       let currentCompanyId = id;
 
-      // --- 1. ADIM: Firma İşlemleri ---
-      if (isEditMode) {
         const { components, ...companyInfo } = companyData;
         await companyService.update(companyInfo as any);
-      } else {
-        const { id: _, components, ...companyInfo } = companyData;
-        const response = await companyService.create(companyInfo as any);
-        currentCompanyId = response.id; // Yeni oluşan ID
-      }
 
-      // --- 2. ADIM: Component İşlemleri ---
-      // Veri varsa GÜNCELLE (PUT), yoksa EKLE (POST)
       const componentPromises = componentData.map((component) => {
         const payload = {
           ...component,
-          companyId: currentCompanyId, // ID mutlaka enjekte edilmeli
+          companyId: currentCompanyId,
           label: component.label || "",
           targetUrl: component.targetUrl || "",
           imageUrl: component.imageUrl || "",
         };
 
-        // Eğer component'in kendi ID'si varsa bu zaten DB'de vardır (Update)
-        // Yoksa yeni oluşturulacaktır (Create)
         if (component.id && component.id !== "") {
           return companyComponentService.update(payload);
         } else {
-          // Create işleminde payload'dan id'yi siliyoruz (Backend UUID atıyorsa çakışmaması için)
           const { id: _, ...createPayload } = payload;
           return companyComponentService.create(createPayload);
         }
@@ -84,9 +71,8 @@ function CompanyEdit() {
 
   return (
     <div className="p-4">
-      <h2 className="mb-4">{isEditMode ? 'Firma Düzenleme' : 'Yeni Firma Ekle'}</h2>
+      <h2 className="mb-4">Firma Düzenleme</h2>
       
-      {/* Firma Ana Formu */}
       <CompanyForm 
         initialData={data} 
         onChange={setCompanyData}
@@ -96,7 +82,6 @@ function CompanyEdit() {
         <h4>Firma Bileşenleri (Sosyal Medya, Logo vb.)</h4>
         <p className="text-muted small">Her bir başlık için bilgileri doldurabilirsiniz.</p>
         
-        {/* Component Formu (Enum listesi ve eşleştirme içeride yapılıyor) */}
         <CompanyComponentForm 
           initialData={data?.components || []} 
           onChange={setComponentData} 
@@ -110,7 +95,7 @@ function CompanyEdit() {
           variant="primary" 
           onClick={handleGlobalSave}
         >
-          {isSubmitting ? 'İşleniyor...' : (isEditMode ? 'Değişiklikleri Güncelle' : 'Firmayı Kaydet')}
+          Değişiklikleri Güncelle
         </Button>
         <Button 
           variant="secondary" 

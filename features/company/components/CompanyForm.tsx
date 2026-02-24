@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Row } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
+import { http } from '@/lib/http';
+import { companyService } from '@/services/company.service';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
     onChange: (data: CompanyResponse) => void,
     onSuccess?: () => void
 }
+
 function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
@@ -23,6 +26,19 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
 
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const signatureAsset = await http.get("/Enums/signature-asset-types");
+                console.log(signatureAsset.data);
+            } catch (error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
+
+    useEffect(() => {
         if (initialData) {
             setFormData(initialData);
         }
@@ -36,13 +52,26 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
         };
 
         setFormData(updatedData);
-        // Her değişimde üst bileşeni bilgilendiriyoruz
         onChange(updatedData);
+    };
+
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+             await companyService.create(formData as any);
+            // Burada API çağrısı yaparak veriyi kaydedebilirsiniz.
+            // Örneğin: await companyService.create(formData);
+            console.log("Kaydedilen Veri:", formData);
+            if (onSuccess) onSuccess();
+        } catch (error) {
+            console.error("Kayıt sırasında hata oluştu:", error);
+        } finally {
+        }
     };
 
     return (
         <>
-            <Form className='m-5'>
+            <Form className='m-5' onSubmit={handleSave}>
                 <Row className="mb-3">
                     <Form.Group className="mb-3">
                         <Form.Label>Firma Adı</Form.Label>
@@ -124,7 +153,6 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
                             onChange={handleChange}
                         />
                     </Form.Group>
-
                 </Row>
             </Form>
         </>

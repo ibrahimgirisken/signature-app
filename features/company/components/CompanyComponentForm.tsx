@@ -19,13 +19,10 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
     useEffect(() => {
         const fetchAndMergeData = async () => {
             try {
-                // 1. Enumları çek (Tüm tipler: Logo, Instagram vb.)
                 const res = await http.get('/Enums/signature-asset-types');
                 const enums = res.data;
 
-                // 2. Mevcut verilerle Enumları birleştir
                 const mergedData = enums.map((enumItem: any) => {
-                    // Eğer gelen initialData içinde bu tipe ait bir kayıt varsa onu kullan
                     const existingRecord = initialData?.find(d => d.type === enumItem.value);
 
                     return existingRecord ? { ...existingRecord } : {
@@ -36,12 +33,12 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
                         order: 1,
                         isActive: true,
                         companyId: companyId,
-                        isNew: true // Yeni ekleneceğini işaretlemek için
+                        isNew: true
                     };
                 });
 
                 setFormData(mergedData);
-                if (onChange) onChange(mergedData); // Başlangıç halini yukarı bildir
+                if (onChange) onChange(mergedData);
             } catch (error) {
                 console.error("Veriler alınırken hata oluştu", error);
             } finally {
@@ -52,13 +49,11 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
         fetchAndMergeData();
     }, [companyId, initialData]); // initialData değişirse (örn: API'den geç gelirse) tekrar çalışır
 
-    // Formdaki herhangi bir alan değiştiğinde tetiklenir
     const handleInputChange = (index: number, field: string, value: any) => {
         const updatedForm = [...formData];
         updatedForm[index] = { ...updatedForm[index], [field]: value };
         setFormData(updatedForm);
         
-        // Üst bileşene (CompanyEdit) güncel listeyi gönder
         if (onChange) onChange(updatedForm);
     };
 
