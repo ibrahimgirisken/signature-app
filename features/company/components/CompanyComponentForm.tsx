@@ -15,7 +15,6 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
     const companyId = params.id as string;
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState<CompanyComponentResponse[]>([]);
-
     useEffect(() => {
         const fetchAndMergeData = async () => {
             try {
@@ -23,20 +22,18 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
                 const enums = res.data;
 
                 const mergedData = enums.map((enumItem: any) => {
-                    const existingRecord = initialData?.find(d => d.type === enumItem.value);
-
-                    return existingRecord ? { ...existingRecord } : {
+                    const existingRecord = initialData?.find(d => d.type === enumItem.name);
+                    return existingRecord ? { ...existingRecord,isNew: false } : {
                         label: enumItem.name,
                         imageUrl: '',
                         targetUrl: '',
-                        type: enumItem.value,
+                        type: enumItem.name,
                         order: 1,
                         isActive: true,
                         companyId: companyId,
                         isNew: true
                     };
                 });
-
                 setFormData(mergedData);
                 if (onChange) onChange(mergedData);
             } catch (error) {
@@ -45,15 +42,16 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
                 setLoading(false);
             }
         };
-
-        fetchAndMergeData();
-    }, [companyId, initialData]); // initialData değişirse (örn: API'den geç gelirse) tekrar çalışır
+        if (formData.length === 0) {
+            fetchAndMergeData();
+        }
+    }, [companyId,initialData]); // initialData değişirse (örn: API'den geç gelirse) tekrar çalışır
 
     const handleInputChange = (index: number, field: string, value: any) => {
         const updatedForm = [...formData];
         updatedForm[index] = { ...updatedForm[index], [field]: value };
         setFormData(updatedForm);
-        
+
         if (onChange) onChange(updatedForm);
     };
 
@@ -92,7 +90,7 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
                                     value={item.targetUrl}
                                     onChange={(e) => handleInputChange(index, 'targetUrl', e.target.value)}
                                 />
-                                
+
                                 <div className="mt-3">
                                     <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
                                     <ImageUpload

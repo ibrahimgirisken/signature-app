@@ -16,7 +16,6 @@ function CompanyEdit() {
 
   const { useGetById } = useCrud<CompanyRequest, CompanyResponse>("company", companyService as any);
   const { data, isLoading } = useGetById(id);
-
   const [companyData, setCompanyData] = useState<Partial<CompanyResponse>>({});
   const [componentData, setComponentData] = useState<CompanyComponentResponse[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,7 +82,7 @@ function CompanyEdit() {
         <p className="text-muted small">Her bir başlık için bilgileri doldurabilirsiniz.</p>
         
         <CompanyComponentForm 
-          initialData={data?.components || []} 
+          initialData={componentData || []} 
           onChange={setComponentData} 
         />
       </div>

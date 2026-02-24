@@ -29,7 +29,6 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
         const fetchData = async () => {
             try {
                 const signatureAsset = await http.get("/Enums/signature-asset-types");
-                console.log(signatureAsset.data);
             } catch (error) {
                 console.error("Veri çekme hatası:", error);
             }
@@ -61,7 +60,6 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
              await companyService.create(formData as any);
             // Burada API çağrısı yaparak veriyi kaydedebilirsiniz.
             // Örneğin: await companyService.create(formData);
-            console.log("Kaydedilen Veri:", formData);
             if (onSuccess) onSuccess();
         } catch (error) {
             console.error("Kayıt sırasında hata oluştu:", error);
