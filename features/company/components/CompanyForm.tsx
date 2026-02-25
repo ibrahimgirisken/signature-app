@@ -3,6 +3,7 @@ import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
 import { http } from '@/lib/http';
 import { companyService } from '@/services/company.service';
+import ImageUpload from '@/app/shared/imageUpload';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
@@ -14,6 +15,8 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
+        companyLogo: '',
+        fairLogo: '',
         domainName: '',
         phone: '',
         fax: '',
@@ -57,7 +60,7 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-             await companyService.create(formData as any);
+            await companyService.create(formData as any);
             // Burada API çağrısı yaparak veriyi kaydedebilirsiniz.
             // Örneğin: await companyService.create(formData);
             if (onSuccess) onSuccess();
@@ -149,6 +152,24 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
                             name="environmentText"
                             value={formData.environmentText}
                             onChange={handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Firma Logosu</Form.Label>
+                        <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
+                        <ImageUpload
+                            name={`image-${formData.id}`}
+                            value={formData.companyLogo || ''}
+                            onChange={(_, val) => handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Firma Logosu</Form.Label>
+                        <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
+                        <ImageUpload
+                            name={`image-${formData.id}`}
+                            value={formData.fairLogo || ''}
+                            onChange={(_, val) => handleChange}
                         />
                     </Form.Group>
                 </Row>

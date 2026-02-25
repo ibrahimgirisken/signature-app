@@ -44,7 +44,6 @@ function CompanyEdit() {
           companyId: currentCompanyId,
           label: component.label || "",
           targetUrl: component.targetUrl || "",
-          imageUrl: component.imageUrl || "",
         };
 
         if (component.id && component.id !== "") {

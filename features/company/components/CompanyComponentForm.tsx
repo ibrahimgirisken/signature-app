@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { http } from '@/lib/http'
 import { useParams } from 'next/navigation'
-import ImageUpload from '@/app/shared/imageUpload';
 import { CompanyComponentResponse } from '@/types/company';
 
 type CompanyComponentFormProps = {
@@ -90,15 +89,6 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
                                     value={item.targetUrl}
                                     onChange={(e) => handleInputChange(index, 'targetUrl', e.target.value)}
                                 />
-
-                                <div className="mt-3">
-                                    <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
-                                    <ImageUpload
-                                        name={`image-${index}`}
-                                        value={item.imageUrl || ''}
-                                        onChange={(_, val) => handleInputChange(index, 'imageUrl', val)}
-                                    />
-                                </div>
                             </div>
                         </div>
                     </div>

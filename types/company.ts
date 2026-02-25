@@ -5,6 +5,8 @@ export interface CompanyListResponse {
 export interface CompanyResponse {
   id: string;
   companyName: string;
+  companyLogo:string;
+  fairLogo: string;
   domainName: string;
   phone: string;
   fax: string;
@@ -28,7 +30,6 @@ export interface CompanyComponentResponse {
   id: string;
   companyId: string;
   label: string;
-  imageUrl: string;
   targetUrl: string;
   type: string;
   order: number;
