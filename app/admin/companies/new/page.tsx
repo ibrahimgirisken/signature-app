@@ -7,22 +7,16 @@ import { CompanyComponentResponse } from '@/types/company'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
-
 function CompanyAdd() {
     const [companyInfoData, setCompanyInfoData] = useState({});
     const [companyComponentsData, setCompanyComponentsData] = useState<CompanyComponentResponse[]>([]);
     const router = useRouter();
-
     const handleFinalSave = async () => {
         try {
             const companyInfo = companyInfoData;
-
             const createdResponse = await companyService.create(companyInfo);
-
             const newCompanyId = createdResponse?.id || createdResponse;
-
             console.log("Firma Kaydedildi, Alınan ID:", newCompanyId);
-
             if (!newCompanyId) {
                 alert("Hata: Firma ID'si alınamadı!");
                 return;
@@ -34,23 +28,18 @@ function CompanyAdd() {
                         ...comp,
                         companyId: newCompanyId
                     };
-
                     console.log("Gönderilen Bileşen Payload:", payload);
-
                     await companyComponentService.create(payload);
                 }
             } else {
                 console.warn("Kaydedilecek bileşen bulunamadı.");
             }
-
             console.log("İşlem başarıyla tamamlandı.");
-            // router.push('/admin/companies');
-
+            router.push('/admin/companies');
         } catch (error) {
             console.error("Kayıt sırasında bir hata oluştu:", error);
         }
     };
-
     return (
         <>
             <h2>Firma Ekleme Sayfası</h2>
@@ -74,5 +63,4 @@ function CompanyAdd() {
         </>
     )
 }
-
 export default CompanyAdd
