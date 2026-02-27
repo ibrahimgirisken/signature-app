@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
 import { http } from '@/lib/http';
-import { companyService } from '@/services/company.service';
-import ImageUpload from '@/app/shared/imageUpload';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
@@ -12,11 +10,14 @@ type CompanyFormProps = {
 }
 
 function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
+    const [companyLogo,setCompanyLogo]=useState<File | null>(null);
+    const [fairImage,setFairImage]=useState<File | null>(null);
+
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
         companyLogo: '',
-        fairLogo: '',
+        fairImage: '',
         domainName: '',
         phone: '',
         fax: '',
@@ -26,19 +27,6 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
         environmentText: '',
         components: []
     });
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const signatureAsset = await http.get("/Enums/signature-asset-types");
-            } catch (error) {
-                console.error("Veri çekme hatası:", error);
-            }
-        };
-        fetchData();
-    }, []);
-
 
     useEffect(() => {
         if (initialData) {
@@ -57,19 +45,66 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
         onChange(updatedData);
     };
 
+    const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debugger
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            setCompanyLogo(file);
+            onChange({
+                ...formData,
+                companyLogo: file.name
+            })
+        }
+    }
+
+    const handleFairImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+             const file = e.target.files[0];
+            setFairImage(file);
+            onChange({
+                ...formData,
+                fairImage: file.name
+            })
+        }
+    }
+
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await companyService.create(formData as any);
-            // Burada API çağrısı yaparak veriyi kaydedebilirsiniz.
-            // Örneğin: await companyService.create(formData);
+            let companyLogoUrl = '';
+            let fairImageUrl = ''; 
+
+            if (companyLogo) {
+                const formDataWithFile = new FormData();
+                formDataWithFile.append("file", companyLogo);
+                const response = await http.post('/Companies/upload', formDataWithFile, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                companyLogoUrl = response.data.fileName;
+                console.log("Firma logosu yüklendi, alınan URL:", companyLogoUrl);
+            }
+            
+            if (fairImage) {
+                const formDataWithFile = new FormData();
+                formDataWithFile.append("file", fairImage);
+                const response = await http.post('/Companies/upload', formDataWithFile, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                fairImageUrl = response.data.fileName;
+                console.log("Fuar görseli yüklendi, alınan URL:", fairImageUrl);
+            }
+
+            const finalData = {
+                ...formData,
+                companyLogo: companyLogoUrl,
+                fairImage: fairImageUrl
+            }
+            onChange(finalData);
             if (onSuccess) onSuccess();
         } catch (error) {
             console.error("Kayıt sırasında hata oluştu:", error);
-        } finally {
         }
     };
-
     return (
         <>
             <Form className='m-5' onSubmit={handleSave}>
@@ -156,20 +191,20 @@ function CompanyForm({ initialData, onChange, onSuccess }: CompanyFormProps) {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Firma Logosu</Form.Label>
-                        <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
-                        <ImageUpload
-                            name={`image-${formData.id}`}
-                            value={formData.companyLogo || ''}
-                            onChange={(_, val) => handleChange}
+                        <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg, image/jpg, image/webp"
+                            name="companyLogo"
+                            onChange={handleLogoChange}
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Firma Logosu</Form.Label>
-                        <label className="text-[10px] font-bold text-gray-400 uppercase">Görsel Yükle</label>
-                        <ImageUpload
-                            name={`image-${formData.id}`}
-                            value={formData.fairLogo || ''}
-                            onChange={(_, val) => handleChange}
+                        <Form.Label>Fuar Görseli</Form.Label>
+                        <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg, image/jpg, image/webp"
+                            name="fairImage"
+                            onChange={handleFairImageChange}
                         />
                     </Form.Group>
                 </Row>

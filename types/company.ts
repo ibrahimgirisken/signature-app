@@ -6,7 +6,7 @@ export interface CompanyResponse {
   id: string;
   companyName: string;
   companyLogo:string;
-  fairLogo: string;
+  fairImage: string;
   domainName: string;
   phone: string;
   fax: string;

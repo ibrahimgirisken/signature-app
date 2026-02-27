@@ -17,7 +17,7 @@ function CompanyEdit() {
   const { useGetById } = useCrud<CompanyRequest, CompanyResponse>("company", companyService as any);
   const { data, isLoading } = useGetById(id);
   const [companyData, setCompanyData] = useState<Partial<CompanyResponse>>({});
-  const [componentData, setComponentData] = useState<CompanyComponentResponse[]>([]);
+  const [componentData, setComponentData] = useState<Partial<CompanyComponentResponse>[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function CompanyEdit() {
       });
 
       await Promise.all(componentPromises);
-      router.push('/admin/companies');
+      // router.push('/admin/companies');
       
     } catch (error) {
       console.error("Kayıt hatası:", error);
@@ -81,7 +81,7 @@ function CompanyEdit() {
         <p className="text-muted small">Her bir başlık için bilgileri doldurabilirsiniz.</p>
         
         <CompanyComponentForm 
-          initialData={componentData || []} 
+          initialData={data?.components || []} 
           onChange={setComponentData} 
         />
       </div>

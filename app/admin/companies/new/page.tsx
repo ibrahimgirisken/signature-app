@@ -7,6 +7,7 @@ import { CompanyComponentResponse } from '@/types/company'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
+
 function CompanyAdd() {
     const [companyInfoData, setCompanyInfoData] = useState({});
     const [companyComponentsData, setCompanyComponentsData] = useState<CompanyComponentResponse[]>([]);
