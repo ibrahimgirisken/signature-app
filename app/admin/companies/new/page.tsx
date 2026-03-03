@@ -10,7 +10,7 @@ import { Button } from 'react-bootstrap'
 
 function CompanyAdd() {
     const [companyInfoData, setCompanyInfoData] = useState({});
-    const [companyComponentsData, setCompanyComponentsData] = useState<CompanyComponentResponse[]>([]);
+    const [companyComponentsData, setCompanyComponentsData] = useState<Partial<CompanyComponentResponse>[]>([]);
     const router = useRouter();
     const handleFinalSave = async () => {
         try {

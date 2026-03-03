@@ -3,7 +3,6 @@ import { useCrud } from '@/hooks/useCrud';
 import { companyService } from '@/services/company.service';
 import { CompanyRequest, CompanyResponse } from '@/types/company';
 import Link from 'next/link'
-import React from 'react'
 import { Button, Table } from 'react-bootstrap'
 function CompanyList() {
     const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
