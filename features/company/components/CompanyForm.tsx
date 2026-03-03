@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
+import ImageView from '@/app/utils/imageView';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
@@ -11,6 +12,8 @@ type CompanyFormProps = {
 }
 
 const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFairImage, onSuccess }: CompanyFormProps, ref) => {
+    const [companyLogoFile, setCompanyLogoFile] = useState<File | null>(null);
+    const [fairImageFile, setFairImageFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
@@ -53,6 +56,7 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
     const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
+            setCompanyLogoFile(file);
             setCompanyLogo?.(file);
         }
     }
@@ -60,6 +64,7 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
     const handleFairImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
+            setFairImageFile(file);
             setFairImage?.(file);
         }
     }
@@ -155,11 +160,7 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        {formData.companyLogo && (
-                            <div className="mb-2">
-                                <img width={200} height={200} src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.companyLogo}`} alt="Firma Logosu" className="img-fluid" />
-                            </div>
-                        )}
+                        <ImageView image={companyLogoFile} />
                         <Form.Label>Firma Logosu</Form.Label>
                         <Form.Control
                             type="file"
@@ -169,11 +170,7 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        {formData.fairImage && (
-                            <div className="mb-2">
-                                <img width={200} height={200} src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.fairImage}`} alt="Fuar Görseli" className="img-fluid" />
-                            </div>
-                        )}
+                        <ImageView image={fairImageFile} />
                         <Form.Label>Fuar Görseli</Form.Label>
                         <Form.Control
                             type="file"
