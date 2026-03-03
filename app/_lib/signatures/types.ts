@@ -5,7 +5,8 @@ export interface SignatureData{
     phone: string;
     mobilePhone:string;
     address:string;
-    logo:string;
+    companyLogo:string;
+    fairImage:string;
     domain_name:string;
     googleUrlLink:string;
     instagram:string;

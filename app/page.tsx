@@ -24,7 +24,8 @@ type SignatureData = {
   phone: string;
   mobilePhone: string;
   address: string;
-  logo: string;
+  companyLogo: string;
+  fairImage: string;
   domain_name: string;
   googleUrlLink: string;
   instagram: string;
@@ -46,7 +47,8 @@ function Home() {
   const [phone, setPhone] = React.useState('');
   const [mobilePhone, setMobilePhone] = React.useState('');
   const [address, setAddress] = React.useState('');
-  const [logo, setLogo] = React.useState('');
+  const [companyLogo, setCompanyLogo] = React.useState('');
+  const [fairImage, setFairImage] = React.useState('');
   const [news, setNews] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
@@ -77,7 +79,8 @@ function Home() {
       mobilePhone,
       googleUrlLink,
       address,
-      logo,
+      companyLogo,
+      fairImage,
       domain_name,
       instagram,
       facebook,
@@ -94,7 +97,8 @@ function Home() {
       mobilePhone,
       googleUrlLink,
       address,
-      logo,
+      companyLogo,
+      fairImage,
       domain_name,
       instagram,
       facebook,
@@ -117,7 +121,8 @@ function Home() {
 
     let selectedCompany = companies.find((c) => c.companyName === selectedCompanyName);
     if (!selectedCompany) return;
-
+    setCompanyLogo(selectedCompany.companyLogo || '');
+    setFairImage(selectedCompany.fairImage || '');
     setDomainName(selectedCompany.domainName || '');
     setPhone(selectedCompany.phone || '');
     setAddress(selectedCompany.address || '');

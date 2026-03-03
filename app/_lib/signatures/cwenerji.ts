@@ -96,9 +96,9 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     <tr>
     <br/>
       <td width="300">
-        <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank">
+        <a href="https://${signatureData.domain_name}" target="_blank">
           <img
-            src="${signatureData.logo}"
+            src="${signatureData.companyLogo ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}` : "cw-enerji-plus.jpg"}"
             width="250"
             height="116"
             alt=""
@@ -107,9 +107,9 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       </td>
 
       <td width="210" align="center">
-        <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank">
+        <a href="https://${signatureData.domain_name}" target="_blank">
           <img
-            src="${signatureData.logo ? signatureData.logo : "cw-enerji-plus.jpg"}"
+            src="${signatureData.companyLogo ? signatureData.companyLogo : "cw-enerji-plus.jpg"}"
             width="250"
             height="116"
             alt=""
