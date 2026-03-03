@@ -6,7 +6,7 @@ import { CompanyComponentResponse } from '@/types/company';
 
 type CompanyComponentFormProps = {
     initialData?: CompanyComponentResponse[],
-    onChange?: (data: Partial<CompanyComponentResponse>[]) => void
+    onChange?: (data: CompanyComponentResponse[]) => void
 }
 
 function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormProps) {
@@ -14,51 +14,37 @@ function CompanyComponentForm({ initialData, onChange }: CompanyComponentFormPro
     const companyId = params.id as string;
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState<CompanyComponentResponse[]>([]);
-    const [enums, setEnums] = useState<any[]>([]);
-
     useEffect(() => {
-        const fetchEnums = async () => {
+        const fetchAndMergeData = async () => {
             try {
                 const res = await http.get('/Enums/signature-asset-types');
-                setEnums(res.data);
+                const enums = res.data;
+
+                const mergedData = enums.map((enumItem: any) => {
+                    const existingRecord = initialData?.find(d => d.type === enumItem.name);
+                    return existingRecord ? { ...existingRecord,isNew: false } : {
+                        label: enumItem.name,
+                        imageUrl: '',
+                        targetUrl: '',
+                        type: enumItem.name,
+                        order: 1,
+                        isActive: true,
+                        companyId: companyId,
+                        isNew: true
+                    };
+                });
+                setFormData(mergedData);
+                if (onChange) onChange(mergedData);
             } catch (error) {
-                console.error("Enumlar alınırken hata oluştu", error);
+                console.error("Veriler alınırken hata oluştu", error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchEnums();
-    }, []);
-
-
-    useEffect(() => {
-        if (enums.length > 0) {
-            const mergedData: CompanyComponentResponse[] = enums.map((enumItem: any) => {
-                const existingRecord = initialData?.find(d => d.type === enumItem.name);
-
-                if (existingRecord) {
-                    return {
-                        ...existingRecord,
-                        isNew: false
-                    } as CompanyComponentResponse;
-                }
-
-                return {
-                    id: '',
-                    label: enumItem.name,
-                    imageUrl: '',
-                    targetUrl: '',
-                    type: enumItem.name,
-                    order: 1,
-                    isActive: true,
-                    companyId: companyId,
-                    isNew: true
-                } as CompanyComponentResponse;
-            });
-
-            setFormData(mergedData);
+        if (formData.length === 0) {
+            fetchAndMergeData();
         }
-    }, [enums, initialData, companyId]);
+    }, [companyId,initialData]); // initialData değişirse (örn: API'den geç gelirse) tekrar çalışır
 
     const handleInputChange = (index: number, field: string, value: any) => {
         const updatedForm = [...formData];

@@ -1,16 +1,17 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
+import { http } from '@/lib/http';
 
 type CompanyFormProps = {
     initialData?: CompanyResponse,
-    onChange: (data: Partial<CompanyResponse>) => void,
-    setCompanyLogo?: (file: File | null) => void,
-    setFairImage?: (file: File | null) => void,
+    onChange: (data: CompanyResponse) => void,
     onSuccess?: () => void
 }
 
-const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFairImage, onSuccess }: CompanyFormProps, ref) => {
+const CompanyForm = forwardRef(({ initialData, onChange, onSuccess }: CompanyFormProps, ref) => {
+    const [companyLogo, setCompanyLogo] = useState<File | null>(null);
+    const [fairImage, setFairImage] = useState<File | null>(null);
     const [formData, setFormData] = useState<CompanyResponse>({
         id: '',
         companyName: '',
@@ -26,18 +27,17 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
         components: []
     });
 
-    useImperativeHandle(ref, () => ({
-        submitForm: async () => {
-            return await handleSave(); // handleSave fonksiyonu finalData'yı return etmeli
-        }
-    }));
+useImperativeHandle(ref, () => ({
+    submitForm: async () => {
+        return await handleSave(); // handleSave fonksiyonu finalData'yı return etmeli
+    }
+}));
 
     useEffect(() => {
         if (initialData) {
             setFormData(initialData);
         }
     }, [initialData]);
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -53,22 +53,49 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
     const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            setCompanyLogo?.(file);
+            setCompanyLogo(file);
         }
     }
 
     const handleFairImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            setFairImage?.(file);
+            setFairImage(file);
         }
     }
 
-    const handleSave = async (e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        onChange(formData);
-        onSuccess?.();
-        return formData;
+    const handleSave = async () => {
+        try {
+            let companyLogoUrl = formData.companyLogo || '';
+            let fairImageUrl = formData.fairImage || '';
+            if (companyLogo) {
+                const formDataWithFile = new FormData();
+                formDataWithFile.append("file", companyLogo);
+                const response = await http.post('/Companies/upload', formDataWithFile, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                companyLogoUrl = response.data;
+            }
+
+            if (fairImage) {
+                const formDataWithFile = new FormData();
+                formDataWithFile.append("file", fairImage);
+                const response = await http.post('/Companies/upload', formDataWithFile, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                fairImageUrl = response.data;
+            }
+
+            const finalData = {
+                ...formData,
+                companyLogo: companyLogoUrl,
+                fairImage: fairImageUrl
+            }
+            onChange(finalData);
+            return finalData;
+        } catch (error) {
+            console.error("Kayıt sırasında hata oluştu:", error);
+        }
     };
     return (
         <>
