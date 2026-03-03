@@ -160,24 +160,30 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <ImageView image={companyLogoFile} />
                         <Form.Label>Firma Logosu</Form.Label>
+                        {formData.companyLogo && !companyLogoFile && (
+                        <img src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.companyLogo}`} alt="Mevcut Logo" style={{ maxWidth: '150px', marginBottom: '10px' }} />
+                        )}
                         <Form.Control
                             type="file"
                             accept="image/png, image/jpeg, image/jpg, image/webp"
                             name="companyLogo"
                             onChange={handleLogoChange}
                         />
+                        <ImageView image={companyLogoFile} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <ImageView image={fairImageFile} />
                         <Form.Label>Fuar Görseli</Form.Label>
+                        {formData.fairImage && !fairImageFile && (
+                        <img src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.fairImage}`} alt="Mevcut Fuar Görseli" style={{ maxWidth: '150px', marginBottom: '10px' }} />
+                        )}
                         <Form.Control
                             type="file"
                             accept="image/png, image/jpeg, image/jpg, image/webp"
                             name="fairImage"
                             onChange={handleFairImageChange}
                         />
+                        <ImageView image={fairImageFile} />
                     </Form.Group>
                 </Row>
             </Form>

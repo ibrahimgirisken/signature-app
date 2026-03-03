@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 interface ImageViewProps {
-  // image artık hem File (yerel) hem de string (URL) olabilir
   image: File | null;
 }
 
@@ -14,25 +13,24 @@ function ImageView({ image }: ImageViewProps) {
       return;
     }
 
-    // EĞER image bir dosya (File) ise yerel URL oluştur
     if (image instanceof File) {
       const objectUrl = URL.createObjectURL(image);
       setPreview(objectUrl);
       
-      // Bellek temizliği sadece yerel dosyalar için gereklidir
       return () => URL.revokeObjectURL(objectUrl);
     } 
     
-    // EĞER image zaten bir string (URL) ise doğrudan state'e ata
     else {
       setPreview(image);
     }
   }, [image]);
 
-  if (!preview) return <p>Görsel bulunamadı.</p>;
+  if (!preview) return <p>Yeni Görsel Seçilmedi</p>;
 
   return (
-    <img
+    <>
+    <div style={{ marginBottom: '10px', fontWeight: 'bold' }}>Seçilen Görsel:</div>
+        <img
       src={preview}
       alt="Görsel İçerik"
       style={{
@@ -44,6 +42,8 @@ function ImageView({ image }: ImageViewProps) {
         display: 'block'
       }}
     />
+    </>
+
   );
 }
 
