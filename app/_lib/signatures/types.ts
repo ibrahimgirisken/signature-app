@@ -17,7 +17,6 @@ export interface SignatureData{
 }
 export interface SignatureAssetItem{
     label: string;
-    imageUrl: string;
     targetUrl: string;
     type: string;
     order: number;

@@ -115,7 +115,7 @@ function Home() {
     const selectedCompanyName = e.target.value;
     setSelectedCompanyName(selectedCompanyName);
 
-    const selectedCompany = companies.find((c) => c.companyName === selectedCompanyName);
+    let selectedCompany = companies.find((c) => c.companyName === selectedCompanyName);
     if (!selectedCompany) return;
 
     setDomainName(selectedCompany.domainName || '');
