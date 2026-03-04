@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Form, Row } from 'react-bootstrap';
 import { CompanyResponse } from '@/types/company';
 import ImageView from '@/app/utils/imageView';
@@ -11,7 +11,7 @@ type CompanyFormProps = {
     onSuccess?: () => void
 }
 
-const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFairImage, onSuccess }: CompanyFormProps, ref) => {
+const CompanyForm = ({ initialData, onChange, setCompanyLogo, setFairImage, onSuccess }: CompanyFormProps) => {
     const [companyLogoFile, setCompanyLogoFile] = useState<File | null>(null);
     const [fairImageFile, setFairImageFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<CompanyResponse>({
@@ -28,12 +28,6 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
         environmentText: '',
         components: []
     });
-
-    useImperativeHandle(ref, () => ({
-        submitForm: async () => {
-            return await handleSave(); // handleSave fonksiyonu finalData'yı return etmeli
-        }
-    }));
 
     useEffect(() => {
         if (initialData) {
@@ -189,6 +183,6 @@ const CompanyForm = forwardRef(({ initialData, onChange, setCompanyLogo, setFair
             </Form>
         </>
     )
-});
+};
 
 export default CompanyForm
