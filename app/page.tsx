@@ -62,6 +62,7 @@ function Home() {
   const [linkedin,setLinkedin]=React.useState('');
   const [twitter,setTwitter]=React.useState('');
   const [youtube,setYoutube]=React.useState('');
+  const [youtubeVideo,setYoutubeVideo]=React.useState('');
   const [contact,setContact]=React.useState('');
   const [fax,setFax]=React.useState('');
 
@@ -99,6 +100,7 @@ function Home() {
       twitter,
       linkedin,
       youtube,
+      youtubeVideo,
       contact,
       kdvInformation,
       informationText,
@@ -127,6 +129,7 @@ function Home() {
       twitter,
       linkedin,
       youtube,
+      youtubeVideo,
       contact,
       kdvInformation,
       informationText,
@@ -168,6 +171,7 @@ function Home() {
     setTwitter(assetsByType.Twitter?.targetUrl ||'');
     setLinkedin(assetsByType.LinkedIn?.targetUrl || '');
     setYoutube(assetsByType.Youtube1?.targetUrl || '');
+    setYoutubeVideo(assetsByType.Youtube2?.targetUrl || '');
     setGoogleUrlLink(assetsByType.Google?.targetUrl || '');
     setContactUrlLink(assetsByType.Contact?.targetUrl || '');
     setNews(assetsByType.News?.targetUrl || '');

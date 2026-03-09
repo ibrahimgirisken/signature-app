@@ -18,6 +18,7 @@ export interface SignatureData{
     twitter?:string;
     linkedin?:string;
     youtube?:string;
+    youtubeVideo?:string;
     contact?:string;
     timotech?:string;
     news?:string;
