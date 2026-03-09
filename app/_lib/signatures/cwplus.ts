@@ -98,7 +98,7 @@ export const cwplusSignature = (signatureData: SignatureData) => `
       <td width="300">
         <a href="https://${signatureData.domain_name}.cw-enerji.com" target="_blank">
           <img
-            src="${signatureData.logo}"
+            src="${signatureData.companyLogo}"
             width="250"
             height="116"
             alt=""
