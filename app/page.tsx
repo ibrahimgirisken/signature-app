@@ -49,11 +49,21 @@ function Home() {
   const [address, setAddress] = React.useState('');
   const [companyLogo, setCompanyLogo] = React.useState('');
   const [fairImage, setFairImage] = React.useState('');
-  const [news, setNews] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
+  const [news, setNews] = React.useState('');
+  const [fair,setFair]=React.useState('');
+  const [downloadCenter,setDownloadCenter]=React.useState('');
+  const [timotech,setTimotech]=React.useState('');
+  const [academy,setAcademy]=React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
+  const [contactUrlLink,setContactUrlLink]=React.useState('');
   const [instagram, setInstagram] = React.useState('');
   const [facebook, setFacebook] = React.useState('');
+  const [linkedin,setLinkedin]=React.useState('');
+  const [twitter,setTwitter]=React.useState('');
+  const [youtube,setYoutube]=React.useState('');
+  const [contact,setContact]=React.useState('');
+  const [fax,setFax]=React.useState('');
 
   const [kdvInformation, setKdvInformation] = React.useState(
     'KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK FATURALARDA KDV <br/> TEVKİFATINA ÖZEN GÖSTERİLMESİ RİCA OLUNUR.'
@@ -76,17 +86,27 @@ function Home() {
       department,
       email,
       phone,
+      fax,
       mobilePhone,
       googleUrlLink,
+      contactUrlLink,
       address,
       companyLogo,
       fairImage,
       domain_name,
       instagram,
       facebook,
+      twitter,
+      linkedin,
+      youtube,
+      contact,
       kdvInformation,
       informationText,
       news,
+      fair,
+      downloadCenter,
+      timotech,
+      academy,
       environmentText
     }),
     [
@@ -94,18 +114,28 @@ function Home() {
       department,
       email,
       phone,
+      fax,
       mobilePhone,
       googleUrlLink,
+      contactUrlLink,
       address,
       companyLogo,
       fairImage,
       domain_name,
       instagram,
       facebook,
+      twitter,
+      linkedin,
+      youtube,
+      contact,
       kdvInformation,
       informationText,
       news,
-      environmentText,
+      fair,
+      downloadCenter,
+      timotech,
+      academy,
+      environmentText
     ]
   );
 
@@ -125,6 +155,7 @@ function Home() {
     setFairImage(selectedCompany.fairImage || '');
     setDomainName(selectedCompany.domainName || '');
     setPhone(selectedCompany.phone || '');
+    setFax(selectedCompany.fax ||'');
     setAddress(selectedCompany.address || '');
     setKdvInformation(selectedCompany.kdvText || '');
     setInformationText(selectedCompany.informationText || '');
@@ -134,8 +165,17 @@ function Home() {
 
     setFacebook(assetsByType.Facebook?.targetUrl || '');
     setInstagram(assetsByType.Instagram?.targetUrl || '');
+    setTwitter(assetsByType.Twitter?.targetUrl ||'');
+    setLinkedin(assetsByType.LinkedIn?.targetUrl || '');
+    setYoutube(assetsByType.Youtube1?.targetUrl || '');
     setGoogleUrlLink(assetsByType.Google?.targetUrl || '');
+    setContactUrlLink(assetsByType.Contact?.targetUrl || '');
     setNews(assetsByType.News?.targetUrl || '');
+    setTimotech(assetsByType.Timotech?.targetUrl || '');
+    setFair(assetsByType.Fair?.targetUrl ||'');
+    setDownloadCenter(assetsByType.DownloadCenter?.targetUrl ||'');
+    setContact(assetsByType.Contact?.targetUrl||'');
+    setAcademy(assetsByType.Academy?.targetUrl || '');
   };
 
   return (

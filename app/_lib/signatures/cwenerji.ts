@@ -61,6 +61,10 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td style="font-weight:700;color: #0B58B5;">Telefon</td>
             <td style="color: #0B58B5;">: ${signatureData.phone}</td>
           </tr>
+                    <tr>
+            <td style="font-weight:700;color: #0B58B5;">Fax</td>
+            <td style="color: #0B58B5;">: ${signatureData.fax}</td>
+          </tr>
            <tr>
             <td style="font-weight:700;color: #0B58B5;">Web</td>
             <td style="color: #0B58B5;">: 
@@ -81,7 +85,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       <td width="200" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank">
           <img
-            src="gorusleriniz-degerli.png"
+            src="./cw-enerji-gorusleriniz-icon.webp"
             width="200"
             height="104"
             alt=""
@@ -95,22 +99,11 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   <table width="720" cellpadding="0" cellspacing="0">
     <tr>
     <br/>
-      <td width="300">
+      <td width="510">
         <a href="https://${signatureData.domain_name}" target="_blank">
           <img
             src="${signatureData.companyLogo ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}` : "cw-enerji-plus.jpg"}"
-            width="250"
-            height="116"
-            alt=""
-          />
-        </a>
-      </td>
-
-      <td width="210" align="center">
-        <a href="https://${signatureData.domain_name}" target="_blank">
-          <img
-            src="${signatureData.companyLogo ? signatureData.companyLogo : "cw-enerji-plus.jpg"}"
-            width="250"
+            width="510"
             height="116"
             alt=""
           />
@@ -120,7 +113,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       <td width="210" align="center">
         <a href="https://www.youtube.com/watch?v=rDa8JF7KywE" target="_blank">
           <img
-            src="reklam.jpg"
+            src="./cw-enerji-youtube-gorseli.png"
             width="110"
             height="86"
             alt=""
@@ -128,7 +121,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
         <div style="font-size:12px; color:#7F7F7F;">
-          CW Enerji Plus Tanıtım
+          CW Enerji Tanıtım
         </div>
       </td>
     </tr>
@@ -147,17 +140,17 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="240">
-        <a href="https://cw-enerji.com/" target="_blank">
-          <img src="cw-enerji-logo.jpg" width="200" height="74" alt="" />
+        <a href="${signatureData.timotech}" target="_blank">
+          <img src="timotech-logo.png" width="200" height="74" alt="" />
         </a>
       </td>
       <td width="240">
-        <a href="https://cw-enerji.com/tr/cw-akademi" target="_blank">
+        <a href="${signatureData.academy}" target="_blank">
           <img src="cw-akademi.png" width="200" height="74" alt="" />
         </a>
       </td>
       <td width="240">
-        <a href="https://indir.cw-enerji.com/tr/index.html" target="_blank">
+        <a href="${signatureData.downloadCenter}" target="_blank">
           <img src="indirme-merkezi.jpg" width="200" height="74" alt="" />
         </a>
       </td>
@@ -204,7 +197,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href=""
+        href="${signatureData.fair}"
         target="_blank"
         style="
           display:block;
@@ -228,7 +221,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href=""
+        href="${signatureData.academy}"
         target="_blank"
         style="
           display:block;
@@ -252,7 +245,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href=""
+        href="${signatureData.contact}"
         target="_blank"
         style="
           display:block;
@@ -293,12 +286,47 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
       </td>
+            <td valign="top" style="padding-top:10px;">
+         <a href="${signatureData.twitter}" target="_blank">
+          <img
+            src="twitter.webp"
+            width="25"
+            height="25"
+            alt=""
+            style="border-radius:12px;"
+          />
+        </a>
+      </td>
+            <td valign="top" style="padding-top:10px;">
+         <a href="${signatureData.linkedin}" target="_blank">
+          <img
+            src="linkedin.webp"
+            width="25"
+            height="25"
+            alt=""
+            style="border-radius:12px;"
+          />
+        </a>
+      </td>
+            <td valign="top" style="padding-top:10px;">
+         <a href="${signatureData.youtube}" target="_blank">
+          <img
+            src="youtube.webp"
+            width="25"
+            height="25"
+            alt=""
+            style="border-radius:12px;"
+          />
+        </a>
+      </td>
       </tr>
   </table>
   <table width="720" height="250" cellpadding="0" cellspacing="0" style="margin-top:10px;">
        <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
       <td valign="top" style="padding-top:10px;">
-      <img src="fuar-takvimi-2026-1.png" width="720" height="60" alt="" />
+         <a href="${signatureData.fair}" target="_blank">
+      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="720" height="60" alt="" />
+      </a>
         </td>
         </tr>
   </table>
