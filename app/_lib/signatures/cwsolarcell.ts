@@ -90,7 +90,7 @@ export const cwsolarcellSignature=(signatureData:SignatureData)=>`
       <td width="300" valign="top">
         <a href="${signatureData.domain_name}" target="_blank" style="text-decoration:none;">
           <img
-            src="${signatureData.logo}"
+            src="${signatureData.companyLogo}"
             width="250"
             height="116"
             alt=""
