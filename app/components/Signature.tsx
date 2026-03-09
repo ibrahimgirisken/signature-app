@@ -19,14 +19,13 @@ function Signature() {
   const [phone, setPhone] = React.useState('');
   const [mobilePhone, setMobilePhone] = React.useState('');
   const [address, setAddress] = React.useState('');
-  const [logo, setLogo] = React.useState('');
+  const [companyLogo, setCompanyLogo] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
   const [instagram, setInstagram] = React.useState('');
   const [facebook, setFacebook] = React.useState('');
   const [kdvInformation, setKdvInformation] = React.useState('KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK FATURALARDA KDV TEVKİFATINA<br>ÖZEN GÖSTERİLMESİ RİCA OLUNUR.');
   const [informationText, setInformationText] = React.useState('Bu elektronik posta ve ekleri gizlidir ve yalnızca gönderildiği gerçek veya tüzel kişi tarafından kullanılması amacıyla gönderilmiştir. Eğer bu elektronik postayı yanlışlıkla aldıysanız, lütfen göndereni derhal bilgilendiriniz ve mesajı sisteminizden siliniz. Bu mesajın izinsiz kullanımı, kopyalanması, ifşa edilmesi veya dağıtılması kesinlikle yasaktır.<br><br>This e-mail and any attachments are confidential and intended solely for the use of the individual or entity to whom they are addressed. If you have received this e-mail in error,please notify the sender immediately and delete it from your system.');
-  const [news, setNews] = React.useState('');
   const [environmentText, setEnvironmentText] = React.useState('Lütfen ağaçları ve doğayı koruyun. Lütfen bu e-postayı yazdırmadan önce düşünün.</br>Please protect the trees and the nature. Please think before printing this e-mail.');
 
     const datas={
@@ -37,7 +36,7 @@ function Signature() {
     mobilePhone,
     googleUrlLink,
     address,
-    logo,
+    companyLogo,
     domain_name,
     instagram,
     facebook,
@@ -59,7 +58,7 @@ const signatureHtml = cwplusSignature(datas);
 
       setAddress(json.iletisim.adres ?? '');
       setPhone(json.iletisim.tel ?? '');
-      setLogo(json.data.img ?? '');
+      setCompanyLogo(json.data.img ?? '');
       setDomainName(json.data.domain_name ?? '');
       setGoogleUrlLink(json.iletisim.google_url ?? '');
       setInstagram(json.iletisim.instagram ?? '');
