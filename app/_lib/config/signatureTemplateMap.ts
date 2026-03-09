@@ -1,4 +1,4 @@
-import { cwenerjiSigranuture } from "../signatures/cwenerji";
+import { cwenerjiSigranuture } from "../signatures/cw-enerji";
 import { cwsolarcellSignature } from "../signatures/cwsolarcell";
 import { tommatechSignature } from "../signatures/tommatech";
 
