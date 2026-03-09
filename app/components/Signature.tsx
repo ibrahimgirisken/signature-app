@@ -79,7 +79,7 @@ const signatureHtml = cwplusSignature(datas);
                 <Row className='mb-4'>
                     <h5 className='text-center mt-2 mb-4 fw-bold fs-3' style={{color:'#1796d2'}}>CW Enerji Plus Mail İmzası Oluşturma</h5>
                     <Form>
-                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
+                        <Form.Group as={Row} className="mb-3">
                             <Col sm="6" col-lg="12">
                                 <Form.Control type='text' className="mb-3" placeholder="İsim" value={fullName??''} onChange={(e) => setFullName(e.target.value)} />
                             </Col>
