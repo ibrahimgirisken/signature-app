@@ -148,7 +148,7 @@ export const tommatechSignature = (signatureData: SignatureData) => `
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
           <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
-         <a href="" target="_blank" style="text-decoration:none;">
+         <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
           <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
     </td>
