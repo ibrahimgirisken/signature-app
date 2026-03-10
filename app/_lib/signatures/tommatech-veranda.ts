@@ -27,7 +27,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   </div>
 
   <!-- İletişim + Sağ Banner -->
-  <table width="720" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+   <table width="720" cellpadding="0" cellspacing="0">
     <tr>
     <td width="520" valign="top">
       <table width="520" cellpadding="0" cellspacing="0">
@@ -101,7 +101,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
         </a>
       </td>
 
-      <td width="210" valign="top" align="center">
+      <td width="210"align="center">
         <a href="${signatureData.youtubeVideo}" target="_blank" style="text-decoration:none;">
           <img
             src="tt-fabric-video.webp"
@@ -134,44 +134,31 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   </table>
 
   <table
-  width="720"
-  cellpadding="0"
-  cellspacing="0"
-  style="margin-top:10px border-collapse:collapse; text-align:center;">
-       <tr align="center" valign="middle" style="color: #7F7F7F;font-size: 10px;display: flex;justify-content: center;">
-    <td width="50%" style="display: flex;justify-content: center;align-items: center;
-    width:291.6pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt;
-    gap: 15px;
-    ">
+  width="720" cellpadding="0" cellspacing="0">
+    <tr style="background-color:#DEEAF6;">
+        <br/>
+<td width="50">
     <a href="${signatureData.facebook}" target="_blank" style="text-decoration:none;">
          <img src="facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
    </a>
+         </td>
+ <td width="50">
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
           <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
-     </a>
+     </a>         </td>
+<td width="50">
        <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
           <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>
+  </td>      <td width="50">
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
           <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
-    </a>
+    </a>  </td>       <td width="50">
          <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
           <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>
     </td>
-    <td width="50%" style="
-    width:291.6pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt
-    ">
+    <td width="470" align="center">
       <a
         href="${signatureData.contact}"
         target="_blank"
