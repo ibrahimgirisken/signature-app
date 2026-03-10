@@ -187,7 +187,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   <table width="720" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:10px;">
     <tr>
       <td width="70" valign="top">
-        <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}cevre.jpg" width="64" height="57" alt="" style="display:block; border:0; outline:none;" />
+        <img src="./cevre.jpg" width="64" height="57" alt="" style="display:block; border:0; outline:none;" />
       </td>
       <td valign="top" style="padding-left:8px; padding-top:10px;">
         <div style="font-size:10px; color:#7F7F7F; font-style:italic;">
