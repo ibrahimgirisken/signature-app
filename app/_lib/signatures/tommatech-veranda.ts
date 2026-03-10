@@ -75,7 +75,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="200" height="150" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank" style="text-decoration:none;">
           <img
-            src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}feedback-logo.webp"
+            src="./feedback-logo.webp"
             width="170"
             height="50"
             alt=""
@@ -104,7 +104,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="210"align="center">
         <a href="${signatureData.youtubeVideo}" target="_blank" style="text-decoration:none;">
           <img
-            src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}tt-fabric-video.webp"
+            src="./tt-fabric-video.webp"
             width="125"
             height="100"
             alt=""
@@ -119,7 +119,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="210" valign="top" align="center">
         <a href="${signatureData.youtubeVideo2}" target="_blank" style="text-decoration:none;">
           <img
-            src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}tt-product-video.webp"
+            src="./tt-product-video.webp"
             width="125"
             height="100"
             alt=""
@@ -139,23 +139,23 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
         <br/>
 <td width="50">
     <a href="${signatureData.facebook}" target="_blank" style="text-decoration:none;">
-         <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+         <img src="./facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
    </a>
          </td>
  <td width="50">
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
-          <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>         </td>
 <td width="50">
        <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
-          <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>
   </td>      <td width="50">
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
-          <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>  </td>       <td width="50">
          <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
-          <img src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>
     </td>
     <td width="470" align="center">
