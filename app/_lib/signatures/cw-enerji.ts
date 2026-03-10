@@ -141,17 +141,17 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     <tr>
       <td width="240">
         <a href="${signatureData.timotech}" target="_blank">
-          <img src="timotech-logo.png" width="200" height="74" alt="" />
+          <img src="./timotech-logo.png" width="200" height="74" alt="" />
         </a>
       </td>
       <td width="240">
         <a href="${signatureData.academy}" target="_blank">
-          <img src="cw-akademi.png" width="200" height="74" alt="" />
+          <img src="./cw-akademi.png" width="200" height="74" alt="" />
         </a>
       </td>
       <td width="240">
         <a href="${signatureData.downloadCenter}" target="_blank">
-          <img src="indirme-merkezi.jpg" width="200" height="74" alt="" />
+          <img src="./indirme-merkezi.jpg" width="200" height="74" alt="" />
         </a>
       </td>
     </tr>
@@ -267,7 +267,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       <td valign="top" style="padding-top:10px;">
        <a href="${signatureData.facebook}" target="_blank">
           <img
-            src="facebook.jpg"
+            src="./facebook.jpg"
             width="25"
             height="25"
             alt=""
@@ -278,7 +278,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.instagram}" target="_blank">
           <img
-            src="instagram.jpg"
+            src="./instagram.jpg"
             width="25"
             height="25"
             alt=""
@@ -289,7 +289,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.twitter}" target="_blank">
           <img
-            src="twitter.webp"
+            src="./twitter.webp"
             width="25"
             height="25"
             alt=""
@@ -300,7 +300,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.linkedin}" target="_blank">
           <img
-            src="linkedin.webp"
+            src="./linkedin.webp"
             width="25"
             height="25"
             alt=""
@@ -311,7 +311,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.youtube}" target="_blank">
           <img
-            src="youtube.webp"
+            src="./youtube.webp"
             width="25"
             height="25"
             alt=""
@@ -345,7 +345,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="70" valign="top">
-        <img src="cevre.jpg" width="64" height="57" alt="" />
+        <img src="./cevre.jpg" width="64" height="57" alt="" />
       </td>
       <td valign="top" style="padding-left:8px;padding-top:10px;">
         <div style="font-size:10px; color:#7F7F7F; font-style:italic;">
