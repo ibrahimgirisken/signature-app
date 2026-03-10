@@ -29,11 +29,11 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   <!-- İletişim + Sağ Banner -->
   <table width="720" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
     <tr>
-      <td width="520" valign="top">
-        <table width="520" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+    <td width="520" valign="top">
+      <table width="520" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="219" style="color: #0B58B5;">Tommatech GmbH</td>
-            <td style="color:#0B58B5;">
+            <td width="230" style="font-weight:700;color: #0B58B5;">Tommatech GmbH</td>
+            <td style="color: #0B58B5;">
             :  ${signatureData.address}
             </td>
         </tr>   
@@ -42,7 +42,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
             <td style="color: #0B58B5;">: ${signatureData.mobilePhone}</td>
         </tr>
         <tr>
-            <td width="110" style="font-weight:700; color: #0B58B5;">E-mail</td>
+            <td style="font-weight:700;color: #0B58B5;">E-mail</td>
             <td style="color:#0B58B5;">:
               <a href="mailto:${signatureData.email}" style="text-decoration: underline; color: #0B58B5;">
                   ${signatureData.email}
@@ -50,22 +50,22 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
             </td>
         </tr>
         <tr>
-            <td style="font-weight:700; vertical-align:top; color: #0B58B5;">Web</td>
-            <td style="line-height:1.35; color: #0B58B5;">:
+            <td style="font-weight:700;color: #0B58B5;">Web</td>
+            <td style="color:#0B58B5;">:
             <a href="mailto:${signatureData.domain_name}" style="text-decoration: underline; color: #0B58B5;">
                  ${signatureData.domain_name}
               </a>
             </td>
         </tr>
         <tr>
-            <td style="font-weight:700; vertical-align:top; color: #0B58B5;">Registergericht</td>
-            <td style="line-height:1.35; color: #0B58B5;">
+            <td style="font-weight:700;color: #0B58B5;">Registergericht</td>
+            <td style="color:#0B58B5;">
               : ${signatureData.fax}
             </td>
           </tr>
                     <tr>
-            <td style="font-weight:700; vertical-align:top; color: #0B58B5;">Umsatzsteuer-Identifikationsnummer</td>
-            <td style="line-height:1.35; color: #0B58B5;">
+            <td style="font-weight:700;color: #0B58B5;">Umsatzsteuer-Identifikationsnummer</td>
+            <td style="color:#0B58B5;">
               : ${signatureData.other}
             </td>
           </tr>
