@@ -32,11 +32,9 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="520" valign="top">
         <table width="520" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
         <tr>
-            <td width="220" style="font-weight:700; color: #0B58B5;">Tommatech GmbH</td>
+            <td width="219" style="color: #0B58B5;">Tommatech GmbH</td>
             <td style="color:#0B58B5;">
             :  ${signatureData.address}
-              <a href="mailto:${signatureData.address}" style="text-decoration: underline; color: #0B58B5;">
-              </a>
             </td>
         </tr>   
         <tr>
