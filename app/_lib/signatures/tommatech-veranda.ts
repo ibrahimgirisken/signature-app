@@ -1,7 +1,7 @@
 import { SignatureData } from "./types";
 export const tommatechVerandaSignature = (signatureData: SignatureData) => {
   // Görsel ana dizini (Bu değişkenin tanımlı olduğundan emin olun)
-  const baseUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL || "https://siteniz.com/images/";
+  const baseUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL;
 
   return `
 <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #0B58B5; max-width: 720px;">
