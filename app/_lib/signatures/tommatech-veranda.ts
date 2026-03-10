@@ -1,7 +1,7 @@
 import { SignatureData } from "./types";
 export const tommatechVerandaSignature = (signatureData: SignatureData) => {
   // Görsel ana dizini (Bu değişkenin tanımlı olduğundan emin olun)
-  const baseUrl = process.env.NEXT_PUBLIC_API_IMAGE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_IMAGE_URL;
 
   return `
 <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #0B58B5; max-width: 720px;">
@@ -52,7 +52,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
     <tr>
       <td width="300" valign="middle">
         <a href="https://${signatureData.domain_name}" target="_blank">
-          <img src="${baseUrl}${signatureData.companyLogo}" width="250" height="116" style="display:block; border:0;" alt="Logo" />
+          <img src="${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}" width="250" height="116" style="display:block; border:0;" alt="Logo" />
         </a>
       </td>
       <td width="210" align="center" valign="top">
