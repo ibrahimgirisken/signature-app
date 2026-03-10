@@ -149,19 +149,19 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
     gap: 15px;
     ">
     <a href="${signatureData.facebook}" target="_blank" style="text-decoration:none;">
-         <img src="facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
+         <img src="facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
    </a>
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
-          <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
+          <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>
        <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
-          <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
+          <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
-          <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
+          <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>
          <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
-          <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
+          <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>
     </td>
     <td width="50%" style="
