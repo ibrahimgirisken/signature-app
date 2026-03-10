@@ -23,6 +23,8 @@ const CompanyForm = ({ initialData, onChange, setCompanyLogo, setFairImage, onSu
         phone: '',
         fax: '',
         address: '',
+        address2: '',
+        address3: '',
         kdvText: '',
         informationText: '',
         environmentText: '',
@@ -112,11 +114,29 @@ const CompanyForm = ({ initialData, onChange, setCompanyLogo, setFairImage, onSu
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Adres</Form.Label>
+                        <Form.Label>Adres1</Form.Label>
                         <Form.Control
                             type="text"
                             name="address"
                             value={formData.address}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                     <Form.Group className="mb-3">
+                        <Form.Label>Adres2</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="address2"
+                            value={formData.address2}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                     <Form.Group className="mb-3">
+                        <Form.Label>Adres3</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="address3"
+                            value={formData.address3}
                             onChange={handleChange}
                         />
                     </Form.Group>

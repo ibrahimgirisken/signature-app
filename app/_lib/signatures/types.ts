@@ -6,6 +6,8 @@ export interface SignatureData{
     mobilePhone:string;
     googleUrlLink:string;
     address:string;
+    address2:string;
+    address3:string;
     companyLogo:string;
     domain_name:string;
     instagram:string;
@@ -19,6 +21,7 @@ export interface SignatureData{
     linkedin?:string;
     youtube?:string;
     youtubeVideo?:string;
+    youtubeVideo2?:string;
     contact?:string;
     timotech?:string;
     news?:string;

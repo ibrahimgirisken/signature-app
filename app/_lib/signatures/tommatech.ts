@@ -54,7 +54,7 @@ export const tommatechSignature = (signatureData: SignatureData) => `
           <tr>
             <td style="font-weight:700; vertical-align:top; color: #0B58B5;">(DE) Address</td>
             <td style="line-height:1.35; color: #0B58B5;">
-              : ${signatureData.address}
+              : ${signatureData.address2}
             </td>
           </tr>
         </table>
@@ -90,9 +90,9 @@ export const tommatechSignature = (signatureData: SignatureData) => `
       </td>
 
       <td width="210" valign="top" align="center">
-        <a href="https://www.youtube.com/watch?v=nUzN7XuREsA" target="_blank" style="text-decoration:none;">
+        <a href="${signatureData.youtubeVideo}" target="_blank" style="text-decoration:none;">
           <img
-            src="kum.jpg"
+            src="tt-fabric-video.webp"
             width="125"
             height="100"
             alt=""
@@ -105,9 +105,9 @@ export const tommatechSignature = (signatureData: SignatureData) => `
       </td>
 
       <td width="210" valign="top" align="center">
-        <a href="https://www.youtube.com/watch?v=rDa8JF7KywE" target="_blank" style="text-decoration:none;">
+        <a href="${signatureData.youtubeVideo2}" target="_blank" style="text-decoration:none;">
           <img
-            src="reklam.jpg"
+            src="tt-product-video.webp"
             width="125"
             height="100"
             alt=""
@@ -142,10 +142,10 @@ export const tommatechSignature = (signatureData: SignatureData) => `
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
           <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
-       <a href="" target="_blank" style="text-decoration:none;">
+       <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
           <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
-     <a href="" target="_blank" style="text-decoration:none;">
+     <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
           <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
          <a href="" target="_blank" style="text-decoration:none;">
@@ -161,7 +161,7 @@ export const tommatechSignature = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt
     ">
       <a
-        href=""
+        href="${signatureData.contact}"
         target="_blank"
         style="
           display:block;

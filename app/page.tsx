@@ -47,6 +47,8 @@ function Home() {
   const [phone, setPhone] = React.useState('');
   const [mobilePhone, setMobilePhone] = React.useState('');
   const [address, setAddress] = React.useState('');
+  const [address2, setAddress2] = React.useState('');
+  const [address3, setAddress3] = React.useState('');
   const [companyLogo, setCompanyLogo] = React.useState('');
   const [fairImage, setFairImage] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
@@ -63,6 +65,7 @@ function Home() {
   const [twitter,setTwitter]=React.useState('');
   const [youtube,setYoutube]=React.useState('');
   const [youtubeVideo,setYoutubeVideo]=React.useState('');
+  const [youtubeVideo2,setYoutubeVideo2]=React.useState('');
   const [contact,setContact]=React.useState('');
   const [fax,setFax]=React.useState('');
 
@@ -92,6 +95,8 @@ function Home() {
       googleUrlLink,
       contactUrlLink,
       address,
+      address2,
+      address3,
       companyLogo,
       fairImage,
       domain_name,
@@ -101,6 +106,7 @@ function Home() {
       linkedin,
       youtube,
       youtubeVideo,
+      youtubeVideo2,
       contact,
       kdvInformation,
       informationText,
@@ -121,6 +127,8 @@ function Home() {
       googleUrlLink,
       contactUrlLink,
       address,
+      address2,
+      address3,
       companyLogo,
       fairImage,
       domain_name,
@@ -130,6 +138,7 @@ function Home() {
       linkedin,
       youtube,
       youtubeVideo,
+      youtubeVideo2,
       contact,
       kdvInformation,
       informationText,
@@ -160,6 +169,8 @@ function Home() {
     setPhone(selectedCompany.phone || '');
     setFax(selectedCompany.fax ||'');
     setAddress(selectedCompany.address || '');
+    setAddress2(selectedCompany.address2 || '');
+    setAddress3(selectedCompany.address3 || '');
     setKdvInformation(selectedCompany.kdvText || '');
     setInformationText(selectedCompany.informationText || '');
     setEnvironmentText(selectedCompany.environmentText || environmentText);
@@ -172,6 +183,7 @@ function Home() {
     setLinkedin(assetsByType.LinkedIn?.targetUrl || '');
     setYoutube(assetsByType.Youtube1?.targetUrl || '');
     setYoutubeVideo(assetsByType.Youtube2?.targetUrl || '');
+    setYoutubeVideo2(assetsByType.Youtube3?.targetUrl || '');
     setGoogleUrlLink(assetsByType.Google?.targetUrl || '');
     setContactUrlLink(assetsByType.Contact?.targetUrl || '');
     setNews(assetsByType.News?.targetUrl || '');
