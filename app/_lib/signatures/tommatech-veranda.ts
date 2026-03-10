@@ -75,7 +75,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="200" height="150" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank" style="text-decoration:none;">
           <img
-            src="feedback-logo.webp"
+            src="./feedback-logo.webp"
             width="170"
             height="50"
             alt=""
@@ -92,7 +92,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="300" valign="top">
         <a href="${signatureData.domain_name}" target="_blank" style="text-decoration:none;">
           <img
-            src="tommatech-logo.webp"
+            src="./tommatech-logo.webp"
             width="250"
             height="116"
             alt=""
@@ -104,7 +104,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="210"align="center">
         <a href="${signatureData.youtubeVideo}" target="_blank" style="text-decoration:none;">
           <img
-            src="tt-fabric-video.webp"
+            src="./tt-fabric-video.webp"
             width="125"
             height="100"
             alt=""
@@ -119,7 +119,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td width="210" valign="top" align="center">
         <a href="${signatureData.youtubeVideo2}" target="_blank" style="text-decoration:none;">
           <img
-            src="tt-product-video.webp"
+            src="./tt-product-video.webp"
             width="125"
             height="100"
             alt=""
@@ -139,23 +139,23 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
         <br/>
 <td width="50">
     <a href="${signatureData.facebook}" target="_blank" style="text-decoration:none;">
-         <img src="facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+         <img src="./facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
    </a>
          </td>
  <td width="50">
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
-          <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>         </td>
 <td width="50">
        <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
-          <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
      </a>
   </td>      <td width="50">
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
-          <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>  </td>       <td width="50">
          <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
-          <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
+          <img src="./youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;padding:0.1in 1.2pt 0.1in 1.2pt" />
     </a>
     </td>
     <td width="470" align="center">
@@ -187,7 +187,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   <table width="720" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:10px;">
     <tr>
       <td width="70" valign="top">
-        <img src="cevre.jpg" width="64" height="57" alt="" style="display:block; border:0; outline:none;" />
+        <img src="./cevre.jpg" width="64" height="57" alt="" style="display:block; border:0; outline:none;" />
       </td>
       <td valign="top" style="padding-left:8px; padding-top:10px;">
         <div style="font-size:10px; color:#7F7F7F; font-style:italic;">
