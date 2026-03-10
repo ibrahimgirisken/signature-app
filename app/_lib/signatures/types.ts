@@ -28,6 +28,7 @@ export interface SignatureData{
     downloadCenter?:string;
     academy?:string;
     fair?:string;
+    other?:string;
 }
 export interface SignatureAssetItem{
     label: string;

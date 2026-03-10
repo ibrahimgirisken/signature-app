@@ -68,6 +68,7 @@ function Home() {
   const [youtubeVideo2,setYoutubeVideo2]=React.useState('');
   const [contact,setContact]=React.useState('');
   const [fax,setFax]=React.useState('');
+  const [other,setOther]=React.useState('');
 
   const [kdvInformation, setKdvInformation] = React.useState(
     'KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK FATURALARDA KDV <br/> TEVKİFATINA ÖZEN GÖSTERİLMESİ RİCA OLUNUR.'
@@ -115,7 +116,8 @@ function Home() {
       downloadCenter,
       timotech,
       academy,
-      environmentText
+      environmentText,
+      other
     }),
     [
       fullName,
@@ -147,7 +149,8 @@ function Home() {
       downloadCenter,
       timotech,
       academy,
-      environmentText
+      environmentText,
+      other
     ]
   );
 
@@ -192,6 +195,7 @@ function Home() {
     setDownloadCenter(assetsByType.DownloadCenter?.targetUrl ||'');
     setContact(assetsByType.Contact?.targetUrl||'');
     setAcademy(assetsByType.Academy?.targetUrl || '');
+    setOther(assetsByType.Other?.targetUrl ||'');
   };
 
   return (
