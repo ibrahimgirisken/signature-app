@@ -264,7 +264,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
 
   <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
        <tr align="center" valign="middle" style="color: #7F7F7F;font-size: 10px;display: flex;justify-content: center;gap:10px;">
-      <td valign="top" style="padding-top:10px;">
+      <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
        <a href="${signatureData.facebook}" target="_blank">
           <img
             src="./facebook.jpg"
@@ -275,7 +275,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
         </td>
-      <td valign="top" style="padding-top:10px;">
+      <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.instagram}" target="_blank">
           <img
             src="./instagram.jpg"
@@ -286,7 +286,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
       </td>
-            <td valign="top" style="padding-top:10px;">
+       <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.twitter}" target="_blank">
           <img
             src="./twitter.webp"
@@ -297,7 +297,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
       </td>
-            <td valign="top" style="padding-top:10px;">
+            <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.linkedin}" target="_blank">
           <img
             src="./linkedin.webp"
@@ -308,7 +308,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
           />
         </a>
       </td>
-            <td valign="top" style="padding-top:10px;">
+            <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.youtube}" target="_blank">
           <img
             src="./youtube.webp"
