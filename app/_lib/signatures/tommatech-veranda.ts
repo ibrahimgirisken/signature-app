@@ -31,18 +31,18 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
 
         <!-- İletişim + feedback görsel -->
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
-          <tr>
-            <td width="520" valign="top" style="width:520px; vertical-align:top;">
+          <tr valign="top">
+            <td width="520" valign="top">
               <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                <tr>
-                  <td width="230" style="width:230px; font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Tommatech GmbH</td>
-                  <td style="color:#0B58B5; padding:0 0 5px 0;">: ${signatureData.address}</td>
+                <tr valign="top">
+                  <td width="230" style="width:230px; font-weight:700; color:#0B58B5; padding:0 0 5pt 0;">Tommatech GmbH</td>
+                  <td style="color:#0B58B5; padding:0 0 5pt 0;">: ${signatureData.address}</td>
                 </tr>
-                <tr>
+                <tr valign="top">
                   <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Tel</td>
                   <td style="color:#0B58B5; padding:0 0 5px 0;">: ${signatureData.mobilePhone}</td>
                 </tr>
-                <tr>
+                <tr valign="top">
                   <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">E-mail</td>
                   <td style="color:#0B58B5; padding:0 0 5px 0;">: 
                     <a href="mailto:${signatureData.email}" style="color:#0B58B5; text-decoration:underline;">
@@ -50,7 +50,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                     </a>
                   </td>
                 </tr>
-                <tr>
+                <tr valign="top">
                   <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Web</td>
                   <td style="color:#0B58B5; padding:0 0 5px 0;">: 
                     <a href="https://${signatureData.domain_name}" target="_blank" style="color:#0B58B5; text-decoration:underline;">
