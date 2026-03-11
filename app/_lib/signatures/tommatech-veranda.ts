@@ -66,7 +66,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                 <img 
                   src="${imageBase}feedback-logo.jpg" 
                   width="170" 
-                  height="150" 
+                  height="100" 
                   alt="Feedback" 
                   style="display:block; border:0; outline:none; text-decoration:none;"
                 />

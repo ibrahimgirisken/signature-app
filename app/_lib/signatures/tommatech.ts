@@ -136,21 +136,29 @@ export const tommatechSignature = (signatureData: SignatureData) => `
     padding:0in 5.4pt 0in 5.4pt;
     gap: 15px;
     ">
+     <tr>
+       <td style="padding-right:10px;">
     <a href="${signatureData.facebook}" target="_blank" style="text-decoration:none;">
          <img src="facebook.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
    </a>
+       <td style="padding-right:10px;">
    <a href="${signatureData.instagram}" target="_blank" style="text-decoration:none;">
           <img src="instagram.jpg" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
+       <td style="padding-right:10px;">
        <a href="${signatureData.twitter}" target="_blank" style="text-decoration:none;">
           <img src="twitter.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
      </a>
+        <td style="padding-right:10px;">
      <a href="${signatureData.linkedin}" target="_blank" style="text-decoration:none;">
           <img src="linkedin.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
+         <td style="padding-right:10px;">
          <a href="${signatureData.youtube}" target="_blank" style="text-decoration:none;">
           <img src="youtube.webp" width="25" height="25" alt="" style="display:block; border:0; outline:none; border-radius:12px;" />
     </a>
+         </td>
+      </tr>
     </td>
     <td width="50%" style="
     width:291.6pt;
