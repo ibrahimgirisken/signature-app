@@ -33,7 +33,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
     ${signatureData.department}
   </div>
 
-  <table width="720" cellpadding="0" cellspacing="0" border="0">
+  <table width="720" cellpadding="0" cellspacing="0>
     <tr>
       <td width="520" valign="top">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -67,18 +67,20 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
     <tr>
       <td width="300" valign="middle">
         <a href="https://${signatureData.domain_name}" target="_blank">
-          <img src="${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}" width="250" height="116" style="display:block; border:0;" alt="Logo" />
+          <img src="${signatureData.companyLogo}"
+           width="250" 
+           height="116" alt="Logo" />
         </a>
       </td>
       <td width="210" align="center" valign="top">
         <a href="${signatureData.youtubeVideo}" target="_blank">
-          <img src="tt-fabric-video.png" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 1" />
+          <img src="tt-fabric-video.png" width="125" height="100" style="border-radius:5pt;" alt="Video 1" />
         </a>
         <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Solarcell Tanıtım</div>
       </td>
       <td width="210" align="center" valign="top">
         <a href="${signatureData.youtubeVideo2}" target="_blank">
-          <img src="tt-product-video.png" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 2" />
+          <img src="tt-product-video.png" width="125" height="100" style="border-radius:5pt;" alt="Video 2" />
         </a>
         <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Enerji Plus Tanıtım</div>
       </td>
@@ -90,9 +92,9 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
       <td style="padding: 10px;">
         <table cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td style="padding-right:10px;"><a href="${signatureData.facebook}"><img src="facebook.jpg" width="25" height="25" style="border:0;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.instagram}"><img src="instagram.jpg" width="25" height="25" style="border:0;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.linkedin}"><img src="linkedin.jpg" width="25" height="25" style="border:0;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.facebook}"><img src="facebook.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.instagram}"><img src="instagram.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.linkedin}"><img src="linkedin.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
           </tr>
         </table>
       </td>
