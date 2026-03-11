@@ -100,9 +100,6 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                   style="display:block; border:0; outline:none; text-decoration:none;"
                 />
               </a>
-              <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">
-                CW Solarcell Tanıtım
-              </div>
             </td>
 
             <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
@@ -115,9 +112,6 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                   style="display:block; border:0; outline:none; text-decoration:none;"
                 />
               </a>
-              <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">
-                CW Enerji Plus Tanıtım
-              </div>
             </td>
           </tr>
         </table>
