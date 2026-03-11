@@ -1,132 +1,189 @@
 import { SignatureData } from "./types";
-export const tommatechVerandaSignature = (signatureData: SignatureData) =>`
-  <!-- =========================
-     TOMMATECH-VERANDA MAIL SIGNATURE
-     HTML – MAIL SAFE TEMPLATE
-     ========================= -->
 
-<style type="text/css">
-  /* Mail client safe reset */
-  table { border-collapse: collapse; }
-  img { display: block; border: 0; outline: none; }
-  a { text-decoration: underline; color: #0070C0; }
-</style>
-<div
-  style="
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    line-height: 1.3;
-    color: #0070C0;
-    max-width: 720px;
->
-      <!-- Selamlama -->
-  <div style="font-style: italic; margin-bottom: 10px;">
-    Mit freundlichen Grüßen
-  </div>
+export const tommatechVerandaSignature = (signatureData: SignatureData) => {
+  const imageBase = process.env.NEXT_PUBLIC_HOST_IMAGE_URL || "";
+  const apiImageBase = process.env.NEXT_PUBLIC_API_IMAGE_URL || "";
 
-  <div style="font-size: 16px; font-weight: 700; color: #0B58B5;">
-    ${signatureData.fullName}
-  </div>
-
-  <div style="font-size: 14px; margin-bottom: 20px; color: #0B58B5;">
-    ${signatureData.department}
-  </div>
-
-  <table width="720" cellpadding="0" cellspacing="0" border="0">
+  return `
+  <!-- TOMMATECH VERANDA MAIL SIGNATURE -->
+  <table cellpadding="0" cellspacing="0" border="0" width="720" style="border-collapse:collapse; font-family: Arial, Helvetica, sans-serif; font-size:12px; line-height:1.3; color:#0B58B5; width:720px; max-width:720px;">
     <tr>
-      <td width="520" valign="top">
-        <table cellpadding="0" cellspacing="0" border="0">
+      <td style="padding:0; margin:0;">
+
+        <!-- Selamlama -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
           <tr>
-            <td width="230" style="font-weight:700; color: #0B58B5; padding-bottom:5px;">Tommatech GmbH</td>
-            <td style="color: #0B58B5; padding-bottom:5px;">: ${signatureData.address}</td>
+            <td style="font-style:italic; color:#0B58B5; padding:0 0 10px 0;">
+              Mit freundlichen Grüßen
+            </td>
           </tr>
           <tr>
-            <td style="font-weight:700; color: #0B58B5; padding-bottom:5px;">Tel</td>
-            <td style="color: #0B58B5; padding-bottom:5px;">: ${signatureData.mobilePhone}</td>
+            <td style="font-size:16px; font-weight:700; color:#0B58B5; padding:0 0 4px 0;">
+              ${signatureData.fullName}
+            </td>
           </tr>
           <tr>
-            <td style="font-weight:700; color: #0B58B5; padding-bottom:5px;">E-mail</td>
-            <td style="color:#0B58B5; padding-bottom:5px;">: <a href="mailto:${signatureData.email}" style="color: #0B58B5; text-decoration: underline;">${signatureData.email}</a></td>
-          </tr>
-          <tr>
-            <td style="font-weight:700; color: #0B58B5; padding-bottom:5px;">Web</td>
-            <td style="color:#0B58B5; padding-bottom:5px;">: <a href="https://${signatureData.domain_name}" target="_blank" style="color: #0B58B5; text-decoration: underline;">${signatureData.domain_name}</a></td>
+            <td style="font-size:14px; color:#0B58B5; padding:0 0 20px 0;">
+              ${signatureData.department}
+            </td>
           </tr>
         </table>
-      </td>
-      <td width="200" valign="top" align="right">
-        <a href="${signatureData.googleUrlLink}" target="_blank">
-          <img src="feedback-logo.webp" width="170" height="50" alt="Feedback" style="display:block; border:0;" />
-        </a>
-      </td>
-    </tr>
-  </table>
 
-  <table width="720" cellpadding="0" cellspacing="0" border="0" style="margin-top: 20px; margin-bottom: 20px;">
-    <tr>
-      <td width="300" valign="middle">
-        <a href="https://${signatureData.domain_name}" target="_blank">
-          <img src="${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}" width="250" height="116" style="display:block; border:0;" alt="Logo" />
-        </a>
-      </td>
-      <td width="210" align="center" valign="top">
-        <a href="${signatureData.youtubeVideo}" target="_blank">
-        <!--[if gte vml 1]><v:shape id="_x0000_i1040" type="#_x0000_t75"
-     alt="işaret, yiyecek, tren, mavi içeren bir resimAçıklama otomatik olarak oluşturuldu"
-     style='width:100pt;height:87pt;visibility:visible'>
-     <v:imagedata src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}tt-fabric-video.webp"
-      o:href="cid:image004.png@01D8ABD2.F6271D30"/>
-    </v:shape><![endif]-->
-        <![if !vml]>
-          <img src="tt-fabric-video.webp" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 1" />
-          <![endif]>
-        </a>
-        <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Solarcell Tanıtım</div>
-      </td>
-      <td width="210" align="center" valign="top">
-        <a href="${signatureData.youtubeVideo2}" target="_blank">
-          <img src="tt-product-video.webp" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 2" />
-        </a>
-        <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Enerji Plus Tanıtım</div>
-      </td>
-    </tr>
-  </table>
-
-  <table width="720" cellpadding="0" cellspacing="0" border="0" style="background-color:#DEEAF6;">
-    <tr>
-      <td style="padding: 10px;">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <!-- İletişim + feedback görsel -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
           <tr>
-            <td style="padding-right:10px;"><a href="${signatureData.facebook}"><img src="facebook.jpg" width="25" height="25" style="border:0;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.instagram}"><img src="instagram.jpg" width="25" height="25" style="border:0;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.linkedin}"><img src="linkedin.webp" width="25" height="25" style="border:0;" /></a></td>
+            <td width="520" valign="top" style="width:520px; vertical-align:top;">
+              <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td width="230" style="width:230px; font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Tommatech GmbH</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: ${signatureData.address}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Tel</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: ${signatureData.mobilePhone}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">E-mail</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: 
+                    <a href="mailto:${signatureData.email}" style="color:#0B58B5; text-decoration:underline;">
+                      ${signatureData.email}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Web</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: 
+                    <a href="https://${signatureData.domain_name}" target="_blank" style="color:#0B58B5; text-decoration:underline;">
+                      ${signatureData.domain_name}
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td width="200" valign="top" align="right" style="width:200px; vertical-align:top; text-align:right;">
+              <a href="${signatureData.googleUrlLink}" target="_blank">
+                <img 
+                  src="${imageBase}feedback-logo.jpg" 
+                  width="170" 
+                  height="50" 
+                  alt="Feedback" 
+                  style="display:block; border:0; outline:none; text-decoration:none;"
+                />
+              </a>
+            </td>
           </tr>
         </table>
-      </td>
-      <td align="right" style="padding-right:20px;">
-        <a href="${signatureData.contact}" target="_blank" style="color:#679fd5; text-decoration:none; font-weight:bold;">Contact Form</a>
+
+        <!-- Logo + videolar -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:20px; margin-bottom:20px;">
+          <tr>
+            <td width="300" valign="middle" style="width:300px; vertical-align:middle;">
+              <a href="https://${signatureData.domain_name}" target="_blank">
+                <img 
+                  src="${apiImageBase}${signatureData.companyLogo}" 
+                  width="250" 
+                  height="116" 
+                  alt="Logo" 
+                  style="display:block; border:0; outline:none; text-decoration:none;"
+                />
+              </a>
+            </td>
+
+            <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
+              <a href="${signatureData.youtubeVideo}" target="_blank">
+                <img 
+                  src="${imageBase}tt-fabric-video.jpg" 
+                  width="125" 
+                  height="100" 
+                  alt="Video 1" 
+                  style="display:block; border:0; outline:none; text-decoration:none;"
+                />
+              </a>
+              <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">
+                CW Solarcell Tanıtım
+              </div>
+            </td>
+
+            <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
+              <a href="${signatureData.youtubeVideo2}" target="_blank">
+                <img 
+                  src="${imageBase}tt-product-video.jpg" 
+                  width="125" 
+                  height="100" 
+                  alt="Video 2" 
+                  style="display:block; border:0; outline:none; text-decoration:none;"
+                />
+              </a>
+              <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">
+                CW Enerji Plus Tanıtım
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Sosyal medya -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; background-color:#DEEAF6;">
+          <tr>
+            <td style="padding:10px;">
+              <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td style="padding-right:10px;">
+                    <a href="${signatureData.facebook}" target="_blank">
+                      <img src="${imageBase}facebook.jpg" width="25" height="25" alt="Facebook" style="display:block; border:0;" />
+                    </a>
+                  </td>
+                  <td style="padding-right:10px;">
+                    <a href="${signatureData.instagram}" target="_blank">
+                      <img src="${imageBase}instagram.jpg" width="25" height="25" alt="Instagram" style="display:block; border:0;" />
+                    </a>
+                  </td>
+                  <td style="padding-right:10px;">
+                    <a href="${signatureData.linkedin}" target="_blank">
+                      <img src="${imageBase}linkedin.jpg" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td align="right" style="padding-right:20px; text-align:right;">
+              <a href="${signatureData.contact}" target="_blank" style="color:#679FD5; text-decoration:none; font-weight:bold;">
+                Contact Form
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Bilgilendirme metni -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:10px;">
+          <tr>
+            <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
+              ${signatureData.informationText}
+            </td>
+          </tr>
+        </table>
+
+        <!-- Çevre metni -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:10px;">
+          <tr>
+            <td width="70" style="width:70px;">
+              <img 
+                src="${imageBase}cevre.jpg" 
+                width="64" 
+                height="57" 
+                alt="Environment" 
+                style="display:block; border:0; outline:none; text-decoration:none;" 
+              />
+            </td>
+            <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
+              ${signatureData.environmentText}
+            </td>
+          </tr>
+        </table>
+
       </td>
     </tr>
   </table>
-
-  <div style="margin-top:12px; font-size:8px; color:#BDD6EE;">
-    <table width="720" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
-    <tr>
-      <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
-    ${signatureData.informationText}
-      </td>
-    </tr>
-  </table>
-
-  </div>
-
-  <table width="720" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
-    <tr>
-      <td width="70"><img src="cevre.jpg" width="64" height="57" style="display:block; border:0;" /></td>
-      <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
-        ${signatureData.environmentText}
-      </td>
-    </tr>
-  </table>
-</div>
-`;
+  `;
+};
