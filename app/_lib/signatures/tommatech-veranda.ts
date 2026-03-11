@@ -1,6 +1,5 @@
 import { SignatureData } from "./types";
-export const tommatechVerandaSignature = (signatureData: SignatureData) => {
-  return `
+export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   <!-- =========================
      TOMMATECH-VERANDA MAIL SIGNATURE
      HTML – MAIL SAFE TEMPLATE
@@ -118,4 +117,3 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
   </table>
 </div>
 `;
-};
