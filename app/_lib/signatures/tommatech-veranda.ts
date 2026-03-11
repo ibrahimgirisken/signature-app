@@ -128,17 +128,17 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
             <td style="padding:10px;">
               <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
                 <tr>
-                  <td style="padding-right:10px;">
+                  <td style="padding-left:20pt;padding-right:20pt;">
                     <a href="${signatureData.facebook}" target="_blank">
                       <img src="${imageBase}facebook.jpg" width="25" height="25" alt="Facebook" style="display:block; border:0;" />
                     </a>
                   </td>
-                  <td style="padding-right:10px;">
+                  <td style="padding-right:20pt;">
                     <a href="${signatureData.instagram}" target="_blank">
                       <img src="${imageBase}instagram.jpg" width="25" height="25" alt="Instagram" style="display:block; border:0;" />
                     </a>
                   </td>
-                  <td style="padding-right:10px;">
+                  <td style="padding-right:20pt;">
                     <a href="${signatureData.linkedin}" target="_blank">
                       <img src="${imageBase}linkedin.jpg" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
                     </a>
