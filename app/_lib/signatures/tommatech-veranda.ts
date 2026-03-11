@@ -71,7 +71,15 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) =>`
       </td>
       <td width="210" align="center" valign="top">
         <a href="${signatureData.youtubeVideo}" target="_blank">
+        <!--[if gte vml 1]><v:shape id="_x0000_i1040" type="#_x0000_t75"
+     alt="işaret, yiyecek, tren, mavi içeren bir resimAçıklama otomatik olarak oluşturuldu"
+     style='width:100pt;height:87pt;visibility:visible'>
+     <v:imagedata src="${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}tt-fabric-video.webp"
+      o:href="cid:image004.png@01D8ABD2.F6271D30"/>
+    </v:shape><![endif]-->
+        <![if !vml]>
           <img src="tt-fabric-video.webp" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 1" />
+          <![endif]>
         </a>
         <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Solarcell Tanıtım</div>
       </td>
