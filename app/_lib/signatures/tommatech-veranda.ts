@@ -1,5 +1,6 @@
 import { SignatureData } from "./types";
-export const tommatechVerandaSignature = (signatureData: SignatureData) => `
+export const tommatechVerandaSignature = (signatureData: SignatureData) => {
+  return `
   <!-- =========================
      TOMMATECH-VERANDA MAIL SIGNATURE
      HTML – MAIL SAFE TEMPLATE
@@ -32,7 +33,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
     ${signatureData.department}
   </div>
 
-  <table width="720" cellpadding="0" cellspacing="0>
+  <table width="720" cellpadding="0" cellspacing="0" border="0">
     <tr>
       <td width="520" valign="top">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -56,7 +57,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       </td>
       <td width="200" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank">
-          <img src="feedback-logo.png" width="170" height="50" alt="Feedback" style="display:block; border:0;" />
+          <img src="feedback-logo.webp" width="170" height="50" alt="Feedback" style="display:block; border:0;" />
         </a>
       </td>
     </tr>
@@ -66,20 +67,18 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
     <tr>
       <td width="300" valign="middle">
         <a href="https://${signatureData.domain_name}" target="_blank">
-          <img src="${signatureData.companyLogo}"
-           width="250" 
-           height="116" alt="Logo" />
+          <img src="${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.companyLogo}" width="250" height="116" style="display:block; border:0;" alt="Logo" />
         </a>
       </td>
       <td width="210" align="center" valign="top">
         <a href="${signatureData.youtubeVideo}" target="_blank">
-          <img src="tt-fabric-video.png" width="125" height="100" style="border-radius:5pt;" alt="Video 1" />
+          <img src="tt-fabric-video.webp" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 1" />
         </a>
         <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Solarcell Tanıtım</div>
       </td>
       <td width="210" align="center" valign="top">
         <a href="${signatureData.youtubeVideo2}" target="_blank">
-          <img src="tt-product-video.png" width="125" height="100" style="border-radius:5pt;" alt="Video 2" />
+          <img src="tt-product-video.webp" width="125" height="100" style="display:block; border:0; border-radius:12px;" alt="Video 2" />
         </a>
         <div style="font-size:10px; color:#7F7F7F; margin-top:5px;">CW Enerji Plus Tanıtım</div>
       </td>
@@ -91,9 +90,9 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
       <td style="padding: 10px;">
         <table cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td style="padding-right:10px;"><a href="${signatureData.facebook}"><img src="facebook.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.instagram}"><img src="instagram.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
-            <td style="padding-right:10px;"><a href="${signatureData.linkedin}"><img src="linkedin.jpg" width="25" height="25" style="border-radius:12px;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.facebook}"><img src="facebook.jpg" width="25" height="25" style="border:0;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.instagram}"><img src="instagram.jpg" width="25" height="25" style="border:0;" /></a></td>
+            <td style="padding-right:10px;"><a href="${signatureData.linkedin}"><img src="linkedin.webp" width="25" height="25" style="border:0;" /></a></td>
           </tr>
         </table>
       </td>
@@ -104,7 +103,14 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   </table>
 
   <div style="margin-top:12px; font-size:8px; color:#BDD6EE;">
+    <table width="720" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+    <tr>
+      <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
     ${signatureData.informationText}
+      </td>
+    </tr>
+  </table>
+
   </div>
 
   <table width="720" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
@@ -117,3 +123,4 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => `
   </table>
 </div>
 `;
+};
