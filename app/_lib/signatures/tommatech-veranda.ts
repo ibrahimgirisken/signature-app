@@ -61,12 +61,12 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
               </table>
             </td>
 
-            <td width="200" valign="top" align="right" style="width:200px; vertical-align:top; text-align:right;">
+            <td width="200" valign="top" align="right" style="width:200px;height:150px; vertical-align:top; text-align:right;">
               <a href="${signatureData.googleUrlLink}" target="_blank">
                 <img 
                   src="${imageBase}feedback-logo.jpg" 
                   width="170" 
-                  height="50" 
+                  height="150" 
                   alt="Feedback" 
                   style="display:block; border:0; outline:none; text-decoration:none;"
                 />
