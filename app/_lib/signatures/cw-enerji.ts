@@ -85,7 +85,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       <td width="200" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank">
           <img
-            src="./cw-enerji-gorusleriniz-icon.webp"
+            src="cw-enerji-gorusleriniz-icon.jpg"
             width="200"
             height="104"
             alt=""
@@ -289,7 +289,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
        <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.twitter}" target="_blank">
           <img
-            src="./twitter.webp"
+            src="twitter.png"
             width="25"
             height="25"
             alt=""
@@ -300,7 +300,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.linkedin}" target="_blank">
           <img
-            src="./linkedin.webp"
+            src="linkedin.png"
             width="25"
             height="25"
             alt=""
@@ -311,7 +311,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
          <a href="${signatureData.youtube}" target="_blank">
           <img
-            src="./youtube.webp"
+            src="youtube.png"
             width="25"
             height="25"
             alt=""
