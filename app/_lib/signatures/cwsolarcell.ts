@@ -35,12 +35,12 @@ return `<!-- =========================
 
 
   <!-- İletişim + Sağ Banner -->
-  <table width="720" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
     <tr valign="middle">
       <td width="520" valign="top">
-        <table width="520" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
           <tr valign="middle">
-            <td width="110" style="font-weight:700; color: #0B58B5;">e-mail</td>
+            <td width="70" style="font-weight:700; color:#0B58B5; padding:0 0 5pt 0;">e-mail</td>
             <td style="color:#0B58B5;">
               :
               <a href="mailto:${signatureData.email}" style="text-decoration: underline; color: #0B58B5;">
