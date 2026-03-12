@@ -310,7 +310,7 @@ export const cwenergySigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.twitter}" target="_blank">
           <img
-            src="twitter.webp"
+            src="twitter.png"
             width="25"
             height="25"
             alt=""
@@ -321,7 +321,7 @@ export const cwenergySigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.linkedin}" target="_blank">
           <img
-            src="linkedin.webp"
+            src="linkedin.png"
             width="25"
             height="25"
             alt=""
@@ -332,7 +332,7 @@ export const cwenergySigranuture = (signatureData: SignatureData) => `
             <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.youtube}" target="_blank">
           <img
-            src="youtube.webp"
+            src="youtube.png"
             width="25"
             height="25"
             alt=""
