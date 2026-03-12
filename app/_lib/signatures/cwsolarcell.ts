@@ -120,8 +120,8 @@ return `<!-- =========================
                     </a>
                   </td>
                   <td style="padding-right:20pt;">
-                    <a href="${signatureData.linkedin}" target="_blank">
-                      <img src="${imageBase}linkedin.jpg" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
+                    <a href="${signatureData.youtubeVideo}" target="_blank">
+                      <img src="${imageBase}youtube.png" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
                     </a>
                   </td>
                 </tr>
