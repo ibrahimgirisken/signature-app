@@ -35,7 +35,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
             <td width="520" valign="top">
               <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
                 <tr valign="top">
-                  <td width="110" style="font-weight:700; color:#0B58B5; padding:0 0 5pt 0;">Tommatech GmbH</td>
+                  <td width="220" style="font-weight:700; color:#0B58B5; padding:0 0 5pt 0;">Tommatech GmbH</td>
                   <td style="color:#0B58B5; padding:0 0 5pt 0;">: ${signatureData.address}</td>
                 </tr>
                 <tr valign="top">
@@ -55,6 +55,22 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                   <td style="color:#0B58B5; padding:0 0 5px 0;">: 
                     <a href="https://${signatureData.domain_name}" target="_blank" style="color:#0B58B5; text-decoration:underline;">
                       ${signatureData.domain_name}
+                    </a>
+                  </td>
+                </tr>
+                                <tr valign="top">
+                  <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Registergericht</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: 
+                    <a href="https://${signatureData.domain_name}" target="_blank" style="color:#0B58B5; text-decoration:underline;">
+                      ${signatureData.fax}
+                    </a>
+                  </td>
+                </tr>
+                                <tr valign="top">
+                  <td style="font-weight:700; color:#0B58B5; padding:0 0 5px 0;">Umsatzsteuer-Identifikationsnummer</td>
+                  <td style="color:#0B58B5; padding:0 0 5px 0;">: 
+                    <a href="https://${signatureData.domain_name}" target="_blank" style="color:#0B58B5; text-decoration:underline;">
+                      ${signatureData.other}
                     </a>
                   </td>
                 </tr>
@@ -78,7 +94,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
         <!-- Logo + videolar -->
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:20px; margin-bottom:20px;">
           <tr>
-            <td width="300" valign="middle" style="width:300px; vertical-align:middle;">
+            <td width="300" valign="middle" style="width:450px; vertical-align:middle;">
               <a href="https://${signatureData.domain_name}" target="_blank">
                 <img 
                   src="${apiImageBase}${signatureData.companyLogo}" 
@@ -88,6 +104,16 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                   style="display:block; border:0; outline:none; text-decoration:none;"
                 />
               </a>
+            </td>
+
+           <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
+                <img 
+                  src="${imageBase}veranda-qr.png" 
+                  width="100" 
+                  height="100" 
+                  alt="QR" 
+                  style="display:block; border:0; outline:none; text-decoration:none;"
+                />
             </td>
 
             <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
@@ -127,14 +153,24 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
                       <img src="${imageBase}facebook.jpg" width="25" height="25" alt="Facebook" style="display:block; border:0;" />
                     </a>
                   </td>
-                  <td style="padding-right:20pt;">
+                                    <td style="padding-right:20pt;">
                     <a href="${signatureData.instagram}" target="_blank">
                       <img src="${imageBase}instagram.jpg" width="25" height="25" alt="Instagram" style="display:block; border:0;" />
                     </a>
                   </td>
                   <td style="padding-right:20pt;">
+                    <a href="${signatureData.twitter}" target="_blank">
+                      <img src="${imageBase}twitter.png" width="25" height="25" alt="Instagram" style="display:block; border:0;" />
+                    </a>
+                  </td>
+                  <td style="padding-right:20pt;">
                     <a href="${signatureData.linkedin}" target="_blank">
                       <img src="${imageBase}linkedin.jpg" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
+                    </a>
+                  </td>
+                                    <td style="padding-right:20pt;">
+                    <a href="${signatureData.youtube}" target="_blank">
+                      <img src="${imageBase}youtube.png" width="25" height="25" alt="LinkedIn" style="display:block; border:0;" />
                     </a>
                   </td>
                 </tr>
