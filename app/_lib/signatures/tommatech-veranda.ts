@@ -93,7 +93,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
 
         <!-- Logo + videolar -->
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:20px; margin-bottom:20px;">
-          <tr>
+          <tr valign="top">
             <td width="300" valign="middle" style="width:450px; vertical-align:middle;">
               <a href="https://${signatureData.domain_name}" target="_blank">
                 <img 
@@ -109,7 +109,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
            <td width="210" align="center" valign="top" style="width:210px; text-align:center; vertical-align:top;">
                 <img 
                   src="${imageBase}veranda-qr.png" 
-                  width="100" 
+                  width="75" 
                   height="100" 
                   alt="QR" 
                   style="display:block; border:0; outline:none; text-decoration:none;"
