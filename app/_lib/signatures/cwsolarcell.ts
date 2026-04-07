@@ -137,7 +137,7 @@ return `<!-- =========================
         </table>
 
   <!-- Detaylı Yasal Metin (DISCLAIMER) -->
-  <div style="margin-top:12px; font-size:10px; line-height:1.35; color:#7F7F7F;">
+ <div style="margin-top:12px; font-size:10px; line-height:1.35; color:#7F7F7F; white-space:pre-line;">
     ${signatureData.informationText}
   </div>
 
