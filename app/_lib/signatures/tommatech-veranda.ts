@@ -188,7 +188,7 @@ export const tommatechVerandaSignature = (signatureData: SignatureData) => {
         <!-- Bilgilendirme metni -->
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:10px;">
           <tr>
-            <td style="font-size:10px; color:#7F7F7F; font-style:italic; padding-left:10px;">
+            <td style="font-size:8px; line-height:1.35; color:#BDD6EE;">
               ${signatureData.informationText}
             </td>
           </tr>
