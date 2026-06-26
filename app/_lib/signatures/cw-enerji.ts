@@ -18,7 +18,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
     font-size: 12px;
     line-height: 1.3;
     color: #0070C0;
-    max-width: 720px;
+    max-width: 800px;
 >
 
   <!-- Selamlama -->
@@ -40,7 +40,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   </div>
 
   <!-- İletişim + Sağ Banner -->
-  <table width="720" cellpadding="0" cellspacing="0">
+  <table width="800" cellpadding="0" cellspacing="0">
     <tr>
       <td width="520" valign="top">
         <table width="520" cellpadding="0" cellspacing="0">
@@ -96,7 +96,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   </table>
 
   <!-- Video / Reklam Alanı -->
-  <table width="720" cellpadding="0" cellspacing="0">
+  <table width="800" cellpadding="0" cellspacing="0">
     <tr>
     <br/>
       <td width="510">
@@ -129,15 +129,15 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
 
   <!-- Çizgi -->
       <br/>
-  <div style="border-top:1px solid #D0CECE; margin:12px 0; width:720px;"></div>
+  <div style="border-top:1px solid #D0CECE; margin:12px 0; width:800px;"></div>
 
   <!-- KDV Metni -->
-  <div style="font-size:10px;color:#7F7F7F;width:720px;height:auto;">
+  <div style="font-size:10px;color:#7F7F7F;width:800px;height:auto;">
     "${signatureData.kdvInformation}"
   </div>
 
   <!-- Alt Link Logolar -->
-  <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+  <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="240">
         <a href="${signatureData.timotech}" target="_blank">
@@ -158,7 +158,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   </table>
 
 <table
-  width="720"
+  width="800"
   cellpadding="0"
   cellspacing="0"
   style="margin-top:10px; border-collapse:collapse; text-align:center;"
@@ -262,7 +262,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
   </tr>
 </table>
 
-  <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+  <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
        <tr align="center" valign="middle" style="color: #7F7F7F;font-size: 10px;display: flex;justify-content: center;gap:10px;">
       <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
        <a href="${signatureData.facebook}" target="_blank">
@@ -321,18 +321,18 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       </td>
       </tr>
   </table>
-  <table width="720" height="250" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+  <table width="800" height="250" cellpadding="0" cellspacing="0" style="margin-top:10px;">
        <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
       <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.fair}" target="_blank">
-      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="720" height="360" alt="" />
+      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="800" height="360" alt="" />
       </a>
         </td>
         </tr>
   </table>
 
   <!-- Detaylı Yasal Metin (DISCLAIMER) -->
-  <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+  <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
        <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
       <td valign="top" style="padding-top:10px;">
        ${signatureData.informationText}
@@ -342,7 +342,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
 
 
   <!-- Çevre Mesajı -->
-  <table width="720" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+  <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="70" valign="top">
         <img src="./cevre.jpg" width="64" height="57" alt="" />
