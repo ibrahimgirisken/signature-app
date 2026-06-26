@@ -23,7 +23,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
 
   <!-- Selamlama -->
   <div style="font-style: italic; margin-bottom: 10px;">
-    Saygılarımla / Best Regards / Mit freundlichen Grüßen
+   Best Regards
   </div>
 
   <!-- İsim -->
