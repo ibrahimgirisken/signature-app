@@ -45,7 +45,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
       <td width="520" valign="top">
         <table width="520" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="110" style="font-weight:700;color: #0B58B5;">E-posta</td>
+            <td width="110" style="font-weight:700;color: #0B58B5;">E-mail</td>
             <td>
               :
               <a href="mailto:${signatureData.email}" style="color: #0B58B5;">
@@ -54,11 +54,11 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
             </td>
           </tr>
           <tr>
-            <td style="font-weight:700;color: #0B58B5;">Cep Telefonu</td>
+            <td style="font-weight:700;color: #0B58B5;">Mobile Phone</td>
             <td style="color: #0B58B5;">: ${signatureData.mobilePhone}</td>
           </tr>
           <tr>
-            <td style="font-weight:700;color: #0B58B5;">Telefon</td>
+            <td style="font-weight:700;color: #0B58B5;">Phone</td>
             <td style="color: #0B58B5;">: ${signatureData.phone}</td>
           </tr>
                     <tr>
@@ -74,7 +74,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
             </td>
           </tr>
           <tr>
-            <td style="font-weight:700; vertical-align:top;color: #0B58B5;">Adres</td>
+            <td style="font-weight:700; vertical-align:top;color: #0B58B5;">Address</td>
             <td style="line-height:1.35;color: #0B58B5;"">
               : ${signatureData.address}
             </td>
@@ -85,7 +85,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
       <td width="200" valign="top" align="right">
         <a href="${signatureData.googleUrlLink}" target="_blank">
           <img
-            src="cw-enerji-gorusleriniz-icon.jpg"
+            src="we-value-your-feedback.png"
             width="200"
             height="104"
             alt=""
@@ -121,7 +121,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
           />
         </a>
         <div style="font-size:12px; color:#7F7F7F;">
-          CW Enerji Tanıtım
+          CW Enerji Introduction
         </div>
       </td>
     </tr>
@@ -151,7 +151,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
       </td>
       <td width="240">
         <a href="${signatureData.downloadCenter}" target="_blank">
-          <img src="./indirme-merkezi.jpg" width="200" height="74" alt="" />
+          <img src="./download-center.png" width="200" height="74" alt="" />
         </a>
       </td>
     </tr>
@@ -184,7 +184,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
           text-decoration:none;
         "
       >
-        Haberler
+        News
       </a>
     </td>
 
@@ -208,7 +208,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
           text-decoration:none;
         "
       >
-        Fuarlar
+        Fairs
       </a>
     </td>
 
@@ -232,7 +232,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
           text-decoration:none;
         "
       >
-        Online Eğitim
+        Online Education
       </a>
     </td>
 
@@ -256,7 +256,7 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
           text-decoration:none;
         "
       >
-        İletişim Formu
+        Contact Form
       </a>
     </td>
   </tr>

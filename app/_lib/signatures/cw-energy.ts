@@ -148,7 +148,7 @@ export const cwenergySigranuture = (signatureData: SignatureData) => `
       </td>
       <td width="240">
         <a href="${signatureData.downloadCenter}" target="_blank">
-          <img src="indirme-merkezi.jpg" width="200" height="74" alt="" />
+          <img src="./download-center.png" width="200" height="74" alt="" />
         </a>
       </td>
     </tr>
