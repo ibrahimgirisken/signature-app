@@ -325,7 +325,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
        <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
       <td valign="top" style="padding-top:10px;">
          <a href="${signatureData.fair}" target="_blank">
-      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="720" height="60" alt="" />
+      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="720" height="360" alt="" />
       </a>
         </td>
         </tr>
