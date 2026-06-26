@@ -1,10 +1,6 @@
 import { SignatureData } from "./types";
-export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
-<!-- =========================
-     CW ENERJİ MAIL SIGNATURE
-     HTML – MAIL SAFE TEMPLATE
-     ========================= -->
 
+export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
 <style type="text/css">
   /* Mail client safe reset */
   table { border-collapse: collapse; }
@@ -19,63 +15,60 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
     line-height: 1.3;
     color: #0070C0;
     max-width: 800px;
+  "
 >
 
-  <!-- Selamlama -->
   <div style="font-style: italic; margin-bottom: 10px;">
-   Best Regards
+    Best Regards
   </div>
 
-  <!-- İsim -->
   <div style="font-size: 16px; font-weight: 700; color: #0B58B5;">
     ${signatureData.fullName}
   </div>
 
-  <!-- Ünvan -->
-  <div style="font-size: 14px; margin-bottom: 20px;color: #0B58B5;">
+  <div style="font-size: 14px; margin-bottom: 20px; color: #0B58B5;">
     ${signatureData.department}<br/>
   </div>
-    <div style="margin-bottom: 5px;">
+  <div style="margin-bottom: 5px;">
     <br/><br/>
   </div>
 
-  <!-- İletişim + Sağ Banner -->
   <table width="800" cellpadding="0" cellspacing="0">
     <tr>
       <td width="520" valign="top">
         <table width="520" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="110" style="font-weight:700;color: #0B58B5;">E-mail</td>
+            <td width="110" style="font-weight:700; color: #0B58B5;">E-mail</td>
             <td>
               :
-              <a href="mailto:${signatureData.email}" style="color: #0B58B5;">
+              <a href="mailto:${signatureData.email}" style="color: #0B58B5; text-decoration: none;">
                 ${signatureData.email}
               </a>
             </td>
           </tr>
           <tr>
-            <td style="font-weight:700;color: #0B58B5;">Mobile Phone</td>
+            <td style="font-weight:700; color: #0B58B5;">Mobile Phone</td>
             <td style="color: #0B58B5;">: ${signatureData.mobilePhone}</td>
           </tr>
           <tr>
-            <td style="font-weight:700;color: #0B58B5;">Phone</td>
+            <td style="font-weight:700; color: #0B58B5;">Phone</td>
             <td style="color: #0B58B5;">: ${signatureData.phone}</td>
           </tr>
-                    <tr>
-            <td style="font-weight:700;color: #0B58B5;">Fax</td>
+          <tr>
+            <td style="font-weight:700; color: #0B58B5;">Fax</td>
             <td style="color: #0B58B5;">: ${signatureData.fax}</td>
           </tr>
-           <tr>
-            <td style="font-weight:700;color: #0B58B5;">Web</td>
+          <tr>
+            <td style="font-weight:700; color: #0B58B5;">Web</td>
             <td style="color: #0B58B5;">: 
-             <a href="https://${signatureData.domain_name}" style="color: #0B58B5;" target="_blank">
+              <a href="https://${signatureData.domain_name}" style="color: #0B58B5; text-decoration: none;" target="_blank">
                 ${signatureData.domain_name}
               </a>
             </td>
           </tr>
           <tr>
-            <td style="font-weight:700; vertical-align:top;color: #0B58B5;">Address</td>
-            <td style="line-height:1.35;color: #0B58B5;"">
+            <td style="font-weight:700; vertical-align:top; color: #0B58B5;">Address</td>
+            <td style="line-height:1.35; color: #0B58B5;">
               : ${signatureData.address}
             </td>
           </tr>
@@ -95,10 +88,9 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
     </tr>
   </table>
 
-  <!-- Video / Reklam Alanı -->
   <table width="800" cellpadding="0" cellspacing="0">
     <tr>
-    <br/>
+      <br/>
       <td width="510">
         <a href="https://${signatureData.domain_name}" target="_blank">
           <img
@@ -127,16 +119,13 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
     </tr>
   </table>
 
-  <!-- Çizgi -->
-      <br/>
+  <br/>
   <div style="border-top:1px solid #D0CECE; margin:12px 0; width:800px;"></div>
 
-  <!-- KDV Metni -->
-  <div style="font-size:10px;color:#7F7F7F;width:800px;height:auto;">
+  <div style="font-size:10px; color:#7F7F7F; width:800px; height:auto;">
     "${signatureData.kdvInformation}"
   </div>
 
-  <!-- Alt Link Logolar -->
   <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="240">
@@ -157,197 +146,99 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
     </tr>
   </table>
 
-<table
-  width="800"
-  cellpadding="0"
-  cellspacing="0"
-  style="margin-top:10px; border-collapse:collapse; text-align:center;"
->
-  <tr>
-    <td width="25%" style="
-    width:145.8pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt
-    ">
-      <a
-        href="${signatureData.news}"
-        target="_blank"
-        style="
-          display:block;
-          background-color:#DEEAF6;
-          padding:8px 6px;
-          font-size:14px;
-          color:#679fd5;
-          text-decoration:none;
-        "
-      >
-        News
-      </a>
-    </td>
-
-    <td width="25%" style="
-    width:145.8pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt
-    ">
-      <a
-        href="${signatureData.fair}"
-        target="_blank"
-        style="
-          display:block;
-          background-color:#DEEAF6;
-          padding:8px 6px;
-          font-size:14px;
-          color:#679fd5;
-          text-decoration:none;
-        "
-      >
-        Fairs
-      </a>
-    </td>
-
-    <td width="25%" style="
-    width:145.8pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt
-    ">
-      <a
-        href="${signatureData.academy}"
-        target="_blank"
-        style="
-          display:block;
-          background-color:#DEEAF6;
-          padding:8px 6px;
-          font-size:14px;
-          color:#679fd5;
-          text-decoration:none;
-        "
-      >
-        Online Education
-      </a>
-    </td>
-
-    <td width="25%" style="
-    width:145.8pt;
-    border:none;
-    border-bottom:
-    solid #4472C4 1.5pt;
-    background:#DEEAF6;
-    padding:0in 5.4pt 0in 5.4pt
-    ">
-      <a
-        href="${signatureData.contact}"
-        target="_blank"
-        style="
-          display:block;
-          background-color:#DEEAF6;
-          padding:8px 6px;
-          font-size:14px;
-          color:#679fd5;
-          text-decoration:none;
-        "
-      >
-        Contact Form
-      </a>
-    </td>
-  </tr>
-</table>
-
-  <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
-       <tr align="center" valign="middle" style="color: #7F7F7F;font-size: 10px;display: flex;justify-content: center;gap:10px;">
-      <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
-       <a href="${signatureData.facebook}" target="_blank">
-          <img
-            src="./facebook.jpg"
-            width="25"
-            height="25"
-            alt=""
-            style="border-radius:12px;"
-          />
-        </a>
-        </td>
-      <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
-         <a href="${signatureData.instagram}" target="_blank">
-          <img
-            src="./instagram.jpg"
-            width="25"
-            height="25"
-            alt=""
-            style="border-radius:12px;"
-          />
+  <table
+    width="800"
+    cellpadding="0"
+    cellspacing="0"
+    style="margin-top:10px; border-collapse:collapse; text-align:center;"
+  >
+    <tr>
+      <td width="25%" style="width:145.8pt; border:none; border-bottom: solid #4472C4 1.5pt; background:#DEEAF6; padding:0in 5.4pt 0in 5.4pt">
+        <a href="${signatureData.news}" target="_blank" style="display:block; background-color:#DEEAF6; padding:8px 6px; font-size:14px; color:#679fd5; text-decoration:none;">
+          News
         </a>
       </td>
-       <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
-         <a href="${signatureData.twitter}" target="_blank">
-          <img
-            src="twitter.png"
-            width="25"
-            height="25"
-            alt=""
-            style="border-radius:12px;"
-          />
+
+      <td width="25%" style="width:145.8pt; border:none; border-bottom: solid #4472C4 1.5pt; background:#DEEAF6; padding:0in 5.4pt 0in 5.4pt">
+        <a href="${signatureData.fair}" target="_blank" style="display:block; background-color:#DEEAF6; padding:8px 6px; font-size:14px; color:#679fd5; text-decoration:none;">
+          Fairs
         </a>
       </td>
-            <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
-         <a href="${signatureData.linkedin}" target="_blank">
-          <img
-            src="linkedin.png"
-            width="25"
-            height="25"
-            alt=""
-            style="border-radius:12px;"
-          />
+
+      <td width="25%" style="width:145.8pt; border:none; border-bottom: solid #4472C4 1.5pt; background:#DEEAF6; padding:0in 5.4pt 0in 5.4pt">
+        <a href="${signatureData.academy}" target="_blank" style="display:block; background-color:#DEEAF6; padding:8px 6px; font-size:14px; color:#679fd5; text-decoration:none;">
+          Online Education
         </a>
       </td>
-            <td valign="top" style="width:25pt;padding:0in .1pt 0in .1pt">
-         <a href="${signatureData.youtube}" target="_blank">
-          <img
-            src="youtube.png"
-            width="25"
-            height="25"
-            alt=""
-            style="border-radius:12px;"
-          />
+
+      <td width="25%" style="width:145.8pt; border:none; border-bottom: solid #4472C4 1.5pt; background:#DEEAF6; padding:0in 5.4pt 0in 5.4pt">
+        <a href="${signatureData.contact}" target="_blank" style="display:block; background-color:#DEEAF6; padding:8px 6px; font-size:14px; color:#679fd5; text-decoration:none;">
+          Contact Form
         </a>
       </td>
-      </tr>
+    </tr>
   </table>
+
+  <table width="800" border="0" cellpadding="0" cellspacing="0" style="padding-top: 15px; padding-bottom: 15px;">
+    <tr>
+      <td align="center" valign="middle">
+        <table border="0" cellpadding="0" cellspacing="0" align="center" style="margin: 0 auto;">
+          <tr>
+            <td valign="middle" style="padding: 0 5px;">
+              <a href="${signatureData.facebook}" target="_blank" style="display: inline-block; text-decoration: none;">
+                <img src="./facebook.jpg" width="25" height="25" alt="Facebook" style="display: block; border: 0; border-radius: 12px;" />
+              </a>
+            </td>
+            <td valign="middle" style="padding: 0 5px;">
+              <a href="${signatureData.instagram}" target="_blank" style="display: inline-block; text-decoration: none;">
+                <img src="./instagram.jpg" width="25" height="25" alt="Instagram" style="display: block; border: 0; border-radius: 12px;" />
+              </a>
+            </td>
+            <td valign="middle" style="padding: 0 5px;">
+              <a href="${signatureData.twitter}" target="_blank" style="display: inline-block; text-decoration: none;">
+                <img src="twitter.png" width="25" height="25" alt="Twitter" style="display: block; border: 0; border-radius: 12px;" />
+              </a>
+            </td>
+            <td valign="middle" style="padding: 0 5px;">
+              <a href="${signatureData.linkedin}" target="_blank" style="display: inline-block; text-decoration: none;">
+                <img src="linkedin.png" width="25" height="25" alt="LinkedIn" style="display: block; border: 0; border-radius: 12px;" />
+              </a>
+            </td>
+            <td valign="middle" style="padding: 0 5px;">
+              <a href="${signatureData.youtube}" target="_blank" style="display: inline-block; text-decoration: none;">
+                <img src="youtube.png" width="25" height="25" alt="YouTube" style="display: block; border: 0; border-radius: 12px;" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
   <table width="800" height="250" cellpadding="0" cellspacing="0" style="margin-top:10px;">
-       <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
+    <tr style="color: #7F7F7F; font-size: 10px; gap:10px;">
       <td valign="top" style="padding-top:10px;">
-         <a href="${signatureData.fair}" target="_blank">
-      <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="800" height="360" alt="" />
-      </a>
-        </td>
-        </tr>
+        <a href="${signatureData.fair}" target="_blank">
+          <img src="${signatureData.fairImage ? `${process.env.NEXT_PUBLIC_API_IMAGE_URL}${signatureData.fairImage}` : ""}" width="800" height="360" alt="" />
+        </a>
+      </td>
+    </tr>
   </table>
 
-  <!-- Detaylı Yasal Metin (DISCLAIMER) -->
   <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
-       <tr style="color: #7F7F7F;font-size: 10px;gap:10px;">
+    <tr style="color: #7F7F7F; font-size: 10px; gap:10px;">
       <td valign="top" style="padding-top:10px;">
-       ${signatureData.informationText}
-        </td>
-        </tr>
+        ${signatureData.informationText}
+      </td>
+    </tr>
   </table>
 
-
-  <!-- Çevre Mesajı -->
   <table width="800" cellpadding="0" cellspacing="0" style="margin-top:10px;">
     <tr>
       <td width="70" valign="top">
         <img src="./cevre.jpg" width="64" height="57" alt="" />
       </td>
-      <td valign="top" style="padding-left:8px;padding-top:10px;">
+      <td valign="top" style="padding-left:8px; padding-top:10px;">
         <div style="font-size:10px; color:#7F7F7F; font-style:italic;">
           ${signatureData.environmentText}
         </div>
@@ -355,4 +246,4 @@ export const cwenerjiEnSigranuture = (signatureData: SignatureData) => `
     </tr>
   </table>
 </div>
-  `;
+`;
