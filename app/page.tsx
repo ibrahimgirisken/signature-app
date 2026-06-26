@@ -83,8 +83,15 @@ function Home() {
   );
 
   const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
-  const companies = getall.data ?? [];
-
+  const rawCompanies = getall.data ?? [];
+  const companies = useMemo(() => {
+  return [...rawCompanies].sort((a, b) => {
+    return (a.companyName || '').localeCompare(b.companyName || '', 'tr', {
+      sensitivity: 'base',
+      numeric: true
+    });
+  });
+  }, [rawCompanies]);
   const datas: SignatureData = useMemo(
     () => ({
       fullName,
