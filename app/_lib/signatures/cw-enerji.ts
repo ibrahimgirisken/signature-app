@@ -111,7 +111,7 @@ export const cwenerjiSigranuture = (signatureData: SignatureData) => `
       </td>
 
       <td width="210" align="center">
-        <a href="https://www.youtube.com/watch?v=rDa8JF7KywE" target="_blank">
+        <a href="https://youtu.be/cJHvgjN5wjY?si=WZyPgzHEEhqbUtfK" target="_blank">
           <img
             src="./cw-enerji-youtube-gorseli.png"
             width="110"
