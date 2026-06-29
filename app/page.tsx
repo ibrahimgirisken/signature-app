@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Container, FormSelect } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -40,7 +40,7 @@ function Home() {
   const sigRef = useRef<HTMLDivElement | null>(null);
 
   const [selectedCompanyName, setSelectedCompanyName] = React.useState<string>('');
-
+  const [loading, setLoading] = useState<boolean>(true);
   const [fullName, setFullName] = React.useState('');
   const [department, setDepartment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -53,23 +53,23 @@ function Home() {
   const [fairImage, setFairImage] = React.useState('');
   const [domain_name, setDomainName] = React.useState('');
   const [news, setNews] = React.useState('');
-  const [fair,setFair]=React.useState('');
-  const [downloadCenter,setDownloadCenter]=React.useState('');
-  const [timotech,setTimotech]=React.useState('');
-  const [academy,setAcademy]=React.useState('');
+  const [fair, setFair] = React.useState('');
+  const [downloadCenter, setDownloadCenter] = React.useState('');
+  const [timotech, setTimotech] = React.useState('');
+  const [academy, setAcademy] = React.useState('');
   const [googleUrlLink, setGoogleUrlLink] = React.useState('');
-  const [contactUrlLink,setContactUrlLink]=React.useState('');
+  const [contactUrlLink, setContactUrlLink] = React.useState('');
   const [instagram, setInstagram] = React.useState('');
   const [facebook, setFacebook] = React.useState('');
-  const [linkedin,setLinkedin]=React.useState('');
-  const [twitter,setTwitter]=React.useState('');
-  const [youtube,setYoutube]=React.useState('');
-  const [youtubeVideo,setYoutubeVideo]=React.useState('');
-  const [youtubeVideo2,setYoutubeVideo2]=React.useState('');
-  const [contact,setContact]=React.useState('');
-  const [fax,setFax]=React.useState('');
-  const [other,setOther]=React.useState('');
-
+  const [linkedin, setLinkedin] = React.useState('');
+  const [twitter, setTwitter] = React.useState('');
+  const [youtube, setYoutube] = React.useState('');
+  const [youtubeVideo, setYoutubeVideo] = React.useState('');
+  const [youtubeVideo2, setYoutubeVideo2] = React.useState('');
+  const [contact, setContact] = React.useState('');
+  const [fax, setFax] = React.useState('');
+  const [other, setOther] = React.useState('');
+  const [rawCompanies, setRawCompanies] = useState<CompanyResponse[]>([]);
   const [kdvInformation, setKdvInformation] = React.useState(
     'KDV KANUNUN 117 SAYILI TEBLİĞ’İN 3.1.2/B MADDESİNE GÖRE BORSA İSTANBUL’DA İŞLEM GÖREN ŞİRKETİMİZE DÜZENLENECEK FATURALARDA KDV <br/> TEVKİFATINA ÖZEN GÖSTERİLMESİ RİCA OLUNUR.'
   );
@@ -83,15 +83,26 @@ function Home() {
   );
 
   const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
-  const rawCompanies = getall.data ?? [];
-  const companies = useMemo(() => {
+
+ useEffect(() => {
+  if (getall?.data) {
+    setRawCompanies(getall.data);
+    setLoading(false);
+  }
+}, [getall?.data]);
+  
+
+const companies = useMemo(() => {
+  if (!Array.isArray(rawCompanies)) return [];
+  
   return [...rawCompanies].sort((a, b) => {
     return (a.companyName || '').localeCompare(b.companyName || '', 'tr', {
       sensitivity: 'base',
       numeric: true
     });
   });
-  }, [rawCompanies]);
+}, [rawCompanies]);
+
   const datas: SignatureData = useMemo(
     () => ({
       fullName,
@@ -177,7 +188,7 @@ function Home() {
     setFairImage(selectedCompany.fairImage || '');
     setDomainName(selectedCompany.domainName || '');
     setPhone(selectedCompany.phone || '');
-    setFax(selectedCompany.fax ||'');
+    setFax(selectedCompany.fax || '');
     setAddress(selectedCompany.address || '');
     setAddress2(selectedCompany.address2 || '');
     setAddress3(selectedCompany.address3 || '');
@@ -189,7 +200,7 @@ function Home() {
 
     setFacebook(assetsByType.Facebook?.targetUrl || '');
     setInstagram(assetsByType.Instagram?.targetUrl || '');
-    setTwitter(assetsByType.Twitter?.targetUrl ||'');
+    setTwitter(assetsByType.Twitter?.targetUrl || '');
     setLinkedin(assetsByType.LinkedIn?.targetUrl || '');
     setYoutube(assetsByType.Youtube1?.targetUrl || '');
     setYoutubeVideo(assetsByType.Youtube2?.targetUrl || '');
@@ -198,11 +209,11 @@ function Home() {
     setContactUrlLink(assetsByType.Contact?.targetUrl || '');
     setNews(assetsByType.News?.targetUrl || '');
     setTimotech(assetsByType.Timotech?.targetUrl || '');
-    setFair(assetsByType.Fair?.targetUrl ||'');
-    setDownloadCenter(assetsByType.DownloadCenter?.targetUrl ||'');
-    setContact(assetsByType.Contact?.targetUrl||'');
+    setFair(assetsByType.Fair?.targetUrl || '');
+    setDownloadCenter(assetsByType.DownloadCenter?.targetUrl || '');
+    setContact(assetsByType.Contact?.targetUrl || '');
     setAcademy(assetsByType.Academy?.targetUrl || '');
-    setOther(assetsByType.Other?.targetUrl ||'');
+    setOther(assetsByType.Other?.targetUrl || '');
   };
 
   return (
@@ -214,12 +225,17 @@ function Home() {
 
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
-           <Col sm="6" col-lg="12">
-              <FormSelect value={selectedCompanyName} className='mb-3' onChange={handleCompanyChange}>
-                <option value="" disabled>
-                  Seçiniz
-                </option>
-                {Array.isArray(companies) &&
+            <Col sm="6" col-lg="12">
+              <FormSelect value={selectedCompanyName} className='mb-3' onChange={handleCompanyChange} disabled={loading}>
+                {loading ? (
+                  <option>Şirketler yükleniyor...</option>
+                ) : (
+                  <option value="" disabled selected>
+                    Seçiniz
+                  </option>
+                )}
+
+                {!loading && Array.isArray(companies) &&
                   companies.map((company) => (
                     <option key={company.id} value={company.companyName}>
                       {company.companyName}
@@ -238,7 +254,7 @@ function Home() {
               />
             </Col>
 
-           <Col sm="6" col-lg="12">
+            <Col sm="6" col-lg="12">
               <Form.Control
                 type="text"
                 className="mb-3"
@@ -248,7 +264,7 @@ function Home() {
               />
             </Col>
 
-          <Col sm="6" col-lg="12">
+            <Col sm="6" col-lg="12">
               <Form.Control
                 type="text"
                 className="mb-3"
