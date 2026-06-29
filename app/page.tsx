@@ -84,24 +84,24 @@ function Home() {
 
   const { getall } = useCrud<CompanyRequest, CompanyResponse>('companies', companyService);
 
- useEffect(() => {
-  if (getall?.data) {
-    setRawCompanies(getall.data);
-    setLoading(false);
-  }
-}, [getall?.data]);
-  
+  useEffect(() => {
+    if (getall?.data) {
+      setRawCompanies(getall.data);
+      setLoading(false);
+    }
+  }, [getall?.data]);
 
-const companies = useMemo(() => {
-  if (!Array.isArray(rawCompanies)) return [];
-  
-  return [...rawCompanies].sort((a, b) => {
-    return (a.companyName || '').localeCompare(b.companyName || '', 'tr', {
-      sensitivity: 'base',
-      numeric: true
+
+  const companies = useMemo(() => {
+    if (!Array.isArray(rawCompanies)) return [];
+
+    return [...rawCompanies].sort((a, b) => {
+      return (a.companyName || '').localeCompare(b.companyName || '', 'tr', {
+        sensitivity: 'base',
+        numeric: true
+      });
     });
-  });
-}, [rawCompanies]);
+  }, [rawCompanies]);
 
   const datas: SignatureData = useMemo(
     () => ({
@@ -226,11 +226,16 @@ const companies = useMemo(() => {
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
             <Col sm="6" col-lg="12">
-              <FormSelect value={selectedCompanyName} className='mb-3' onChange={handleCompanyChange} disabled={loading}>
+              <FormSelect
+                value={selectedCompanyName}
+                className='mb-3'
+                onChange={handleCompanyChange}
+                disabled={loading}
+              >
                 {loading ? (
-                  <option>Şirketler yükleniyor...</option>
+                  <option value="">Şirketler yükleniyor...</option>
                 ) : (
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Seçiniz
                   </option>
                 )}
