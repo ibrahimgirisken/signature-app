@@ -55,6 +55,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
         try {
             setDepartmentsLoading(true);
             const departmentsData = await departmentService.getalldepartmentbycompanyid(companyId);
+            setDepartment([]);
             setDepartment(departmentsData);
             setModules([]);
         } catch (error) {
@@ -72,6 +73,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
         try {
             setModulesLoading(true);
             const modulesData = await moduleService.getallmodulebydepartmentid(departmentId);
+            setModules([]);
             setModules(modulesData);
         } catch (error) {
             console.error("Modüller yüklenirken hata:", error);
