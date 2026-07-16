@@ -19,9 +19,6 @@ function CompanyAdd() {
 
   const [companyLogos, setCompanyLogos] = useState<Record<string, File>>({});
   const [fairCalendarImages, setFairCalendarImages] = useState<Record<string, File>>({});
-  const [promoImages1, setPromoImages1] = useState<Record<string, File>>({});
-  const [promoImages2, setPromoImages2] = useState<Record<string, File>>({});
-  const [promoImages3, setPromoImages3] = useState<Record<string, File>>({});
   const [qrCodeImages, setQrCodeImages] = useState<Record<string, File>>({});
 
   const { register, control, handleSubmit, watch, setValue } =
@@ -162,9 +159,6 @@ function CompanyAdd() {
           fileSetters={{
             setCompanyLogos,
             setFairCalendarImages,
-            setPromoImages1,
-            setPromoImages2,
-            setPromoImages3,
             setQrCodeImages
           }}
         />
