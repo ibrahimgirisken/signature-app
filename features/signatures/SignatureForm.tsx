@@ -55,8 +55,6 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
         try {
             setDepartmentsLoading(true);
             const departmentsData = await departmentService.getalldepartmentbycompanyid(companyId);
-            setDepartment([]);
-            setModules([]);
             setDepartment(departmentsData);
         } catch (error) {
             console.error("Departmanlar yüklenirken hata:", error);
@@ -67,7 +65,6 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
 
     const handleModules = async (departmentId: string) => {
         if (!departmentId) {
-            setModules([]);
             return;
         }
         try {
@@ -98,7 +95,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         {companiesLoading ? (
                             <option value="">Şirketler yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>Firma Seçiniz</option>
+                            <option value="">Firma Seçiniz</option>
                         )}
 
                         {!companiesLoading && Array.isArray(companies) &&
@@ -121,7 +118,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         {companiesLoading ? (
                             <option value="">Diller yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>Dil Seçiniz</option>
+                            <option value="">Dil Seçiniz</option>
                         )}
 
                         {!companiesLoading && Array.isArray(langs) &&
@@ -144,7 +141,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         {departmentsLoading ? (
                             <option value="">Departmanlar yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>Departman Seçiniz</option>
+                            <option value="">Departman Seçiniz</option>
                         )}
 
                         {!departmentsLoading && Array.isArray(departments) &&
