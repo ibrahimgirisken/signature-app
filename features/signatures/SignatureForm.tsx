@@ -54,6 +54,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
         }
         try {
             setDepartmentsLoading(true);
+             setModules([]);
             const departmentsData = await departmentService.getalldepartmentbycompanyid(companyId);
             setDepartment(departmentsData);
         } catch (error) {
