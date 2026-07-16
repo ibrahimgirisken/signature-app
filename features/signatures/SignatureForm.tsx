@@ -1,5 +1,4 @@
 'use client';
-
 import { formatPhone } from '@/app/utils/formatPhone';
 import { companyService } from '@/services/company.service';
 import { departmentService } from '@/services/department.service';
@@ -10,27 +9,24 @@ import { DepartmentResponse } from '@/types/department';
 import { Lang } from '@/types/lang';
 import { ModuleResponse } from '@/types/module';
 import { SignatureRequest } from '@/types/signature-request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { Button, Col, Form, FormSelect, Row } from 'react-bootstrap';
 import { UseFormRegister } from 'react-hook-form';
 
 type SignatureFormProps = {
     register: UseFormRegister<SignatureRequest>;
-};
+}
 
 const SignatureForm = ({ register }: SignatureFormProps) => {
-    const [companiesLoading, setCompaniesLoading] = useState(true);
-    const [departmentsLoading, setDepartmentsLoading] = useState(false);
-    const [modulesLoading, setModulesLoading] = useState(false);
+
+    const [companiesLoading, setCompaniesLoading] = useState<boolean>(true);
+    const [departmentsLoading, setDepartmentsLoading] = useState<boolean>(false);
+    const [modulesLoading, setModulesLoading] = useState<boolean>(false);
 
     const [companies, setCompanies] = useState<CompanyResponse[]>([]);
-    const [departments, setDepartments] = useState<DepartmentResponse[]>([]);
+    const [departments, setDepartment] = useState<DepartmentResponse[]>([]);
     const [modules, setModules] = useState<ModuleResponse[]>([]);
     const [langs, setLangs] = useState<Lang[]>([]);
-
-    const [selectedCompanyId, setSelectedCompanyId] = useState('');
-    const [selectedDepartmentId, setSelectedDepartmentId] = useState('');
-    const [selectedModuleCode, setSelectedModuleCode] = useState('');
 
     useEffect(() => {
         const fetchInitialData = async () => {
@@ -39,222 +35,143 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                     companyService.getAll(),
                     langService.getAll()
                 ]);
-
                 setCompanies(responseCompanies);
                 setLangs(responseLangs);
             } catch (error) {
-                console.error('İlk veriler yüklenirken hata oluştu:', error);
+                console.error("İlk veriler yüklenirken hata oluştu:", error);
             } finally {
                 setCompaniesLoading(false);
             }
         };
-
         fetchInitialData();
     }, []);
 
     const handleDepartments = async (companyId: string) => {
-        setSelectedCompanyId(companyId);
-
-        // Şirket değiştiğinde bağlı seçimleri hemen sıfırla
-        setSelectedDepartmentId('');
-        setSelectedModuleCode('');
-        setDepartments([]);
-        setModules([]);
-
         if (!companyId) {
+            setDepartment([]);
+            setModules([]);
             return;
         }
-
         try {
             setDepartmentsLoading(true);
-
-            const departmentsData =
-                await departmentService.getalldepartmentbycompanyid(companyId);
-
-            setDepartments(departmentsData);
+            const departmentsData = await departmentService.getalldepartmentbycompanyid(companyId);
+            setDepartment(departmentsData);
+            setModules([]);
         } catch (error) {
-            console.error('Departmanlar yüklenirken hata:', error);
-            setDepartments([]);
+            console.error("Departmanlar yüklenirken hata:", error);
         } finally {
             setDepartmentsLoading(false);
         }
-    };
+    }
 
     const handleModules = async (departmentId: string) => {
-        setSelectedDepartmentId(departmentId);
-
-        // Departman değiştiğinde eski modülü sıfırla
-        setSelectedModuleCode('');
-        setModules([]);
-
         if (!departmentId) {
+            setModules([]);
             return;
         }
-
         try {
             setModulesLoading(true);
-
-            const modulesData =
-                await moduleService.getallmodulebydepartmentid(departmentId);
-
+            const modulesData = await moduleService.getallmodulebydepartmentid(departmentId);
             setModules(modulesData);
         } catch (error) {
-            console.error('Modüller yüklenirken hata:', error);
-            setModules([]);
+            console.error("Modüller yüklenirken hata:", error);
         } finally {
             setModulesLoading(false);
         }
-    };
-
-    const companyRegister = register('companyId', {
-        required: true
-    });
-
-    const moduleRegister = register('moduleCode', {
-        required: true
-    });
+    }
 
     return (
         <>
-            <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextName"
-            >
-                <Col sm="6" lg="6" className="justify-center d-flex align">
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
+
+                {/* 1. ŞİRKET SEÇİMİ */}
+                <Col sm="6" lg="6" className='justify-center d-flex align'>
                     <FormSelect
-                        className="mb-3"
+                        className='mb-3'
                         disabled={companiesLoading}
+                        defaultValue=""
                         required
-                        {...companyRegister}
-                        value={selectedCompanyId}
-                        onChange={(event) => {
-                            companyRegister.onChange(event);
-                            handleDepartments(event.target.value);
-                        }}
+                        {...register('companyId', { required: true })}
+                        onChange={(e) => handleDepartments(e.target.value)}
                     >
                         {companiesLoading ? (
-                            <option value="">
-                                Şirketler yükleniyor...
-                            </option>
+                            <option value="">Şirketler yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>
-                                Firma Seçiniz
-                            </option>
+                            <option value="" disabled>Firma Seçiniz</option>
                         )}
 
-                        {!companiesLoading &&
+                        {!companiesLoading && Array.isArray(companies) &&
                             companies.map((company) => (
-                                <option
-                                    key={company.id}
-                                    value={company.id}
-                                >
+                                <option key={company.id} value={company.id}>
                                     {company.companyName}
                                 </option>
                             ))}
                     </FormSelect>
                 </Col>
 
-                <Col sm="6" lg="6" className="justify-center d-flex align">
+                <Col sm="6" lg="6" className='justify-center d-flex align'>
                     <FormSelect
-                        className="mb-3"
+                        className='mb-3'
                         disabled={companiesLoading}
                         defaultValue=""
                         required
-                        {...register('lang', {
-                            required: true
-                        })}
+                        {...register('lang')}
                     >
                         {companiesLoading ? (
-                            <option value="">
-                                Diller yükleniyor...
-                            </option>
+                            <option value="">Diller yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>
-                                Dil Seçiniz
-                            </option>
+                            <option value="" disabled>Dil Seçiniz</option>
                         )}
 
-                        {!companiesLoading &&
+                        {!companiesLoading && Array.isArray(langs) &&
                             langs.map((lang) => (
-                                <option
-                                    key={lang.langCode}
-                                    value={lang.langCode}
-                                >
+                                <option key={lang.langCode} value={lang.langCode}>
                                     {lang.title}
                                 </option>
                             ))}
                     </FormSelect>
                 </Col>
 
-                <Col sm="6" lg="6" className="justify-center d-flex align">
+                <Col sm="6" lg="6" className='justify-center d-flex align'>
                     <FormSelect
-                        className="mb-3"
-                        value={selectedDepartmentId}
-                        disabled={
-                            departmentsLoading ||
-                            companiesLoading ||
-                            !selectedCompanyId
-                        }
+                        className='mb-3'
+                        disabled={departmentsLoading || companiesLoading || departments.length === 0}
+                        defaultValue=""
                         required
-                        onChange={(event) =>
-                            handleModules(event.target.value)
-                        }
+                        onChange={(e) => handleModules(e.target.value)}
                     >
                         {departmentsLoading ? (
-                            <option value="">
-                                Departmanlar yükleniyor...
-                            </option>
+                            <option value="">Departmanlar yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>
-                                Departman Seçiniz
-                            </option>
+                            <option value="" disabled>Departman Seçiniz</option>
                         )}
 
-                        {!departmentsLoading &&
+                        {!departmentsLoading && Array.isArray(departments) &&
                             departments.map((department) => (
-                                <option
-                                    key={department.id}
-                                    value={department.id}
-                                >
+                                <option key={department.id} value={department.id}>
                                     {department.departmentName}
                                 </option>
                             ))}
                     </FormSelect>
                 </Col>
 
-                <Col sm="6" lg="6" className="justify-center d-flex align">
+                <Col sm="6" lg="6" className='justify-center d-flex align'>
                     <FormSelect
-                        className="mb-3"
-                        disabled={
-                            modulesLoading ||
-                            departmentsLoading ||
-                            !selectedDepartmentId
-                        }
+                        className='mb-3'
+                        disabled={modulesLoading || departmentsLoading || modules.length === 0}
+                        defaultValue=""
                         required
-                        {...moduleRegister}
-                        value={selectedModuleCode}
-                        onChange={(event) => {
-                            moduleRegister.onChange(event);
-                            setSelectedModuleCode(event.target.value);
-                        }}
+                        {...register('moduleCode', { required: true })}
                     >
                         {modulesLoading ? (
-                            <option value="">
-                                Modüller yükleniyor...
-                            </option>
+                            <option value="">Modüller yükleniyor...</option>
                         ) : (
-                            <option value="" disabled>
-                                Modül Seçiniz
-                            </option>
+                            <option value="" disabled>Modül Seçiniz</option>
                         )}
 
-                        {!modulesLoading &&
+                        {!modulesLoading && Array.isArray(modules) &&
                             modules.map((module) => (
-                                <option
-                                    key={module.id}
-                                    value={module.code}
-                                >
+                                <option key={module.id} value={module.id}>
                                     {module.moduleName}
                                 </option>
                             ))}
@@ -266,9 +183,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         type="text"
                         className="mb-3"
                         placeholder="İsim & Soyisim"
-                        {...register('nameSurname', {
-                            required: true
-                        })}
+                        {...register('nameSurname', { required: true })}
                     />
                 </Col>
 
@@ -277,9 +192,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         type="text"
                         className="mb-3"
                         placeholder="Ünvan"
-                        {...register('title', {
-                            required: true
-                        })}
+                        {...register('title', { required: true })}
                     />
                 </Col>
 
@@ -288,9 +201,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         type="email"
                         className="mb-3"
                         placeholder="E-mail"
-                        {...register('email', {
-                            required: true
-                        })}
+                        {...register('email', { required: true })}
                     />
                 </Col>
 
@@ -299,13 +210,9 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         type="text"
                         className="mb-3"
                         placeholder="Cep Telefonu 0(5xx) xxx xx xx"
-                        {...register('phoneNumber', {
-                            required: true
-                        })}
-                        onChange={(event) => {
-                            event.target.value = formatPhone(
-                                event.target.value
-                            );
+                        {...register('phoneNumber', { required: true })}
+                        onChange={(e) => {
+                            e.target.value = formatPhone(e.target.value);
                         }}
                     />
                 </Col>
@@ -321,10 +228,9 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                     </Button>
                 </div>
             </Form.Group>
-
             <hr />
         </>
-    );
-};
+    )
+}
 
 export default SignatureForm;
