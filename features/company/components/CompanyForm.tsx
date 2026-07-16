@@ -1,208 +1,270 @@
-import React, { useEffect,useState } from 'react'
-import { Form, Row } from 'react-bootstrap';
-import { CompanyResponse } from '@/types/company';
-import ImageView from '@/app/utils/imageView';
+'use client'
+import React, { useState, useEffect } from 'react'
+import { Form, Row, Col, Tabs, Tab, Image } from 'react-bootstrap';
+import { UseFormRegister, UseFormWatch, UseFormSetValue } from 'react-hook-form';
+import { CompanyUpdate } from '@/types/company';
+import { Lang } from '@/types/lang';
 
 type CompanyFormProps = {
-    initialData?: CompanyResponse,
-    onChange: (data: Partial<CompanyResponse>) => void,
-    setCompanyLogo?: (file: File | null) => void,
-    setFairImage?: (file: File | null) => void,
-    onSuccess?: () => void
+    languages: Lang[];
+    register: UseFormRegister<CompanyUpdate>;
+    watch: UseFormWatch<CompanyUpdate>;
+    setValue: UseFormSetValue<CompanyUpdate>;
+    fileSetters: {
+        setCompanyLogos: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+        setFairCalendarImages: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+        setQrCodeImages: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+    }
 }
 
-const CompanyForm = ({ initialData, onChange, setCompanyLogo, setFairImage, onSuccess }: CompanyFormProps) => {
-    const [companyLogoFile, setCompanyLogoFile] = useState<File | null>(null);
-    const [fairImageFile, setFairImageFile] = useState<File | null>(null);
-    const [formData, setFormData] = useState<CompanyResponse>({
-        id: '',
-        companyName: '',
-        companyLogo: '',
-        fairImage: '',
-        domainName: '',
-        phone: '',
-        fax: '',
-        address: '',
-        address2: '',
-        address3: '',
-        kdvText: '',
-        informationText: '',
-        environmentText: '',
-        components: []
-    });
+const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: CompanyFormProps) => {
+    const [activeTab, setActiveTab] = useState<string>('');
+    const companyTranslations = watch("companyTranslations") || [];
+    const [previewUrls, setPreviewUrls] = useState<Record<string, string>>({});
 
+    // --- 1. DİLLER YÜKLENDİĞİNDE TRANSLATIONS ARRAY'İNİ TEK SEFERDE BAŞLATMA ---
     useEffect(() => {
-        if (initialData) {
-            setFormData(initialData);
+        if (languages && languages.length > 0) {
+            if (!activeTab) {
+                setActiveTab(languages[0].id);
+            }
+
+            if (companyTranslations.length === 0) {
+                const initialTranslations = languages.map(lang => ({
+                    langId: lang.id,
+                    langLangCode: lang.langCode || '',
+                    langLangImage: lang.image || '',
+                    addressText1: '',
+                    addressText2: '',
+                    addressText3: '',
+                    companyLogo: '',
+                    youtubeLabel1: '',
+                    youtubeLabel2: '',
+                    youtubeLabel3: '',
+                    promoVideoUrl1: '',
+                    promoVideoUrl2: '',
+                    promoVideoUrl3: '',
+                    qrCodeImage: '',
+                    downloadCenterLink: '',
+                    newsLink: '',
+                    fairsLink: '',
+                    fairCalendarUrl: '',
+                    fairCalendarImageUrl: '',
+                    onlineEducationLink: '',
+                    contactFormLink: '',
+                    googleFeedbackLink: '',
+                    signOff: '',
+                    gdprText: '',
+                    environmentalText: '',
+                    taxInfo: ''
+                }));
+                setValue("companyTranslations", initialTranslations);
+            }
         }
-    }, [initialData]);
+    }, [languages, setValue]);
 
+    const handleImageChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        langId: string,
+        fieldName: string,
+        setFileState: React.Dispatch<React.SetStateAction<Record<string, File>>>
+    ) => {
+        if (e.target.files && e.target.files[0]) {
+            const selectedFile = e.target.files[0];
+            const uniqueKey = `${langId}_${fieldName}`;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        const updatedData = {
-            ...formData,
-            [name]: value,
-        };
+            setFileState(prev => ({ ...prev, [langId]: selectedFile }));
 
-        setFormData(updatedData);
-        onChange(updatedData);
+            if (previewUrls[uniqueKey]) {
+                URL.revokeObjectURL(previewUrls[uniqueKey]);
+            }
+
+            const cachedUrl = URL.createObjectURL(selectedFile);
+            setPreviewUrls(prev => ({ ...prev, [uniqueKey]: cachedUrl }));
+        }
     };
 
-    const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            setCompanyLogoFile(file);
-            setCompanyLogo?.(file);
-        }
-    }
-
-    const handleFairImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            setFairImageFile(file);
-            setFairImage?.(file);
-        }
-    }
-
-    const handleSave = async (e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        onChange(formData);
-        onSuccess?.();
-        return formData;
-    };
     return (
         <>
-            <Form className='m-1' onSubmit={handleSave}>
-                <Row className="mb-3">
-                    <Form.Group className="mb-3">
+            <div className='m-1'>
+                <h5 className="mb-3 text-muted">Genel Bilgiler</h5>
+                <Row className="mb-4">
+                    <Form.Group as={Col} md={6} className="mb-3">
                         <Form.Label>Firma Adı</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="companyName"
-                            value={formData.companyName}
-                            onChange={handleChange}
-                        />
+                        <Form.Control type="text" {...register("companyName")} />
                     </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Domain</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="domainName"
-                            value={formData.domainName}
-                            onChange={handleChange}
-                        />
+                    <Form.Group as={Col} md={6} className="mb-3">
+                        <Form.Label>Domain Adresi</Form.Label>
+                        <Form.Control type="text" {...register("domainName")} />
                     </Form.Group>
-
-                    <Form.Group className="mb-3">
+                    <Form.Group as={Col} md={6} className="mb-3">
                         <Form.Label>Telefon</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
+                        <Form.Control type="text" {...register("phone")} />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Fax</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="fax"
-                            value={formData.fax}
-                            onChange={handleChange}
-                        />
+                    <Form.Group as={Col} md={6} className="mb-3">
+                        <Form.Label>Faks</Form.Label>
+                        <Form.Control type="text" {...register("fax")} />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Adres1</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                        />
+                    <Form.Group as={Col} md={12} className="mb-3">
+                        <Form.Label>Google Geri Bildirim Linki</Form.Label>
+                        <Form.Control type="text" {...register("googleFeedbackLink")} />
                     </Form.Group>
-                     <Form.Group className="mb-3">
-                        <Form.Label>Adres2</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="address2"
-                            value={formData.address2}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                     <Form.Group className="mb-3">
-                        <Form.Label>Adres3</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="address3"
-                            value={formData.address3}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Kdv Metni</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={2}
-                            type="text"
-                            name="kdvText"
-                            value={formData.kdvText}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Güvenlik Yazısı</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={4}
-                            type="text"
-                            name="informationText"
-                            value={formData.informationText}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Çevre Yazısı</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={2}
-                            type="text"
-                            name="environmentText"
-                            value={formData.environmentText}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Firma Logosu</Form.Label>
-                        {formData.companyLogo && !companyLogoFile && (
-                        <img src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.companyLogo}`} alt="Mevcut Logo" style={{ maxWidth: '150px', marginBottom: '10px' }} />
-                        )}
-                        <Form.Control
-                            type="file"
-                            accept="image/png, image/jpeg, image/jpg, image/webp"
-                            name="companyLogo"
-                            onChange={handleLogoChange}
-                        />
-                        <ImageView image={companyLogoFile} />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Fuar Görseli</Form.Label>
-                        {formData.fairImage && !fairImageFile && (
-                        <img src={`${process.env.NEXT_PUBLIC_API_IMAGE_URL}${formData.fairImage}`} alt="Mevcut Fuar Görseli" style={{ maxWidth: '150px', marginBottom: '10px' }} />
-                        )}
-                        <Form.Control
-                            type="file"
-                            accept="image/png, image/jpeg, image/jpg, image/webp"
-                            name="fairImage"
-                            onChange={handleFairImageChange}
-                        />
-                        <ImageView image={fairImageFile} />
+                    <Form.Group as={Col} md={12} className="mb-3">
+                        <Form.Label column sm="2">Durum</Form.Label>
+                        <Col sm="10">
+                            <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                {...register("status")}
+                            />
+                        </Col>
                     </Form.Group>
                 </Row>
-            </Form>
+                <hr />
+                <h5 className="mb-3 text-muted">Sosyal Medya Hesapları</h5>
+                <Row className="mb-4">
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>Facebook</Form.Label><Form.Control type="text" {...register("facebook")} /></Form.Group>
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>Instagram</Form.Label><Form.Control type="text" {...register("instagram")} /></Form.Group>
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>Twitter</Form.Label><Form.Control type="text" {...register("twitter")} /></Form.Group>
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>LinkedIn</Form.Label><Form.Control type="text" {...register("linkedin")} /></Form.Group>
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>Youtube</Form.Label><Form.Control type="text" {...register("youtube")} /></Form.Group>
+                    <Form.Group as={Col} md={4} className="mb-3"><Form.Label>Tiktok</Form.Label><Form.Control type="text" {...register("tiktok")} /></Form.Group>
+                </Row>
+                <hr />
+                <h5 className="mb-3 text-muted">Dil Bazlı Bilgiler ve Çeviriler</h5>
+                <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k || '')} className="mb-3">
+                    {languages.map((lang) => {
+                        // --- 2. GÜVENLİ INDEX BULMA ---
+                        // State tetiklemesi kaldırıldı, sadece var olan index okunuyor.
+                        const idx = companyTranslations.findIndex(t => t.langId === lang.id);
+
+                        // Eğer useEffect henüz çalışmadıysa veya veri senkronize oluyorsa render'ı pas geç
+                        if (idx === -1) return null;
+
+                        const fairCalendarKey = `${lang.id}_fairCalendarImage`;
+                        const logoKey = `${lang.id}_companyLogo`;
+                        const qrKey = `${lang.id}_qrCodeImage`;
+
+                        return (
+                            <Tab
+                                key={lang.id}
+                                eventKey={lang.id}
+                                title={
+                                    <span>
+                                        {lang.image && <img src={lang.image?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}/${lang.image}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`} alt={lang.title} style={{ width: 18, marginRight: 6 }} />}
+                                        {lang.title} ({lang.langCode.toUpperCase()})
+                                    </span>
+                                }
+                            >
+                                <div className="p-3 border border-top-0 rounded-bottom">
+                                    <Row>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Adres Satırı 1</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText1`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Adres Satırı 2</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText2`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Adres Satırı 3</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText3`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Fuar Takvim Görseli</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.fairCalenderImageUrl?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].fairCalenderImageUrl}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Fuar Takvimi"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'fairCalendarImage', fileSetters.setFairCalendarImages)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Fuar Takvimi URL</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.fairsLink`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Kapanış Metni (Sign Off)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.signOff`)} />
+                                        </Form.Group>
+
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 1 (Başlık)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.youtubeLabel1`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 2 (Başlık)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.youtubeLabel2`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 3 (Başlık)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.youtubeLabel3`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 1 (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.promoVideoUrl1`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 2 (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.promoVideoUrl2`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video 3 (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.promoVideoUrl3`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={6} className="mb-3">
+                                            <Form.Label>Logo</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[logoKey] || (companyTranslations[idx]?.companyLogo?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].companyLogo}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Company Logo"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'companyLogo', fileSetters.setCompanyLogos)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={6} className="mb-3">
+                                            <Form.Label>QR Code Logo</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[qrKey] || (companyTranslations[idx]?.qrCodeImage?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].qrCodeImage}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="QR Code Logo"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'qrCodeImage', fileSetters.setQrCodeImages)} />
+                                        </Form.Group>
+                                        <hr />
+                                        <Form.Group as={Col} md={12} className="mb-3">
+                                            <Form.Label>Gdpr Metni</Form.Label>
+                                            <Form.Control as="textarea" rows={6} {...register(`companyTranslations.${idx}.gdprText`)} />
+                                        </Form.Group>
+                                        <Form.Group as={Col} md={12} className="mb-3">
+                                            <Form.Label>Çevresel Sorumluluk Metni</Form.Label>
+                                            <Form.Control as="textarea" rows={2} {...register(`companyTranslations.${idx}.environmentalText`)} />
+                                        </Form.Group>
+                                    </Row>
+                                </div>
+                            </Tab>
+                        );
+                    })}
+                </Tabs>
+            </div>
         </>
     )
 };
 
-export default CompanyForm
+export default CompanyForm;

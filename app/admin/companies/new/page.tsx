@@ -1,67 +1,190 @@
 'use client'
-import CompanyComponentForm from '@/features/company/components/CompanyComponentForm'
 import CompanyForm from '@/features/company/components/CompanyForm'
 import { companyService } from '@/services/company.service'
-import { companyComponentService } from '@/services/companyComponent.service'
-import { CompanyComponentResponse } from '@/types/company'
+import { langService } from '@/services/lang.service'
+import { uploadService } from '@/services/upload.service'
+import { Lang } from '@/types/lang'
+import { CompanyUpdate } from '@/types/company'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { useForm } from 'react-hook-form'
 
 function CompanyAdd() {
-    const [companyInfoData, setCompanyInfoData] = useState({});
-    const [companyComponentsData, setCompanyComponentsData] = useState<Partial<CompanyComponentResponse>[]>([]);
-    const router = useRouter();
-    const handleFinalSave = async () => {
-        try {
-            const companyInfo = companyInfoData;
-            const createdResponse = await companyService.create(companyInfo);
-            const newCompanyId = createdResponse?.id || createdResponse;
-            console.log("Firma Kaydedildi, Alınan ID:", newCompanyId);
-            if (!newCompanyId) {
-                alert("Hata: Firma ID'si alınamadı!");
-                return;
-            }
-            console.log("data", companyComponentsData);
-            if (companyComponentsData.length > 0) {
-                for (const comp of companyComponentsData) {
-                    const payload = {
-                        ...comp,
-                        companyId: newCompanyId
-                    };
-                    console.log("Gönderilen Bileşen Payload:", payload);
-                    await companyComponentService.create(payload);
-                }
-            } else {
-                console.warn("Kaydedilecek bileşen bulunamadı.");
-            }
-            console.log("İşlem başarıyla tamamlandı.");
-            router.push('/admin/companies');
-        } catch (error) {
-            console.error("Kayıt sırasında bir hata oluştu:", error);
-        }
+  const router = useRouter()
+
+  const [languages, setLanguages] = useState<Lang[]>([]);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
+
+  const [companyLogos, setCompanyLogos] = useState<Record<string, File>>({});
+  const [fairCalendarImages, setFairCalendarImages] = useState<Record<string, File>>({});
+  const [promoImages1, setPromoImages1] = useState<Record<string, File>>({});
+  const [promoImages2, setPromoImages2] = useState<Record<string, File>>({});
+  const [promoImages3, setPromoImages3] = useState<Record<string, File>>({});
+  const [qrCodeImages, setQrCodeImages] = useState<Record<string, File>>({});
+
+  const { register, control, handleSubmit, watch, setValue } =
+    useForm<CompanyUpdate>({
+      defaultValues: {
+        id:"",
+        companyName: "",
+        googleFeedbackLink: "",
+        domainName: "",
+        phone: "",
+        facebook: "",
+        instagram: "",
+        twitter: "",
+        linkedin: "",
+        youtube: "",
+        tiktok: "",
+        fax: "",
+        status:true,
+        companyTranslations: [],
+      },
+    });
+
+  // --- DİLLERİ YÜKLE ---
+  useEffect(() => {
+    const loadLanguages = async () => {
+      try {
+        const langsData = await langService.getAll();
+        setLanguages(langsData);
+      } catch (error) {
+        console.error("Diller yüklenirken hata oluştu:", error);
+      }
     };
-    return (
-        <>
-            <h2>Firma Ekleme Sayfası</h2>
-            <CompanyForm onChange={(val) => setCompanyInfoData(prev => ({ ...prev, ...val }))} />
-            <CompanyComponentForm onChange={(val) => setCompanyComponentsData(val)} />
-            <div className="mt-4 sticky-bottom bg-white p-3 border-top shadow-sm">
-                <Button
-                    style={{ minWidth: '10rem' }}
-                    variant="primary"
-                    onClick={handleFinalSave}
-                >Ekle
-                </Button>
-                <Button
-                    variant="secondary"
-                    className="ms-2"
-                    onClick={() => router.back()}
-                >
-                    İptal
-                </Button>
-            </div>
-        </>
-    )
+    loadLanguages();
+  }, []);
+
+  const onSubmit = async (data: CompanyUpdate) => {
+    try {
+      setSubmitting(true);
+      const createdResponse = await companyService.create(data);
+      const newCompanyId = createdResponse?.id || createdResponse;
+
+      console.log("Firma Kaydedildi, Alınan ID:", newCompanyId);
+      
+      if (!newCompanyId) {
+        alert("Hata: Firma ID'si alınamadı!");
+        return;
+      }
+
+      let updatedTranslations = [...(data.companyTranslations || [])];
+
+      if (updatedTranslations.length === 0 && languages.length > 0) {
+        updatedTranslations = languages.map(lang => ({
+          langId: lang.id,
+          langLangCode: lang.langCode || "",
+          addressText1: "",
+          addressText2: "",
+          addressText3: "",
+          companyLogo: "",
+          youtubeLabel1:"",
+          youtubeLabel2:"",
+          youtubeLabel3:"",
+          promoVideoUrl1: "",
+          promoVideoUrl2: "",
+          promoVideoUrl3: "",
+          qrCodeImage: "",
+          downloadCenterLink:"",
+          newsLink: "",
+          fairsLink: "",
+          fairCalendarUrl: "",
+          fairCalendarImageUrl: "",
+          onlineEducationLink:"",
+          contactFormLink:"",
+          googleFeedbackLink:"",
+          fairCalenderUrl:"",
+          signOff: "",
+          gdprText: "",
+          environmentalText: "",
+          taxInfo:""
+        }));
+      }
+
+      for (const [langId, file] of Object.entries(companyLogos)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].companyLogo = uploadFileData.fileName;
+          }
+        }
+      }
+
+      for (const [langId, file] of Object.entries(fairCalendarImages)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].fairCalenderImageUrl = uploadFileData.fileName;
+          }
+        }
+      }
+
+      for (const [langId, file] of Object.entries(qrCodeImages)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].qrCodeImage = uploadFileData.fileName;
+          }
+        }
+      }
+
+      const updateRequestData:CompanyUpdate = {
+        ...data,
+        id:newCompanyId as string,
+        companyTranslations: updatedTranslations,
+      };
+
+      await companyService.update(updateRequestData);
+      console.log("İşlem başarıyla tamamlandı ve görseller güncellendi.");
+      
+      router.push('/admin/companies');
+    } catch (error) {
+      console.error("Kayıt veya görsel yükleme sırasında hata oluştu:", error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div>
+      <h2 className="mb-4">Firma Ekleme Sayfası</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <CompanyForm
+          languages={languages}
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          fileSetters={{
+            setCompanyLogos,
+            setFairCalendarImages,
+            setPromoImages1,
+            setPromoImages2,
+            setPromoImages3,
+            setQrCodeImages
+          }}
+        />
+
+        <div className="mt-4 sticky-bottom bg-white p-3 border-top shadow-sm">
+          <Button 
+            disabled={submitting} 
+            type="submit" 
+            style={{ minWidth: '10rem' }} 
+            variant="primary"
+          >
+            {submitting ? 'Kaydediliyor...' : 'Ekle'}
+          </Button>
+          <Button variant="secondary" className="ms-2" onClick={() => router.back()}>
+            İptal
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
 }
-export default CompanyAdd
+
+export default CompanyAdd;

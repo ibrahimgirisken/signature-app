@@ -14,11 +14,17 @@ export default function ResponsiveSidebar() {
 
   const dashboardPath = `/admin/dashboard`;
   const productsPath = `/admin/companies`;
+  const languagesPath = `/admin/languages`;
+  const departmentsPath = `/admin/departments`;
+  const modulesPath = `/admin/modules`;
 
 
   const links = [
     { href: dashboardPath, label: `Yönetim Paneli` },
     { href: productsPath, label: `Firmalar` },
+    { href: departmentsPath, label: `Departmanlar` },
+    { href: modulesPath, label: `Modüller` },
+    { href: languagesPath, label: `Dil Değerleri` },
   ]
 
   return (

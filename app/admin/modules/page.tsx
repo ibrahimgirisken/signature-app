@@ -1,26 +1,26 @@
 'use client'
-import { companyService } from '@/services/company.service';
-import { CompanyResponse } from '@/types/company';
+import { moduleService } from '@/services/module.service';
+import { ModuleResponse } from '@/types/module';
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap'
-function CompanyList() {
+function ModuleList() {
 
-  const [companies, setCompanies] = useState<CompanyResponse[]>([]);
+  const [modules, setModules] = useState<ModuleResponse[]>([]);
 
   useEffect(() => {
-    const fetchCompanies = async () => {
-      setCompanies(await companyService.getAll());
+    const fetchModules = async () => {
+      setModules(await moduleService.getAll());
     };
-    fetchCompanies();
+    fetchModules();
   },[]);
   
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Firma Listesi</h2>
-        <Link href="/admin/companies/new">
-          <Button variant="primary">Yeni Firma Ekle</Button>
+        <h2>Module Listesi</h2>
+        <Link href="/admin/modules/new">
+          <Button variant="primary">Yeni Modül Ekle</Button>
         </Link>
       </div>
       <div className="table-responsive">
@@ -28,20 +28,20 @@ function CompanyList() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Marka İsmi</th>
+              <th>Departman İsmi</th>
               <th>Durum</th>
               <th>İşlemler</th>
             </tr>
           </thead>
           <tbody>
-            {companies && companies.map((company, index) => {
+            {modules && modules.map((module, index) => {
               return (
                 <tr key={index + 1}>
                   <td>{index+ 1}</td>
-                  <td>{company.companyName}</td>
-                  <td>{company.status}</td>
+                  <td>{module.moduleName}</td>
+                  <td>{module.status}</td>
                   <td>
-                    <Link href={`/admin/companies/${company.id}/edit`}>
+                    <Link href={`/admin/modules/${module.id}/edit`}>
                       <Button variant="warning" size="sm" className="me-2">
                         Düzenle
                       </Button>
@@ -58,4 +58,4 @@ function CompanyList() {
   )
 }
 
-export default CompanyList
+export default ModuleList

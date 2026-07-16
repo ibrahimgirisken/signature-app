@@ -1,35 +1,55 @@
 import { http } from "@/lib/http";
 
-export class BaseService<TRequest, TResponse> {
-    constructor(private readonly endpoint: string) {}
+export class BaseService<TCreate = any, TUpdate = any, TResponse = any> {
+  constructor(protected readonly endpoint: string) {}
 
-    async getAll(params?: TRequest | any): Promise<TResponse[]> {
-        const res = await http.get<TResponse[]>(`${this.endpoint}/all`, {
-            params: params 
-        });
-        return res.data;
-    }
+  getAll(): Promise<TResponse[]> {
+    return http.get(`${this.endpoint}/all`).then((res) => res.data);
+  }
 
-    async getById(id: string): Promise<TResponse> {
-        const res = await http.get<TResponse>(`${this.endpoint}/getbyid`, {
-            params: { Id: id }
-        });
-        return res.data;
-    }
+  getById(id: string): Promise<TResponse> {
+    return http
+      .get(`${this.endpoint}/getbyid?Id=${id}`)
+      .then((res) => res.data);
+  }
 
-    async create(data: TRequest | any): Promise<TResponse> {
-        const res = await http.post<TResponse>(`${this.endpoint}/add`, data);
-        return res.data;
-    }
+  create(data: TCreate): Promise<TResponse> {
+    return http.post(`${this.endpoint}/add`, data).then((res) => res.data);
+  }
 
-    async update(data: TRequest | any): Promise<TResponse> {
-        const res = await http.put<TResponse>(`${this.endpoint}/update`, data);
-        return res.data;
-    }
+  update(data: TUpdate): Promise<void> {
+    return http.put(`${this.endpoint}/update`, data).then((res) => res.data);
+  }
 
-    async delete(id: string): Promise<void> {
-        await http.delete(`${this.endpoint}/delete`, {
-            params: { Id: id }
-        });
-    }
+  delete(id: string): Promise<void> {
+    return http
+      .delete(`${this.endpoint}/delete?Id=${id}`)
+      .then((res) => res.data);
+  }
+
+  uploadFile(formData: FormData): Promise<void> {
+    return http
+      .post(`${this.endpoint}/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => res.data);
+  }
+
+  getmailtemplate(data: any): Promise<TResponse> {
+    return http
+      .post(`${this.endpoint}/getmailtemplate`, data)
+      .then((res) => res.data);
+  }
+
+  getLocalization(lang: any): Promise<TResponse> {
+    return http
+      .get(`${this.endpoint}/${lang}`)
+      .then((res) => res.data);
+  }
+
+  updateLocalization(data: TUpdate, lang: any): Promise<TResponse> {
+    return http
+      .post(`${this.endpoint}/${lang}`,data)
+      .then((res) => res.data);
+  }
 }

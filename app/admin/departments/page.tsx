@@ -1,26 +1,26 @@
 'use client'
-import { companyService } from '@/services/company.service';
-import { CompanyResponse } from '@/types/company';
+import { departmentService } from '@/services/department.service';
+import { DepartmentResponse } from '@/types/department';
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap'
-function CompanyList() {
+function DepartmentList() {
 
-  const [companies, setCompanies] = useState<CompanyResponse[]>([]);
+  const [departments, setDepartments] = useState<DepartmentResponse[]>([]);
 
   useEffect(() => {
-    const fetchCompanies = async () => {
-      setCompanies(await companyService.getAll());
+    const fetchDepartments = async () => {
+      setDepartments(await departmentService.getAll());
     };
-    fetchCompanies();
+    fetchDepartments();
   },[]);
   
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Firma Listesi</h2>
-        <Link href="/admin/companies/new">
-          <Button variant="primary">Yeni Firma Ekle</Button>
+        <h2>Departman Listesi</h2>
+        <Link href="/admin/departments/new">
+          <Button variant="primary">Yeni Departman Ekle</Button>
         </Link>
       </div>
       <div className="table-responsive">
@@ -28,20 +28,20 @@ function CompanyList() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Marka İsmi</th>
+              <th>Departman İsmi</th>
               <th>Durum</th>
               <th>İşlemler</th>
             </tr>
           </thead>
           <tbody>
-            {companies && companies.map((company, index) => {
+            {departments && departments.map((department, index) => {
               return (
                 <tr key={index + 1}>
                   <td>{index+ 1}</td>
-                  <td>{company.companyName}</td>
-                  <td>{company.status}</td>
+                  <td>{department.departmentName}</td>
+                  <td>{department.status}</td>
                   <td>
-                    <Link href={`/admin/companies/${company.id}/edit`}>
+                    <Link href={`/admin/departments/${department.id}/edit`}>
                       <Button variant="warning" size="sm" className="me-2">
                         Düzenle
                       </Button>
@@ -58,4 +58,4 @@ function CompanyList() {
   )
 }
 
-export default CompanyList
+export default DepartmentList
