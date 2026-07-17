@@ -25,7 +25,6 @@ export default function Home() {
     }
   });
 
-
   const onSubmit = async (data: SignatureRequest) => {
     try {
       setHtmlData("");
