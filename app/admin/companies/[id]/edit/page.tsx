@@ -67,7 +67,6 @@ function CompanyEdit() {
           newsLink:t.newsLink || "",
           fairsLink:t.fairsLink || "",
           timotechLink:t.timotechLink || "",
-          fairCalendarUrl:t.fairCalendarUrl || "",
           fairCalenderImageUrl: t.fairCalenderImageUrl || "",
           onlineEducationLink:t.onlineEducationLink ||"",
           contactFormLink:t.contactFormLink||"",
