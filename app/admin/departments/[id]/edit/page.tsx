@@ -15,6 +15,7 @@ function DepartmentEdit() {
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
+
   const { register, control, handleSubmit, reset, watch, setValue } =
     useForm<DepartmentUpdate>({
       defaultValues: {
@@ -24,46 +25,38 @@ function DepartmentEdit() {
       },
     });
 
-  // DB'den gelen orijinal companyId ve departmentId değerlerini takip etmek için
-  const dbCompanyId = watch('companyId');
-
-  useEffect(() => {
-    const loadDepartmentData = async () => {
-      try {
-        setLoading(true);
-        const data = await departmentService.getById(id);
-        if (data) {
-          // reset fonksiyonu formun default değerlerini günceller.
-          // options (şirket listesi) child formda yüklenirken bu değerlerin kaybolmaması için 
-          // reset işlemini loading durumunu kapatmadan hemen önce yapıyoruz.
-          reset({
-            departmentName: data.departmentName || "",
-            companyId: data.companyId || "",
-            status: data.status ?? true
-          });
-        }
-      } catch (error) {
-        console.error("Departman yüklenirken hata oluştu:", error);
-      } finally {
-        setLoading(false);
+  const loadDepartmentData = async () => {
+    try {
+      setLoading(true);
+      const data = await departmentService.getById(id);
+      if (data) {
+        reset({
+          departmentName: data.departmentName || "",
+          companyId: data.companyId || "",
+          status: data.status || true
+        });
       }
-    };
-
-    if (id) {
-      loadDepartmentData();
+    } catch (error) {
+      console.error("Departman yüklenirken hata oluştu:", error);
+    } finally {
+      setLoading(false);
     }
-  }, [id, reset]);
+  };
 
   const handleDelete = async (departmentId: string) => {
-    if (!window.confirm("Bu departmanı silmek istediğinize emin misiniz?")) return;
-    
     try {
       await departmentService.delete(departmentId);
-      router.push('/admin/departments'); // URL'i departman listesine yönlendirdik (modules yerine)
+      router.push('/admin/modules');
     } catch (error) {
       console.error("Departman silinirken hata oluştu:", error);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      loadDepartmentData();
+    }
+  }, [id]);
 
   const onSubmit = async (data: DepartmentUpdate) => {
     try {
@@ -79,6 +72,7 @@ function DepartmentEdit() {
       } else {
         await departmentService.update(requestData);
       }
+      await loadDepartmentData();
       router.push('/admin/departments');
     } catch (error) {
       console.error("Güncelleme sırasında hata oluştu:", error);
@@ -87,27 +81,17 @@ function DepartmentEdit() {
     }
   };
 
-  // Veritabanından veriler gelene kadar formu hiç render etmiyoruz.
-  // Bu sayede "Seçiniz" seçeneğinin varsayılan olarak seçili kalma hatasını önlüyoruz.
   if (loading) {
-    return (
-      <div className="p-6 text-center text-zinc-500 animate-pulse">
-        Form bilgileri hazırlanıyor...
-      </div>
-    );
+    return <div className="p-6 text-center text-zinc-500 animate-pulse">Veriler yükleniyor...</div>;
   }
 
   return (
     <div>
       <h2 className="mb-4">Firma İmza Detayları Düzenleme</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        
-        {/* Form alanlarını child bileşene gönderiyoruz */}
-        <DepartmentForm 
-          register={register}
+        <DepartmentForm register={register}
           watch={watch}
-          setValue={setValue} 
-        />
+          setValue={setValue} />
 
         <div className="mt-4 sticky-bottom bg-white p-3 border-top shadow-sm">
           <Button disabled={submitting} type="submit" style={{ minWidth: '10rem' }} variant="primary">

@@ -19,7 +19,7 @@ const DepartmentForm = ({ register, watch, setValue }: DepartmentFormProps) => {
     useEffect(() => {
         const loadCompanies = async () => {
             try {
-                const companiesData = await companyService.getAll();
+                const companiesData = await companyService.list();
                 setCompanies(companiesData);
                 setLoading(false);
                 if (currentCompanyId) {

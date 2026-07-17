@@ -32,7 +32,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
         const fetchInitialData = async () => {
             try {
                 const [responseCompanies, responseLangs] = await Promise.all([
-                    companyService.getAll(),
+                    companyService.list(),
                     langService.getAll()
                 ]);
                 setCompanies(responseCompanies);
