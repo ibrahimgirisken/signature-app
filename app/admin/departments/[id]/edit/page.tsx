@@ -1,6 +1,8 @@
 'use client'
 import DepartmentForm from '@/features/department/DepartmentForm'
 import { departmentService } from '@/services/department.service'
+import { companyService } from '@/services/company.service'
+import { Company } from '@/types/company'
 import { DepartmentUpdate } from '@/types/department'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -14,8 +16,9 @@ function DepartmentEdit() {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [companies, setCompanies] = useState<Company[]>([]);
 
-  const { register, control, handleSubmit, reset, watch, setValue } =
+  const { register, handleSubmit, reset, watch, setValue } =
     useForm<DepartmentUpdate>({
       defaultValues: {
         departmentName: "",
@@ -24,42 +27,45 @@ function DepartmentEdit() {
       },
     });
 
-  // DB'den gelen orijinal companyId ve departmentId değerlerini takip etmek için
-  const dbCompanyId = watch('companyId');
-
   useEffect(() => {
-    const loadDepartmentData = async () => {
+    const loadAllData = async () => {
       try {
         setLoading(true);
-        const data = await departmentService.getById(id);
-        if (data) {
-          // reset fonksiyonu formun default değerlerini günceller.
-          // options (şirket listesi) child formda yüklenirken bu değerlerin kaybolmaması için 
-          // reset işlemini loading durumunu kapatmadan hemen önce yapıyoruz.
+
+        // KRİTİK NOKTA: İki API isteğini aynı anda (paralel) başlatıyoruz
+        const [departmentData, companiesData] = await Promise.all([
+          departmentService.getById(id),
+          companyService.list() // Tüm şirketleri çeken servisiniz
+        ]);
+
+        if (companiesData) {
+          setCompanies(companiesData);
+        }
+
+        if (departmentData) {
           reset({
-            departmentName: data.departmentName || "",
-            companyId: data.companyId || "",
-            status: data.status ?? true
+            departmentName: departmentData.departmentName || "",
+            companyId: departmentData.companyId || "",
+            status: departmentData.status ?? true
           });
         }
       } catch (error) {
-        console.error("Departman yüklenirken hata oluştu:", error);
+        console.error("Veriler yüklenirken hata oluştu:", error);
       } finally {
         setLoading(false);
       }
     };
 
     if (id) {
-      loadDepartmentData();
+      loadAllData();
     }
   }, [id, reset]);
 
   const handleDelete = async (departmentId: string) => {
     if (!window.confirm("Bu departmanı silmek istediğinize emin misiniz?")) return;
-    
     try {
       await departmentService.delete(departmentId);
-      router.push('/admin/departments'); // URL'i departman listesine yönlendirdik (modules yerine)
+      router.push('/admin/departments');
     } catch (error) {
       console.error("Departman silinirken hata oluştu:", error);
     }
@@ -87,14 +93,8 @@ function DepartmentEdit() {
     }
   };
 
-  // Veritabanından veriler gelene kadar formu hiç render etmiyoruz.
-  // Bu sayede "Seçiniz" seçeneğinin varsayılan olarak seçili kalma hatasını önlüyoruz.
   if (loading) {
-    return (
-      <div className="p-6 text-center text-zinc-500 animate-pulse">
-        Form bilgileri hazırlanıyor...
-      </div>
-    );
+    return <div className="p-6 text-center text-zinc-500 animate-pulse">Veriler hazırlanıyor...</div>;
   }
 
   return (
@@ -102,11 +102,12 @@ function DepartmentEdit() {
       <h2 className="mb-4">Firma İmza Detayları Düzenleme</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         
-        {/* Form alanlarını child bileşene gönderiyoruz */}
+        {/* API'den hazır gelen şirket listesini alt bileşene gönderiyoruz */}
         <DepartmentForm 
           register={register}
           watch={watch}
           setValue={setValue} 
+          companies={companies} // <-- Artık veriler hazır gidiyor
         />
 
         <div className="mt-4 sticky-bottom bg-white p-3 border-top shadow-sm">
