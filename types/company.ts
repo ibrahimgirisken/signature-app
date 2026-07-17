@@ -16,11 +16,11 @@ export interface CompanyTranslation {
   downloadCenterLink?:string;
   newsLink?:string;
   fairsLink?:string;
+  timotechLink?:string;
   fairCalenderImageUrl?:string;
   onlineEducationLink?: string;
   contactFormLink?: string;
   googleFeedbackLink?: string;
-  fairCalenderUrl?: string;
   signOff?: string;
   gdprText?: string;
   environmentalText?: string;

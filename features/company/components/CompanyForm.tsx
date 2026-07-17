@@ -48,7 +48,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                     downloadCenterLink: '',
                     newsLink: '',
                     fairsLink: '',
-                    fairCalendarUrl: '',
+                    timotechLink: '',
                     fairCalendarImageUrl: '',
                     onlineEducationLink: '',
                     contactFormLink: '',
@@ -106,7 +106,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                         <Form.Control type="text" {...register("fax")} />
                     </Form.Group>
                     <Form.Group as={Col} md={12} className="mb-3">
-                        <Form.Label>Google Geri Bildirim Linki</Form.Label>
+                        <Form.Label>Google Geri Bildirim Linki (URL)</Form.Label>
                         <Form.Control type="text" {...register("googleFeedbackLink")} />
                     </Form.Group>
                     <Form.Group as={Col} md={12} className="mb-3">
@@ -157,18 +157,31 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                 }
                             >
                                 <div className="p-3 border border-top-0 rounded-bottom">
-                                    <Row>
+                                    <Row className='m-3'>
                                         <Form.Group as={Col} md={4} className="mb-3">
-                                            <Form.Label>Adres Satırı 1</Form.Label>
-                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText1`)} />
+                                            <Form.Label>Logo</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[logoKey] || (companyTranslations[idx]?.companyLogo?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].companyLogo}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Company Logo"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'companyLogo', fileSetters.setCompanyLogos)} />
                                         </Form.Group>
+
                                         <Form.Group as={Col} md={4} className="mb-3">
-                                            <Form.Label>Adres Satırı 2</Form.Label>
-                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText2`)} />
-                                        </Form.Group>
-                                        <Form.Group as={Col} md={4} className="mb-3">
-                                            <Form.Label>Adres Satırı 3</Form.Label>
-                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText3`)} />
+                                            <Form.Label>QR Code Logo</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[qrKey] || (companyTranslations[idx]?.qrCodeImage?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].qrCodeImage}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="QR Code Logo"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'qrCodeImage', fileSetters.setQrCodeImages)} />
                                         </Form.Group>
 
                                         <Form.Group as={Col} md={4} className="mb-3">
@@ -184,15 +197,20 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'fairCalendarImage', fileSetters.setFairCalendarImages)} />
                                         </Form.Group>
 
+                                    </Row>
+                                    <Row>
                                         <Form.Group as={Col} md={4} className="mb-3">
-                                            <Form.Label>Fuar Takvimi URL</Form.Label>
-                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.fairsLink`)} />
+                                            <Form.Label>Adres Satırı 1</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText1`)} />
                                         </Form.Group>
                                         <Form.Group as={Col} md={4} className="mb-3">
-                                            <Form.Label>Kapanış Metni (Sign Off)</Form.Label>
-                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.signOff`)} />
+                                            <Form.Label>Adres Satırı 2</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText2`)} />
                                         </Form.Group>
-
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Adres Satırı 3</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText3`)} />
+                                        </Form.Group>
 
                                         <Form.Group as={Col} md={4} className="mb-3">
                                             <Form.Label>Promo Video 1 (Başlık)</Form.Label>
@@ -222,36 +240,53 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.promoVideoUrl3`)} />
                                         </Form.Group>
 
-                                        <Form.Group as={Col} md={6} className="mb-3">
-                                            <Form.Label>Logo</Form.Label>
-                                            <div className="mb-2">
-                                                <Image
-                                                    src={previewUrls[logoKey] || (companyTranslations[idx]?.companyLogo?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].companyLogo}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
-                                                    alt="Company Logo"
-                                                    thumbnail
-                                                    style={{ maxHeight: 100 }}
-                                                />
-                                            </div>
-                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'companyLogo', fileSetters.setCompanyLogos)} />
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>İndirme Merkezi Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.downloadCenterLink`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Fuar Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.fairsLink`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Haberler Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.newsLink`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Online Eğitim Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.onlineEducationLink`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>İletişim Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.contactFormLink`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Timotech Linki (URL)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.timotechLink`)} />
                                         </Form.Group>
 
                                         <Form.Group as={Col} md={6} className="mb-3">
-                                            <Form.Label>QR Code Logo</Form.Label>
-                                            <div className="mb-2">
-                                                <Image
-                                                    src={previewUrls[qrKey] || (companyTranslations[idx]?.qrCodeImage?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].qrCodeImage}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
-                                                    alt="QR Code Logo"
-                                                    thumbnail
-                                                    style={{ maxHeight: 100 }}
-                                                />
-                                            </div>
-                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'qrCodeImage', fileSetters.setQrCodeImages)} />
+                                            <Form.Label>Kapanış Metni (Sign Off)</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.signOff`)} />
                                         </Form.Group>
+
+
+                                        <Form.Group as={Col} md={6} className="mb-3">
+                                            <Form.Label>Vergi Numarası</Form.Label>
+                                            <Form.Control type="text" {...register(`companyTranslations.${idx}.taxInfo`)} />
+                                        </Form.Group>
+
                                         <hr />
                                         <Form.Group as={Col} md={12} className="mb-3">
                                             <Form.Label>Gdpr Metni</Form.Label>
                                             <Form.Control as="textarea" rows={6} {...register(`companyTranslations.${idx}.gdprText`)} />
                                         </Form.Group>
+
                                         <Form.Group as={Col} md={12} className="mb-3">
                                             <Form.Label>Çevresel Sorumluluk Metni</Form.Label>
                                             <Form.Control as="textarea" rows={2} {...register(`companyTranslations.${idx}.environmentalText`)} />

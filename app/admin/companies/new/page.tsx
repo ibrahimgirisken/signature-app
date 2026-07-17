@@ -87,6 +87,7 @@ function CompanyAdd() {
           downloadCenterLink:"",
           newsLink: "",
           fairsLink: "",
+          timotechLink: "",
           fairCalendarUrl: "",
           fairCalendarImageUrl: "",
           onlineEducationLink:"",
