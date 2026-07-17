@@ -160,7 +160,7 @@ const SignatureForm = ({ register }: SignatureFormProps) => {
                         disabled={modulesLoading || departmentsLoading || modules.length === 0}
                         defaultValue=""
                         required
-                        {...register('moduleCode', { required: true })}
+                        {...register('moduleId', { required: true })}
                     >
                         {modulesLoading ? (
                             <option value="">Modüller yükleniyor...</option>

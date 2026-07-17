@@ -4,7 +4,7 @@ export interface SignatureRequest {
     email: string;
     phoneNumber: string;
     companyId: string;
-    moduleCode: string;
+    moduleId: string;
     lang: string;
 }
 
