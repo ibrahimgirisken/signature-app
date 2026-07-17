@@ -48,7 +48,7 @@ function CompanyEdit() {
       setLoading(true);
       const data = await companyService.getById(id);
       if (data) {
-        const existingTranslations = (data.companyTranslations || []).map((t) => ({
+        const existingTranslations = (data.companyTranslations || []).map((t:any) => ({
           langId: t.langId,
           langLangCode: t.langLangCode || "",
           langLangImage: t.langLangCode,
