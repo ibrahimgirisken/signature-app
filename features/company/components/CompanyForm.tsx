@@ -270,13 +270,13 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.timotechLink`)} />
                                         </Form.Group>
 
-                                        <Form.Group as={Col} md={6} className="mb-3">
+                                        <Form.Group as={Col} md={12} className="mb-3">
                                             <Form.Label>Kapanış Metni (Sign Off)</Form.Label>
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.signOff`)} />
                                         </Form.Group>
 
 
-                                        <Form.Group as={Col} md={6} className="mb-3">
+                                        <Form.Group as={Col} md={12} className="mb-3">
                                             <Form.Label>Kdv Bildiri Yazısı</Form.Label>
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.taxInfo`)} />
                                         </Form.Group>
