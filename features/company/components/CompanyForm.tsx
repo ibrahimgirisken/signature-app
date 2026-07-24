@@ -277,7 +277,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
 
 
                                         <Form.Group as={Col} md={6} className="mb-3">
-                                            <Form.Label>Vergi Numarası</Form.Label>
+                                            <Form.Label>Kdv Bildiri Yazısı</Form.Label>
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.taxInfo`)} />
                                         </Form.Group>
 
