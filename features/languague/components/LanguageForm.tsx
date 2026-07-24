@@ -1,6 +1,5 @@
 'use client'
 import { Lang } from '@/types/lang'
-import React from 'react'
 import { Form, Table, Tabs, Tab, Card } from 'react-bootstrap'
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
@@ -27,7 +26,10 @@ const formFields = [
     { key: "OnlineEducationTitle", label: "Online Eğitim Başlığı", type: "text" },
     { key: "ContactFormTitle", label: "İletişim Formu Başlığı", type: "text" },
     { key: "Registergericht", label: "Ticaret Odası / Mahkemesi (Registergericht)", type: "text" },
-    { key: "Umsatzsteuer-Identifikationsnummer", label: "KDV Muafiyet No (Umsatzsteuer)", type: "text" }
+    { key: "Umsatzsteuer-Identifikationsnummer", label: "KDV Muafiyet No (Umsatzsteuer)", type: "text" },
+    { key: "DownloadCenterIcon", label: "İndirme Merkezi İkonu", type: "text" },
+    { key: "GoogleContactIcon", label: "Google Yorum Linki", type: "text" },
+    { key: "YoutubeVideoIcon", label: "Youtube Video Görseli", type: "text" }
 ]
 
 const LanguageForm = ({ languages, register, watch, setValue }: LanguageFormProps) => {

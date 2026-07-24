@@ -20,7 +20,7 @@ function AdminHeader() {
             <Navbar.Toggle aria-controls="navbar-dark-example" />
             <Navbar.Collapse id="navbar-dark-example">
               <Nav>
-                <Nav.Link href="../">Site</Nav.Link>
+                <Nav.Link href="/">Site</Nav.Link>
                 <Nav.Link href="/logout">Çıkış</Nav.Link>
               </Nav>
             </Navbar.Collapse>
