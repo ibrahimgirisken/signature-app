@@ -20,11 +20,14 @@ function CompanyAdd() {
   const [companyLogos, setCompanyLogos] = useState<Record<string, File>>({});
   const [fairCalendarImages, setFairCalendarImages] = useState<Record<string, File>>({});
   const [qrCodeImages, setQrCodeImages] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl1, setPromoVideoImageUrl1] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl2, setPromoVideoImageUrl2] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl3, setPromoVideoImageUrl3] = useState<Record<string, File>>({});
 
   const { register, control, handleSubmit, watch, setValue } =
     useForm<CompanyUpdate>({
       defaultValues: {
-        id:"",
+        id: "",
         companyName: "",
         googleFeedbackLink: "",
         domainName: "",
@@ -36,7 +39,7 @@ function CompanyAdd() {
         youtube: "",
         tiktok: "",
         fax: "",
-        status:true,
+        status: true,
         companyTranslations: [],
       },
     });
@@ -61,7 +64,7 @@ function CompanyAdd() {
       const newCompanyId = createdResponse?.id || createdResponse;
 
       console.log("Firma Kaydedildi, Alınan ID:", newCompanyId);
-      
+
       if (!newCompanyId) {
         alert("Hata: Firma ID'si alınamadı!");
         return;
@@ -77,26 +80,29 @@ function CompanyAdd() {
           addressText2: "",
           addressText3: "",
           companyLogo: "",
-          youtubeLabel1:"",
-          youtubeLabel2:"",
-          youtubeLabel3:"",
+          youtubeLabel1: "",
+          youtubeLabel2: "",
+          youtubeLabel3: "",
           promoVideoUrl1: "",
           promoVideoUrl2: "",
           promoVideoUrl3: "",
+          promoVideoImageUrl1: "",
+          promoVideoImageUrl2: "",
+          promoVideoImageUrl3: "",
           qrCodeImage: "",
-          downloadCenterLink:"",
+          downloadCenterLink: "",
           newsLink: "",
           fairsLink: "",
           timotechLink: "",
           fairCalendarImageUrl: "",
-          onlineEducationLink:"",
-          contactFormLink:"",
-          googleFeedbackLink:"",
-          fairCalenderUrl:"",
+          onlineEducationLink: "",
+          contactFormLink: "",
+          googleFeedbackLink: "",
+          fairCalenderUrl: "",
           signOff: "",
           gdprText: "",
           environmentalText: "",
-          taxInfo:""
+          taxInfo: ""
         }));
       }
 
@@ -130,15 +136,47 @@ function CompanyAdd() {
         }
       }
 
-      const updateRequestData:CompanyUpdate = {
+      for (const [langId, file] of Object.entries(promoVideoImageUrl1)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl1 = uploadFileData.fileName;
+          }
+        }
+      }
+
+      for (const [langId, file] of Object.entries(promoVideoImageUrl2)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl2 = uploadFileData.fileName;
+          }
+        }
+      }
+
+      for (const [langId, file] of Object.entries(promoVideoImageUrl3)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl3 = uploadFileData.fileName;
+          }
+        }
+      }
+
+
+
+      const updateRequestData: CompanyUpdate = {
         ...data,
-        id:newCompanyId as string,
+        id: newCompanyId as string,
         companyTranslations: updatedTranslations,
       };
 
       await companyService.update(updateRequestData);
       console.log("İşlem başarıyla tamamlandı ve görseller güncellendi.");
-      
+
       router.push('/admin/companies');
     } catch (error) {
       console.error("Kayıt veya görsel yükleme sırasında hata oluştu:", error);
@@ -159,15 +197,18 @@ function CompanyAdd() {
           fileSetters={{
             setCompanyLogos,
             setFairCalendarImages,
-            setQrCodeImages
+            setQrCodeImages,
+            setPromoVideoImageUrl1,
+            setPromoVideoImageUrl2,
+            setPromoVideoImageUrl3
           }}
         />
 
         <div className="mt-4 sticky-bottom bg-white p-3 border-top shadow-sm">
-          <Button 
-            disabled={submitting} 
-            type="submit" 
-            style={{ minWidth: '10rem' }} 
+          <Button
+            disabled={submitting}
+            type="submit"
+            style={{ minWidth: '10rem' }}
             variant="primary"
           >
             {submitting ? 'Kaydediliyor...' : 'Ekle'}

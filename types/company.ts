@@ -6,25 +6,28 @@ export interface CompanyTranslation {
   addressText2?: string;
   addressText3?: string;
   companyLogo?: string;
-  youtubeLabel1?:string;
-  youtubeLabel2?:string;
-  youtubeLabel3?:string;
+  youtubeLabel1?: string;
+  youtubeLabel2?: string;
+  youtubeLabel3?: string;
   promoVideoUrl1?: string;
   promoVideoUrl2?: string;
   promoVideoUrl3?: string;
+  promoVideoImageUrl1?: string;
+  promoVideoImageUrl2?: string;
+  promoVideoImageUrl3?: string;
   qrCodeImage?: string;
-  downloadCenterLink?:string;
-  newsLink?:string;
-  fairsLink?:string;
-  timotechLink?:string;
-  fairCalenderImageUrl?:string;
+  downloadCenterLink?: string;
+  newsLink?: string;
+  fairsLink?: string;
+  timotechLink?: string;
+  fairCalenderImageUrl?: string;
   onlineEducationLink?: string;
   contactFormLink?: string;
   googleFeedbackLink?: string;
   signOff?: string;
   gdprText?: string;
   environmentalText?: string;
-  taxInfo?:string;
+  taxInfo?: string;
 }
 
 export interface Company {
@@ -40,7 +43,7 @@ export interface Company {
   youtube: string;
   tiktok: string;
   fax: string;
-  status:boolean|true;
+  status: boolean | true;
   companyTranslations: CompanyTranslation[];
 }
 
@@ -57,7 +60,7 @@ export interface CompanyCreate {
   youtube: string;
   tiktok: string;
   fax: string;
-  status:boolean|true;
+  status: boolean | true;
   companyTranslations: CompanyTranslation[];
 }
 
@@ -74,7 +77,7 @@ export interface CompanyUpdate {
   youtube: string;
   tiktok: string;
   fax: string;
-  status:boolean|true;
+  status: boolean | true;
   companyTranslations: CompanyTranslation[];
 }
 
@@ -91,7 +94,6 @@ export interface CompanyResponse {
   youtube: string;
   tiktok: string;
   fax: string;
-  status:boolean|true;
+  status: boolean | true;
   companyTranslations: CompanyTranslation[];
 }
-

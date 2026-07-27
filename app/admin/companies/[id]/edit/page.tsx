@@ -23,6 +23,9 @@ function CompanyEdit() {
   const [companyLogos, setCompanyLogos] = useState<Record<string, File>>({});
   const [fairCalendarImages, setFairCalendarImages] = useState<Record<string, File>>({});
   const [qrCodeImages, setQrCodeImages] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl1, setPromoVideoImageUrl1] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl2, setPromoVideoImageUrl2] = useState<Record<string, File>>({});
+  const [promoVideoImageUrl3, setPromoVideoImageUrl3] = useState<Record<string, File>>({});
 
   const { register, control, handleSubmit, reset, watch, setValue } =
     useForm<CompanyUpdate>({
@@ -62,6 +65,9 @@ function CompanyEdit() {
           promoVideoUrl1: t.promoVideoUrl1 || "",
           promoVideoUrl2: t.promoVideoUrl2 || "",
           promoVideoUrl3: t.promoVideoUrl3 || "",
+          promoVideoImageUrl1: t.promoVideoImageUrl1,
+          promoVideoImageUrl2: t.promoVideoImageUrl2,
+          promoVideoImageUrl3: t.promoVideoImageUrl3,
           qrCodeImage: t.qrCodeImage || "",
           downloadCenterLink:t.downloadCenterLink || "",
           newsLink:t.newsLink || "",
@@ -152,6 +158,39 @@ function CompanyEdit() {
         }
       }
 
+            // --- 6. QR CODE GÖRSELİ YÜKLEME ---
+      for (const [langId, file] of Object.entries(promoVideoImageUrl1)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl1 = uploadFileData.fileName;
+          }
+        }
+      }
+
+            // --- 6. QR CODE GÖRSELİ YÜKLEME ---
+      for (const [langId, file] of Object.entries(promoVideoImageUrl2)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl2 = uploadFileData.fileName;
+          }
+        }
+      }
+
+            // --- 6. QR CODE GÖRSELİ YÜKLEME ---
+      for (const [langId, file] of Object.entries(promoVideoImageUrl3)) {
+        if (file) {
+          const uploadFileData = await uploadService.uploadCompanyImage(langId, file);
+          const targetIndex = updatedTranslations.findIndex(t => t.langId === langId);
+          if (targetIndex > -1) {
+            updatedTranslations[targetIndex].promoVideoImageUrl3 = uploadFileData.fileName;
+          }
+        }
+      }
+
       const requestData = {
         ...data,
         id: id,
@@ -185,7 +224,10 @@ function CompanyEdit() {
           fileSetters={{
             setCompanyLogos,
             setFairCalendarImages,
-            setQrCodeImages
+            setQrCodeImages,
+            setPromoVideoImageUrl1,
+            setPromoVideoImageUrl2,
+            setPromoVideoImageUrl3
           }}
         />
 

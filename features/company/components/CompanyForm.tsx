@@ -14,6 +14,9 @@ type CompanyFormProps = {
         setCompanyLogos: React.Dispatch<React.SetStateAction<Record<string, File>>>;
         setFairCalendarImages: React.Dispatch<React.SetStateAction<Record<string, File>>>;
         setQrCodeImages: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+        setPromoVideoImageUrl1: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+        setPromoVideoImageUrl2: React.Dispatch<React.SetStateAction<Record<string, File>>>;
+        setPromoVideoImageUrl3: React.Dispatch<React.SetStateAction<Record<string, File>>>;
     }
 }
 
@@ -44,6 +47,9 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                     promoVideoUrl1: '',
                     promoVideoUrl2: '',
                     promoVideoUrl3: '',
+                    promoVideoImageUrl1: '',
+                    promoVideoImageUrl2: '',
+                    promoVideoImageUrl3: '',
                     qrCodeImage: '',
                     downloadCenterLink: '',
                     newsLink: '',
@@ -210,6 +216,45 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                         <Form.Group as={Col} md={4} className="mb-3">
                                             <Form.Label>Adres Satırı 3</Form.Label>
                                             <Form.Control type="text" {...register(`companyTranslations.${idx}.addressText3`)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video Görseli 1</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl1?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl1}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Promo Video 1"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'promoVideoImageUrl1', fileSetters.setPromoVideoImageUrl1)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video Görseli 2</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl2?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl2}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Promo Video 2"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'promoVideoImageUrl2', fileSetters.setPromoVideoImageUrl2)} />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} md={4} className="mb-3">
+                                            <Form.Label>Promo Video Görseli 3</Form.Label>
+                                            <div className="mb-2">
+                                                <Image
+                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl3?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl3}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    alt="Promo Video 3"
+                                                    thumbnail
+                                                    style={{ maxHeight: 100 }}
+                                                />
+                                            </div>
+                                            <Form.Control type="file" accept="image/*" onChange={(e: any) => handleImageChange(e, lang.id, 'promoVideoImageUrl3', fileSetters.setPromoVideoImageUrl3)} />
                                         </Form.Group>
 
                                         <Form.Group as={Col} md={4} className="mb-3">
