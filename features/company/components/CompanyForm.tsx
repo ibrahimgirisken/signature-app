@@ -148,6 +148,9 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                         if (idx === -1) return null;
 
                         const fairCalendarKey = `${lang.id}_fairCalendarImage`;
+                        const promoVideo1Key = `${lang.id}_promoVideo1Image`;
+                        const promoVideo2Key = `${lang.id}_promoVideo2Image`;
+                        const promoVideo3Key = `${lang.id}_promoVideo3Image`;
                         const logoKey = `${lang.id}_companyLogo`;
                         const qrKey = `${lang.id}_qrCodeImage`;
 
@@ -222,7 +225,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Label>Promo Video Görseli 1</Form.Label>
                                             <div className="mb-2">
                                                 <Image
-                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl1?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl1}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    src={previewUrls[promoVideo1Key] || (companyTranslations[idx]?.promoVideoImageUrl1?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl1}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
                                                     alt="Promo Video 1"
                                                     thumbnail
                                                     style={{ maxHeight: 100 }}
@@ -235,7 +238,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Label>Promo Video Görseli 2</Form.Label>
                                             <div className="mb-2">
                                                 <Image
-                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl2?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl2}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    src={previewUrls[promoVideo2Key] || (companyTranslations[idx]?.promoVideoImageUrl2?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl2}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
                                                     alt="Promo Video 2"
                                                     thumbnail
                                                     style={{ maxHeight: 100 }}
@@ -248,7 +251,7 @@ const CompanyForm = ({ languages, register, watch, setValue, fileSetters }: Comp
                                             <Form.Label>Promo Video Görseli 3</Form.Label>
                                             <div className="mb-2">
                                                 <Image
-                                                    src={previewUrls[fairCalendarKey] || (companyTranslations[idx]?.promoVideoImageUrl3?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl3}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
+                                                    src={previewUrls[promoVideo3Key] || (companyTranslations[idx]?.promoVideoImageUrl3?.trim() ? `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${companyTranslations[idx].promoVideoImageUrl3}` : `${process.env.NEXT_PUBLIC_HOST_IMAGE_URL}${process.env.NEXT_PUBLIC_NO_IMAGE}`)}
                                                     alt="Promo Video 3"
                                                     thumbnail
                                                     style={{ maxHeight: 100 }}
