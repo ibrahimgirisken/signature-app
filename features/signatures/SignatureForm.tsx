@@ -227,6 +227,15 @@ const SignatureForm = ({ register, setValue }: SignatureFormProps) => {
                     <Form.Control
                         type="email"
                         className="mb-3"
+                        placeholder="E-mail"
+                        {...register('email', { required: true })}
+                    />
+                </Col>
+
+                <Col sm="4" lg="3">
+                    <Form.Control
+                        type="text"
+                        className="mb-3"
                         placeholder="+90"
                         value="+90"
                         {...register('phoneCode', { required: true })}
