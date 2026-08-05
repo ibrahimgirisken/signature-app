@@ -223,7 +223,7 @@ const SignatureForm = ({ register, setValue }: SignatureFormProps) => {
                     />
                 </Col>
 
-                <Col sm="6" lg="3">
+                <Col sm="12" lg="12">
                     <Form.Control
                         type="email"
                         className="mb-3"
