@@ -237,7 +237,7 @@ const SignatureForm = ({ register, setValue }: SignatureFormProps) => {
                         type="text"
                         className="mb-3"
                         placeholder="+90"
-                        value="+90"
+                        defaultValue="+90"
                         {...register('phoneCode', { required: true })}
                     />
                 </Col>
